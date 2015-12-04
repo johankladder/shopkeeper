@@ -5,7 +5,7 @@ import org.shopkeeper.subjects.Subject;
 /**
  * Created by typhooncoaster on 4-12-15.
  */
-public class PersonModule extends SubjectModule{
+public class CustomerModule extends SubjectModule{
 
     @Override
     void add(Subject subject) {

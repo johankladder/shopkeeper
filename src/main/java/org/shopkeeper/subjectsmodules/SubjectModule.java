@@ -11,9 +11,11 @@ public abstract class SubjectModule {
 
     private static ArrayList<Subject> SUBJECTS = new ArrayList<Subject>();
 
-    abstract void add(Subject subject);
-    abstract void update(Subject subject);
-    abstract void delete(Subject subject);
+    public abstract void add(Subject subject);
+
+    public abstract void update(Subject subject);
+
+    public abstract void delete(Subject subject);
 
     public int getTotalSubjects() {
         return SUBJECTS.size();
