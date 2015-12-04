@@ -9,7 +9,7 @@ public class ItemModule extends SubjectModule {
 
     @Override
     public void add(Subject subject) {
-
+        System.out.println("Test in item module!");
     }
 
     @Override

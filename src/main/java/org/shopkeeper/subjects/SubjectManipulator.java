@@ -1,9 +1,11 @@
 package org.shopkeeper.subjects;
 
 import org.apache.commons.lang3.StringUtils;
+import org.shopkeeper.parsers.SubjectActionChooser;
 import org.shopkeeper.subjects.categories.Category;
 import org.shopkeeper.subjects.customer.Customer;
 import org.shopkeeper.subjects.items.Item;
+import org.shopkeeper.subjectsmodules.SubjectModule;
 import org.shopkeeper.util.DateTimeGenerator;
 
 import java.util.HashMap;
@@ -20,6 +22,7 @@ public class SubjectManipulator {
      *
      * @param map Map with info about the Item
      * @return Item or null when errors
+     * @see org.shopkeeper.parsers.SubjectMapGenerator
      */
     public static Item createItem(HashMap<String, String> map) {
         if (map.containsKey(SubjectFields.IDNUMBER) && map.containsKey(SubjectFields.NAME)) {
@@ -44,17 +47,66 @@ public class SubjectManipulator {
         }
     }
 
-    public static Customer createCustomer() {
-        return null;
+    public static Customer createCustomer(HashMap<String, String> map) {
+        if (map.containsKey(SubjectFields.IDNUMBER) && map.containsKey(SubjectFields.NAME)) {
+            try {
+                Long identificationNumber = Long.parseLong(StringUtils.trimToNull(map.get(SubjectFields.IDNUMBER)));
+                String name = map.get(SubjectFields.NAME);
+                if (StringUtils.isBlank(name) || identificationNumber == null) {
+                    return null;
+                } else {
+                    name = StringUtils.trimToNull(name);
+                    String placeOfLiving = StringUtils.trimToNull(map.get(SubjectFields.CUSTOMER_PLACE));
+                    String address = StringUtils.trimToNull(map.get(SubjectFields.CUSTOMER_ADDRESS));
+                    String phone = StringUtils.trimToNull(map.get(SubjectFields.CUSTOMER_PHONE));
+                    String zipcode = StringUtils.trimToNull(map.get(SubjectFields.CUSTOMER_ZIPCODE));
+                    String email = StringUtils.trimToNull(map.get(SubjectFields.CUSTOMER_EMAIL));
+                    return new Customer(identificationNumber, name, DateTimeGenerator.generateDateTimeNow(),
+                            placeOfLiving, address, zipcode, phone, email);
+                }
+
+            } catch (NumberFormatException ex) {
+                return null;
+            }
+
+
+        } else {
+            return null;
+        }
     }
 
-    public static Category createCategory() {
-        return null;
+    public static Category createCategory(HashMap<String, String> map) {
+        if (map.containsKey(SubjectFields.IDNUMBER) && map.containsKey(SubjectFields.NAME)) {
+            try {
+                Long identificationNumber = Long.parseLong(StringUtils.trimToNull(map.get(SubjectFields.IDNUMBER)));
+                String name = map.get(SubjectFields.NAME);
+                if (StringUtils.isBlank(name) || identificationNumber == null) {
+                    return null;
+                } else {
+                    name = StringUtils.trimToNull(name);
+                    return new Category(identificationNumber, name, DateTimeGenerator.generateDateTimeNow());
+                }
+
+            } catch (NumberFormatException ex) {
+                return null;
+            }
+
+        } else {
+            return null;
+        }
     }
 
 
     public static void add(Subject subject) {
+        SubjectActionChooser.actionOnSubject(subject, SubjectActionChooser.ADD);
+    }
 
+    public static void update(Subject subject) {
+        SubjectActionChooser.actionOnSubject(subject, SubjectActionChooser.UPDATE);
+    }
+
+    public static void delete(Subject subject) {
+        SubjectActionChooser.actionOnSubject(subject, SubjectActionChooser.DELETE);
     }
 
 }

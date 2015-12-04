@@ -1,5 +1,6 @@
 package org.shopkeeper.parsers;
 
+import org.shopkeeper.subjects.Subject;
 import org.shopkeeper.subjects.SubjectFields;
 import org.shopkeeper.subjects.SubjectManipulator;
 import org.shopkeeper.subjects.SubjectTypes;
@@ -7,7 +8,22 @@ import org.shopkeeper.subjects.SubjectTypes;
 import java.util.HashMap;
 
 /**
- * Created by typhooncoaster on 4-12-15.
+ * The SubjectMapGenerator is specialised when it comes to creating new subjects from for example forms. The method generates
+ * these HashMaps with pre stated keys. Just invoke the method generateMapForSubject with the subject type and of you go.
+ * <p>
+ * The hashmap are prefilled with key's and values. The best way to use this class is to invoke a generated HashMap and
+ * put the values that the subject contains after the right key. Example:
+ * <p>
+ * <p>HashMap<String, String> map = generateMapForStorage(SubjectTypes.ITEM); <br>
+ * map.put(SubjectFields.PRICE, "12.2"); <br>
+ * etc. <br>
+ * </p>
+ * <p>After that the map can be passed in the create/update with map methods. This will handles the rest.</p>
+ *
+ * @see SubjectManipulator
+ * @see SubjectMapGenerator#generateMapForStorage(Integer)
+ * @see SubjectMapGenerator#createWithMap(HashMap)
+ * @see SubjectMapGenerator#updateWithMap(HashMap)
  */
 public class SubjectMapGenerator {
 
@@ -72,20 +88,58 @@ public class SubjectMapGenerator {
 
 
     // MAP-PARSER:
-    public static void createWithMap(HashMap<String, String> map) {
+
+    /**
+     * Creates a new subject with a map -> When its done it will send a request to the module, who will eventually put
+     * this subject in a database or something like that. The method returns the requested item and will request null when
+     * there where any errors on the parsing site. This method communicates with the manipulator and so it will only give
+     * and request to the module when there where no errors.
+     *
+     * @param map Map containing information about the subject.
+     * @return The requested Subject class or null when there was a error.
+     */
+    public static Subject createWithMap(HashMap<String, String> map) {
         if (map.containsKey(MAP_ITEM_ID)) {
-            SubjectManipulator.createItem(map);
+            Subject subject = SubjectManipulator.createItem(map);
+            SubjectManipulator.add(subject);
+            return subject;
         } else if (map.containsKey(MAP_CUSTOMER_ID)) {
-           // SubjectManipulator.create(map, SubjectTypes.CUSTOMER);
+            Subject subject = SubjectManipulator.createCustomer(map);
+            SubjectManipulator.add(subject);
+            return subject;
         } else if (map.containsKey(MAP_CATEGORY_ID)) {
-            //SubjectManipulator.create(map, SubjectTypes.CATEGORY);
+            Subject subject = SubjectManipulator.createCategory(map);
+            SubjectManipulator.add(subject);
+            return subject;
         } else {
-            // Do nothing, map was not valid
+            return null;
         }
     }
 
-    public static void updateWithMap(HashMap<String, Object> map) {
-
+    /**
+     * This method updates a subject when it is given the right map. If not, or if there where errors, it will return
+     * null, else it will return the newly updated subject. This method works almost the same a creating a new subject
+     * with a map, but communicates a little bit different with the subjects manipulator.
+     *
+     * @param map Map including information about the subject.
+     * @return The updated subject.
+     */
+    public static Subject updateWithMap(HashMap<String, String> map) {
+        if (map.containsKey(MAP_ITEM_ID)) {
+            Subject subject = SubjectManipulator.createItem(map);
+            SubjectManipulator.update(subject);
+            return subject;
+        } else if (map.containsKey(MAP_CUSTOMER_ID)) {
+            Subject subject = SubjectManipulator.createCustomer(map);
+            SubjectManipulator.update(subject);
+            return subject;
+        } else if (map.containsKey(MAP_CATEGORY_ID)) {
+            Subject subject = SubjectManipulator.createCategory(map);
+            SubjectManipulator.update(subject);
+            return subject;
+        } else {
+            return null;
+        }
     }
 
 
