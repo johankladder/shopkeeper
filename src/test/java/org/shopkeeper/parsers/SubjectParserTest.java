@@ -43,7 +43,7 @@ public class SubjectParserTest {
 
     @Test
     public void testHashMapGetter() {
-        HashMap<String, Object> map = SubjectMapGenerator.generateMapForStorage(SubjectTypes.ITEM);
+        HashMap<String, String> map = SubjectMapGenerator.generateMapForStorage(SubjectTypes.ITEM);
         boolean status;
         if (map.containsKey(SubjectFields.ITEM_PRICE) && map.containsKey(SubjectFields.NAME) && map.containsKey(SubjectFields.IDNUMBER)
                 && !map.containsKey(SubjectFields.CUSTOMER_ADDRESS)) {
@@ -53,7 +53,7 @@ public class SubjectParserTest {
         }
 
 
-        HashMap<String, Object> map2 = SubjectMapGenerator.generateMapForStorage(SubjectTypes.CUSTOMER);
+        HashMap<String, String> map2 = SubjectMapGenerator.generateMapForStorage(SubjectTypes.CUSTOMER);
         boolean status2;
         if (!map2.containsKey(SubjectFields.ITEM_PRICE) && map2.containsKey(SubjectFields.CUSTOMER_ADDRESS) && map2.containsKey(SubjectFields.CUSTOMER_EMAIL)
                 && map2.containsKey(SubjectFields.NAME)) {
