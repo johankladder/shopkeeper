@@ -2,6 +2,8 @@ package org.shopkeeper.subjectsmodules;
 
 import org.shopkeeper.subjects.Subject;
 
+import java.util.logging.Logger;
+
 /**
  * Created by typhooncoaster on 4-12-15.
  */
@@ -9,7 +11,6 @@ public class ItemModule extends SubjectModule {
 
     @Override
     public void add(Subject subject) {
-        System.out.println("Test in item module!");
     }
 
     @Override

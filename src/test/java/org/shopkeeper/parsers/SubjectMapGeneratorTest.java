@@ -59,7 +59,7 @@ public class SubjectMapGeneratorTest {
         Long nowId = item.getIdentificationNumber();
         assertEquals(id, nowId);
 
-
+        SubjectManipulator.add(item);
 
     }
 

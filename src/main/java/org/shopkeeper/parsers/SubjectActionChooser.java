@@ -7,12 +7,15 @@ import org.shopkeeper.subjectsmodules.CustomerModule;
 import org.shopkeeper.subjectsmodules.ItemModule;
 import org.shopkeeper.subjectsmodules.SubjectModule;
 
+import java.util.logging.Logger;
+
 /**
  * This class communicates with the modules from the subjects. Well, it not only communicates but also chooses when to
  * use which module with a certain subject. This method is perfectly when you've changed your subject by hand and want
  * commit actions on it, like adding, updating or maybe even deleting.
  */
 public class SubjectActionChooser {
+    private final static Logger LOGGER = Logger.getLogger(SubjectActionChooser.class.getName());
 
     // Actions
     public static final int DELETE = 0;
@@ -44,7 +47,7 @@ public class SubjectActionChooser {
             } else if (subject.TYPE == SubjectTypes.CUSTOMER) {
                 performAction(CUSTOMER_MODULE, subject, action);
             } else {
-                // Do nothing -> parsed subject was not valid.
+                LOGGER.warning("There is no module for a NULL object ;)!");
             }
         }
     }
@@ -58,7 +61,7 @@ public class SubjectActionChooser {
             } else if (action == ADD) {
                 module.add(subject);
             } else {
-                // Do nothing -> not a valid action parameter.
+                LOGGER.warning("The action can't be found! Do you want more actions? :)");
             }
         }
     }

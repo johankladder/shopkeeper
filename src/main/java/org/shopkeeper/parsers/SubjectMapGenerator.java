@@ -6,6 +6,7 @@ import org.shopkeeper.subjects.SubjectManipulator;
 import org.shopkeeper.subjects.SubjectTypes;
 
 import java.util.HashMap;
+import java.util.logging.Logger;
 
 /**
  * The SubjectMapGenerator is specialised when it comes to creating new subjects from for example forms. The method generates
@@ -26,6 +27,7 @@ import java.util.HashMap;
  * @see SubjectMapGenerator#updateWithMap(HashMap)
  */
 public class SubjectMapGenerator {
+    private final static Logger LOGGER = Logger.getLogger(SubjectMapGenerator.class.getName());
 
     // MAP IDS:
     public static final String MAP_ITEM_ID = "item_map_id=" + SubjectTypes.ITEM;
@@ -48,6 +50,7 @@ public class SubjectMapGenerator {
         } else if (subjectType == SubjectTypes.CUSTOMER) {
             return generateMapCustomer();
         } else {
+            LOGGER.warning("Your subject type can not be found..");
             return null;
         }
     }
@@ -112,6 +115,7 @@ public class SubjectMapGenerator {
             SubjectManipulator.add(subject);
             return subject;
         } else {
+            LOGGER.warning("The map you gave was not valid, please make sure you haven't edited the map_id fields.");
             return null;
         }
     }
@@ -138,6 +142,7 @@ public class SubjectMapGenerator {
             SubjectManipulator.update(subject);
             return subject;
         } else {
+            LOGGER.warning("The map you gave was not valid, please make sure you haven't edited the map_id fields.");
             return null;
         }
     }

@@ -9,11 +9,13 @@ import org.shopkeeper.subjectsmodules.SubjectModule;
 import org.shopkeeper.util.DateTimeGenerator;
 
 import java.util.HashMap;
+import java.util.logging.Logger;
 
 /**
  * Created by typhooncoaster on 4-12-15.
  */
 public class SubjectManipulator {
+    private final static Logger LOGGER = Logger.getLogger(SubjectManipulator.class.getName());
 
     /**
      * Creates item and sends it to its module. After the item was send to the module, the method returns the mentioned
@@ -24,6 +26,7 @@ public class SubjectManipulator {
      * @return Item or null when errors
      * @see org.shopkeeper.parsers.SubjectMapGenerator
      */
+    // TODO Create a price parse (for . and ,) so that both can be entered
     public static Item createItem(HashMap<String, String> map) {
         if (map.containsKey(SubjectFields.IDNUMBER) && map.containsKey(SubjectFields.NAME)) {
             try {
@@ -31,6 +34,7 @@ public class SubjectManipulator {
                 String name = map.get(SubjectFields.NAME);
                 Double price = Double.parseDouble(StringUtils.trimToNull(map.get(SubjectFields.ITEM_PRICE)));
                 if (StringUtils.isBlank(name) || identificationNumber == null) {
+                    LOGGER.warning("The name or id was empty -> cannot create an subject :(!");
                     return null;
                 } else {
                     name = StringUtils.trimToNull(name);
@@ -38,11 +42,13 @@ public class SubjectManipulator {
                 }
 
             } catch (NumberFormatException ex) {
+                LOGGER.warning("Can't parse the given price -> Make sure you use a digit! :)");
                 return null;
             }
 
 
         } else {
+            LOGGER.warning("The map you've given was not valid! Maybe the wrong map for right subject? :)");
             return null;
         }
     }
@@ -53,6 +59,7 @@ public class SubjectManipulator {
                 Long identificationNumber = Long.parseLong(StringUtils.trimToNull(map.get(SubjectFields.IDNUMBER)));
                 String name = map.get(SubjectFields.NAME);
                 if (StringUtils.isBlank(name) || identificationNumber == null) {
+                    LOGGER.warning("The name or id was empty -> cannot create an subject :(!");
                     return null;
                 } else {
                     name = StringUtils.trimToNull(name);
@@ -66,12 +73,15 @@ public class SubjectManipulator {
                 }
 
             } catch (NumberFormatException ex) {
+                LOGGER.warning("Can't parse the given number(s) -> Make sure you use a digit! :)");
                 return null;
             }
 
 
         } else {
+            LOGGER.warning("The map you've given was not valid! Maybe the wrong map for right subject? :)");
             return null;
+
         }
     }
 
@@ -81,6 +91,7 @@ public class SubjectManipulator {
                 Long identificationNumber = Long.parseLong(StringUtils.trimToNull(map.get(SubjectFields.IDNUMBER)));
                 String name = map.get(SubjectFields.NAME);
                 if (StringUtils.isBlank(name) || identificationNumber == null) {
+                    LOGGER.warning("The name or id was empty -> cannot create an subject :(!");
                     return null;
                 } else {
                     name = StringUtils.trimToNull(name);
@@ -88,10 +99,12 @@ public class SubjectManipulator {
                 }
 
             } catch (NumberFormatException ex) {
+                LOGGER.warning("Can't parse the given number(s) -> Make sure you use a digit! :)");
                 return null;
             }
 
         } else {
+            LOGGER.warning("The map you've given was not valid! Maybe the wrong map for right subject? :)");
             return null;
         }
     }

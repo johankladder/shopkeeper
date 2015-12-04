@@ -11,4 +11,8 @@ public class DateTimeGenerator {
         DateTime time = new DateTime();
         return time;
     }
+
+    public static String dateTimeToString(DateTime time) {
+        return null; // TODO DATE TIME TO GIVEN STRING -> Nicely formated
+    }
 }
