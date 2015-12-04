@@ -2,10 +2,11 @@ package org.shopkeeper.parsers;
 
 import org.joda.time.DateTime;
 import org.junit.Test;
-import org.shopkeeper.subjects.Subject;
+import org.shopkeeper.subjects.SubjectTypes;
 import org.shopkeeper.subjects.categories.Category;
 import org.shopkeeper.subjects.customer.Customer;
 import org.shopkeeper.subjects.items.Item;
+import org.shopkeeper.subjects.SubjectFields;
 
 import java.util.HashMap;
 
@@ -42,20 +43,20 @@ public class SubjectParserTest {
 
     @Test
     public void testHashMapGetter() {
-        HashMap<String, Object> map = SubjectParser.generateMapForStorage(SubjectTypes.ITEM);
+        HashMap<String, Object> map = SubjectMapGenerator.generateMapForStorage(SubjectTypes.ITEM);
         boolean status;
-        if (map.containsKey(SubjectParser.ITEM_PRICE) && map.containsKey(SubjectParser.NAME) && map.containsKey(SubjectParser.IDNUMBER)
-                && !map.containsKey(SubjectParser.CUSTOMER_ADDRESS)) {
+        if (map.containsKey(SubjectFields.ITEM_PRICE) && map.containsKey(SubjectFields.NAME) && map.containsKey(SubjectFields.IDNUMBER)
+                && !map.containsKey(SubjectFields.CUSTOMER_ADDRESS)) {
             status = true;
         } else {
             status = false;
         }
 
 
-        HashMap<String, Object> map2 = SubjectParser.generateMapForStorage(SubjectTypes.CUSTOMER);
+        HashMap<String, Object> map2 = SubjectMapGenerator.generateMapForStorage(SubjectTypes.CUSTOMER);
         boolean status2;
-        if (!map2.containsKey(SubjectParser.ITEM_PRICE) && map2.containsKey(SubjectParser.CUSTOMER_ADDRESS) && map2.containsKey(SubjectParser.CUSTOMER_EMAIL)
-                && map2.containsKey(SubjectParser.NAME)) {
+        if (!map2.containsKey(SubjectFields.ITEM_PRICE) && map2.containsKey(SubjectFields.CUSTOMER_ADDRESS) && map2.containsKey(SubjectFields.CUSTOMER_EMAIL)
+                && map2.containsKey(SubjectFields.NAME)) {
             status2 = true;
         } else {
             status2 = false;

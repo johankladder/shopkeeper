@@ -1,4 +1,4 @@
-package org.shopkeeper.parsers;
+package org.shopkeeper.subjects;
 
 import org.shopkeeper.subjects.Subject;
 import org.shopkeeper.subjects.categories.Category;
@@ -14,6 +14,4 @@ public class SubjectTypes {
     public static final int ITEM = 0;
     public static final int CATEGORY = 1;
     public static final int CUSTOMER = 2;
-
-
 }

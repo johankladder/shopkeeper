@@ -1,9 +1,7 @@
 package org.shopkeeper.parsers;
 
 import org.shopkeeper.subjects.Subject;
-import org.shopkeeper.subjects.categories.Category;
-import org.shopkeeper.subjects.customer.Customer;
-import org.shopkeeper.subjects.items.Item;
+import org.shopkeeper.subjects.SubjectTypes;
 import org.shopkeeper.subjectsmodules.CategoryModule;
 import org.shopkeeper.subjectsmodules.CustomerModule;
 import org.shopkeeper.subjectsmodules.ItemModule;
@@ -12,7 +10,7 @@ import org.shopkeeper.subjectsmodules.SubjectModule;
 /**
  * Created by typhooncoaster on 4-12-15.
  */
-public class SubjectModuleParser {
+public class SubjectModuleChooser {
 
     // Actions
     public static final int DELETE = 0;
