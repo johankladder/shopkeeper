@@ -7,21 +7,19 @@ import org.shopkeeper.subjects.Subject;
  */
 public class CustomerModule extends SubjectModule{
 
-    @Override
-    void add(Subject subject) {
-        // Perform action -> ADD TO DATABASE OR SOMETHING
-        addToList(subject);
-    }
 
     @Override
-    void update(Subject subject) {
+    public void add(Subject subject) {
 
     }
 
     @Override
-    void delete(Subject subject) {
-        // Perform action
-        removeFromList(subject);
+    public void update(Subject subject) {
+
     }
 
+    @Override
+    public void delete(Subject subject) {
+
+    }
 }

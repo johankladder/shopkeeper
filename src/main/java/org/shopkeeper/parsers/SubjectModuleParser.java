@@ -1,4 +1,4 @@
-package org.shopkeeper.subjectparser;
+package org.shopkeeper.parsers;
 
 import org.shopkeeper.subjects.Subject;
 import org.shopkeeper.subjects.categories.Category;
@@ -26,11 +26,11 @@ public class SubjectModuleParser {
 
 
     public static void parseSubject(Subject subject, Integer action) {
-        if (subject instanceof Item) {
+        if (subject.TYPE == SubjectTypes.ITEM) {
             performAction(ITEMMODULE, subject, action);
-        } else if (subject instanceof Category) {
+        } else if (subject.TYPE == SubjectTypes.CATEGORY) {
             performAction(CATEGORYMODULE, subject, action);
-        } else if (subject instanceof Customer) {
+        } else if (subject.TYPE == SubjectTypes.CUSTOMER) {
             performAction(CUSTOMER_MODULE, subject, action);
         } else {
             // Do nothing -> parsed subject was not valid.

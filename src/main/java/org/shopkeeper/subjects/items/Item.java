@@ -10,7 +10,6 @@ public class Item extends Subject {
 
     public Double price;
 
-
     public Item(Long identificationNumber, String name, Double price, DateTime dateAdded) {
         super(identificationNumber, name, dateAdded);
         this.price = price;
