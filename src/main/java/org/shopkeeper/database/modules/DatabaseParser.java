@@ -1,8 +1,6 @@
-package org.shopkeeper.parsers;
+package org.shopkeeper.database.modules;
 
-import org.shopkeeper.database.modules.DatabaseModule;
-import org.shopkeeper.database.modules.DatabaseTypes;
-import org.shopkeeper.database.modules.SQLLiteModule;
+import org.shopkeeper.database.modules.sqllite.SQLLiteModule;
 
 import java.util.logging.Logger;
 

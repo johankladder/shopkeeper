@@ -1,5 +1,6 @@
-package org.shopkeeper.database.modules;
+package org.shopkeeper.database.modules.sqllite;
 
+import org.shopkeeper.database.modules.DatabaseModule;
 import org.shopkeeper.subjects.Subject;
 
 import java.sql.Connection;
@@ -15,13 +16,12 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
     // static connection -> so no multiple connectios.
     public static Connection conn = null;
     public static boolean running = false;
-    public static ArrayList<String> queue = new ArrayList<String>();
-    public static Thread thread = new Thread(new SQLLiteModule(), "SQLLite-database-thread");
+    public static boolean connected = false;
 
 
     @Override
     public void add(Subject subject) {
-        System.out.println("hoi");
+        System.out.println(subject);
     }
 
 
@@ -40,11 +40,11 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
 
     }
 
-    public static void start() {
-        thread.start();
+    public void processQueryNoResult() {
+
     }
 
-    public void stop() {
+    public void processQueryResult() {
 
     }
 
@@ -54,14 +54,15 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
             try {
                 Class.forName("org.sqlite.JDBC");
                 conn = DriverManager.getConnection("jdbc:sqlite:" + DBNAME);
-                System.out.println("Connection established");
+                System.out.println("Connection established in: " + Thread.currentThread().getName());
+                connected = true;
             } catch (Exception e) {
                 System.err.println(e.getClass().getName() + ": " + e.getMessage());
             }
             while (running) {
-
+                    // Check connection!
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(10000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -69,9 +70,9 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
         }
     }
 
-    public static void main(String[] args) throws InterruptedException {
-        SQLLiteModule l = new SQLLiteModule();
-    }
+
+
+
 
 
 }

@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 public class SubjectMapGeneratorTest {
 
     @Test
-    public void testMap() {
+    public void testMap() throws InterruptedException {
         HashMap<String, String> map = SubjectMapGenerator.generateMapForStorage(SubjectTypes.ITEM);
         assertNotNull(map);
 
@@ -60,6 +60,7 @@ public class SubjectMapGeneratorTest {
         assertEquals(id, nowId);
 
         SubjectManipulator.add(item);
+        Thread.sleep(5000);
 
     }
 

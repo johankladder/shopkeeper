@@ -1,5 +1,8 @@
 package org.shopkeeper.subjectsmodules;
 
+import org.shopkeeper.database.modules.DatabaseChooser;
+import org.shopkeeper.database.modules.DatabaseModule;
+import org.shopkeeper.database.modules.DatabaseTypes;
 import org.shopkeeper.subjects.Subject;
 
 import java.util.ArrayList;
@@ -9,7 +12,13 @@ import java.util.ArrayList;
  */
 public abstract class SubjectModule {
 
+
+
     private static ArrayList<Subject> SUBJECTS = new ArrayList<Subject>();
+
+    public SubjectModule() {
+        DatabaseChooser.start();
+    }
 
     public abstract void add(Subject subject);
 
@@ -29,5 +38,8 @@ public abstract class SubjectModule {
         SUBJECTS.remove(subject);
     }
 
+    protected DatabaseModule getDatabase() {
+        return DatabaseChooser.getDatabase(DatabaseTypes.DATABASETYPE_SQLLITE);
+    }
 
 }

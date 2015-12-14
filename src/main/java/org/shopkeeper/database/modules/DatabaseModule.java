@@ -1,6 +1,5 @@
 package org.shopkeeper.database.modules;
 
-import org.shopkeeper.parsers.DatabaseParser;
 import org.shopkeeper.subjects.Subject;
 
 /**
