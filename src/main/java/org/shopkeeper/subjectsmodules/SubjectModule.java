@@ -15,9 +15,14 @@ public abstract class SubjectModule {
 
 
     private static ArrayList<Subject> SUBJECTS = new ArrayList<Subject>();
+    private static boolean started = false;
 
     public SubjectModule() {
-        DatabaseChooser.start();
+        if(!started) {
+            System.out.println("Starting database from module...");
+            DatabaseChooser.start();
+            started = true;
+        }
     }
 
     public abstract void add(Subject subject);

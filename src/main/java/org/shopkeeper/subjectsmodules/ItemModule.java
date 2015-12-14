@@ -11,7 +11,7 @@ public class ItemModule extends SubjectModule {
 
     @Override
     public void add(Subject subject) {
-        getDatabase().add(subject);
+
     }
 
     @Override

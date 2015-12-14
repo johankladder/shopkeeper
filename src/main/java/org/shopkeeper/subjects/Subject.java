@@ -3,7 +3,7 @@ package org.shopkeeper.subjects;
 import org.joda.time.DateTime;
 import org.shopkeeper.parsers.SubjectParser;
 
-import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by typhooncoaster on 4-12-15.

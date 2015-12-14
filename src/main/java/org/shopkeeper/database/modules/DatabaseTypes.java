@@ -1,7 +1,7 @@
 package org.shopkeeper.database.modules;
 
 /**
- * Created by typhooncoaster on 4-12-15.
+ * This class contains the currently available database-types. Please make sure you use one of these when asked.
  */
 public class DatabaseTypes {
     public static final Integer DATABASETYPE_SQLLITE = 0;

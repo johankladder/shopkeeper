@@ -8,17 +8,20 @@ import org.shopkeeper.database.modules.sqllite.SQLLiteModule;
 public class DatabaseChooser {
 
     // SQL LITE
-    private static SQLLiteModule sqllite = new SQLLiteModule();
+    private static SQLLiteModule SQLLITEMODULE = new SQLLiteModule();
     private static Thread sqlLiteThread;
 
+    public static Integer CURRENTDB = null;
+
     public static void start() {
-                sqlLiteThread = new Thread(sqllite, "SQLLITE_DATABASE_THREAD");
+                sqlLiteThread = new Thread(SQLLITEMODULE, "SQLLITE_DATABASE_THREAD");
                 sqlLiteThread.start();
+                CURRENTDB = DatabaseTypes.DATABASETYPE_SQLLITE;
     }
 
     public static DatabaseModule getDatabase(Integer databaseType) {
         if(databaseType == DatabaseTypes.DATABASETYPE_SQLLITE) {
-            return sqllite;
+            return SQLLITEMODULE;
         } else {
             return null;
         }

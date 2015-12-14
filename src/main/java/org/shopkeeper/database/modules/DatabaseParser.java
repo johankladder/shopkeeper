@@ -15,7 +15,7 @@ public class DatabaseParser {
         if (subject instanceof SQLLiteModule) {
             return DatabaseTypes.DATABASETYPE_SQLLITE;
         } else {
-            LOGGER.warning("Subject can not be found!");
+            LOGGER.warning("Database-type can not be found!");
             return null;
         }
     }

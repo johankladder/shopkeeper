@@ -3,6 +3,8 @@ package org.shopkeeper.subjects.customer;
 import org.joda.time.DateTime;
 import org.shopkeeper.subjects.Subject;
 
+import java.util.Map;
+
 /**
  * Created by typhooncoaster on 4-12-15.
  */
@@ -63,5 +65,9 @@ public class Customer extends Subject {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public static  Map getFields() {
+        return null;
     }
 }
