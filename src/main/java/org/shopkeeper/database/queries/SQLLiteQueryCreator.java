@@ -1,25 +1,23 @@
-package org.shopkeeper.database.modules.queries;
+package org.shopkeeper.database.queries;
 
 import org.apache.commons.lang3.StringUtils;
 import org.shopkeeper.database.modules.DatabaseTypes;
 
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 /**
  * Created by typhooncoaster on 14-12-15.
  */
-public class QueryCreator {
+public class SQLLiteQueryCreator {
 
 
     /**
      * Creates the initialization-query for a given map and database-type. If the map or database-type is not acknowledged,
      * this method will return null. This method will work the best with the 'getFields' method from the Subject's class.
-     * <p>
      * A valid database-type is necessary for this method to work as it is supposed to.
      *
-     * @param map          Map with the database-fields.
+     * @param map Map with the database-fields.
      * @param databaseType Type of the database
      * @return Creation-query.
      * @see DatabaseTypes
@@ -52,7 +50,7 @@ public class QueryCreator {
                 Map.Entry pair = (Map.Entry) it.next();
                 if (!pair.getKey().equals("tablename")) {
                     if (pair.getKey().equals("id")) {
-                        initString += "id INTEGER PRIMARY KEY AUTOINCREMENT, "; // TODO Autoincrement
+                        initString += "id INTEGER PRIMARY KEY AUTOINCREMENT, ";
                     } else {
                         String type = getDatatypeSqlLite((String) pair.getValue());
                         if (StringUtils.isNotBlank(type)) {
@@ -80,6 +78,24 @@ public class QueryCreator {
         return null;
     }
 
+    /**
+     * Creates a 'drop-table'-query for an SQLite database. Will return null when table-name is invalid, null or empty.
+     * @param tableName The name of the table who you like to 'drop'
+     * @return Query for dropping the table
+     */
+    public static String createDropTableQuery(String tableName) {
+        if(tableName != null) {
+            return "DROP TABLE IF EXISTS " + tableName +";";
+        }
+        return null;
+    }
+
+    /**
+     * Provides syntax for certain fields in the database-type. When a unknown parameter was send, this method will return
+     * null. This method is private because it's not interesting for the outside world.
+     * @param type Type of field
+     * @return Syntax for provided field
+     */
     private static String getDatatypeSqlLite(String type) {
         if (type != null) {
             if (type.equals("string")) {
@@ -95,5 +111,7 @@ public class QueryCreator {
         // TODO Logging
         return null;
     }
+
+
 
 }

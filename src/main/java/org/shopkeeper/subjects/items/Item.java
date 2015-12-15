@@ -14,6 +14,7 @@ import java.util.Map;
 public class Item extends Subject {
 
     public Double price;
+    public static final String TABLENAME = "items";
 
     public Item(Long identificationNumber, String name, Double price, DateTime dateAdded) {
         super(identificationNumber, name, dateAdded);
@@ -32,12 +33,11 @@ public class Item extends Subject {
     // TODO Make abstract
     public static Map getFields() {
         Map fields = new HashMap();
-        fields.put("tablename", "items");
+        fields.put("tablename", TABLENAME);
         fields.put("price", "double");
         fields.put("id", "integer");
         fields.put("name", "string");
         fields.put("dateadded", "date");
-
         return fields;
     }
 }

@@ -3,6 +3,7 @@ package org.shopkeeper.subjects.customer;
 import org.joda.time.DateTime;
 import org.shopkeeper.subjects.Subject;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -68,6 +69,16 @@ public class Customer extends Subject {
     }
 
     public static  Map getFields() {
-        return null;
+        Map fields = new HashMap();
+        fields.put("tablename", "customers");
+        fields.put("id", "integer");
+        fields.put("name", "string");
+        fields.put("dateadded", "date");
+        fields.put("place", "string");
+        fields.put("address", "string");
+        fields.put("zipcode", "string");
+        fields.put("phone", "string");
+        fields.put("email", "string");
+        return fields;
     }
 }

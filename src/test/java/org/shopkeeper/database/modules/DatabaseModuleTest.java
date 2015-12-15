@@ -1,6 +1,7 @@
 package org.shopkeeper.database.modules;
 
 import org.junit.Test;
+import org.shopkeeper.database.modules.sqllite.SQLLiteModule;
 import org.shopkeeper.subjectsmodules.CustomerModule;
 import org.shopkeeper.subjectsmodules.ItemModule;
 
@@ -15,9 +16,12 @@ public class DatabaseModuleTest {
     public void testDatabase() throws InterruptedException {
         ItemModule module =  new ItemModule();
         new CustomerModule();
-        Thread.sleep(5000);
+        Thread.sleep(1000);
         assertTrue(DatabaseModule.isConnected());
         assertEquals(DatabaseTypes.DATABASETYPE_SQLLITE, DatabaseChooser.CURRENTDB);
+        assertTrue(SQLLiteModule.WAS_INITIALIZED);
+        assertTrue(SQLLiteModule.RUNNING);
+        assertTrue(SQLLiteModule.CONNECTED);
     }
 
 }
