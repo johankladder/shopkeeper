@@ -86,17 +86,27 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
             } catch (Exception e) {
                 System.err.println(e.getClass().getName() + ": " + e.getMessage());
             }
+
             while (RUNNING) {
-                    // Check connection!
                 try {
+                    if(!CONNECTION.isValid(5)) {
+                       CONNECTED = false;
+                       System.err.println("Connection is not valid anymore");
+                    }
                     Thread.sleep(10000);
                 } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (SQLException e) {
                     e.printStackTrace();
                 }
             }
         }
     }
 
+
+    public static void main(String[] args) {
+        System.out.println("test");
+    }
 
 
 

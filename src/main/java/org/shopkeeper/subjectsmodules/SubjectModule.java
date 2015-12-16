@@ -12,14 +12,12 @@ import java.util.ArrayList;
  */
 public abstract class SubjectModule {
 
-
-
     private static ArrayList<Subject> SUBJECTS = new ArrayList<Subject>();
     private static boolean started = false;
+    protected static DatabaseModule DB = null; // TODO init dbmodule here from db chooser
 
     public SubjectModule() {
         if(!started) {
-            System.out.println("Starting database from module...");
             DatabaseChooser.start();
             started = true;
         }
@@ -35,16 +33,12 @@ public abstract class SubjectModule {
         return SUBJECTS.size();
     }
 
-    protected void addToList(Subject subject) {
+    public static void addToList(Subject subject) {
         SUBJECTS.add(subject);
     }
 
-    protected void removeFromList(Subject subject) {
+    public static void removeFromList(Subject subject) {
         SUBJECTS.remove(subject);
-    }
-
-    protected DatabaseModule getDatabase() {
-        return DatabaseChooser.getDatabase(DatabaseTypes.DATABASETYPE_SQLLITE);
     }
 
 }

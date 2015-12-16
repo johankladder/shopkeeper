@@ -13,6 +13,7 @@ public class DatabaseChooser {
 
     public static Integer CURRENTDB = null;
 
+    // TODO Param for starting a predefined db and init dbtype from that
     public static void start() {
                 sqlLiteThread = new Thread(SQLLITEMODULE, "SQLLITE_DATABASE_THREAD");
                 sqlLiteThread.start();
