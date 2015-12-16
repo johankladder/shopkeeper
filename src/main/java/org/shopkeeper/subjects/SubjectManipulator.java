@@ -5,7 +5,6 @@ import org.shopkeeper.parsers.SubjectActionChooser;
 import org.shopkeeper.subjects.categories.Category;
 import org.shopkeeper.subjects.customer.Customer;
 import org.shopkeeper.subjects.items.Item;
-import org.shopkeeper.subjectsmodules.SubjectModule;
 import org.shopkeeper.util.DateTimeGenerator;
 
 import java.util.HashMap;

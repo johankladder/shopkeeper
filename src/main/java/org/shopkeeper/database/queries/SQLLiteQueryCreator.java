@@ -2,6 +2,7 @@ package org.shopkeeper.database.queries;
 
 import org.apache.commons.lang3.StringUtils;
 import org.shopkeeper.database.modules.DatabaseTypes;
+import org.shopkeeper.subjects.Subject;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -91,6 +92,46 @@ public class SQLLiteQueryCreator {
     }
 
     /**
+     * Creates an insert-query for an sqlite-database. Will first look if the subjects field map contains a table name.
+     * After that the id and table name are getting skipped while creating the query. This is because the id is always
+     * autoincrement in this case. Before the actual values are added to the query they will be parsed. This is because
+     * for certain data- types there is another syntax for query-building.
+     *
+     * @param subject The subject
+     * @return The insert-query bases on the above mentioned subject.
+     * @see Subject
+     */
+    // TODO Currently not checking if value is null or empty.
+    public static String createInsertQuery(Subject subject) {
+        if(subject != null) {
+            Map map = subject.getFields();
+            if(map.containsKey("tablename")) {
+                String base = "INSERT INTO " + map.get("tablename");
+                String datanames = "(";
+                String values = "VALUES (";
+                Iterator it = map.entrySet().iterator();
+                while (it.hasNext()) {
+                    Map.Entry pair = (Map.Entry) it.next();
+                        if(!pair.getKey().equals("id") && !pair.getKey().equals("tablename")) {
+                            datanames += pair.getKey() + ", ";
+                            // Create values
+                            values += parseValue(pair, subject.INITFIELD) + ", ";
+                        }
+                }
+                // Trim and normalise:
+                datanames = StringUtils.trimToNull(StringUtils.substringBeforeLast(datanames, ","));
+                datanames += ") ";
+                values = StringUtils.trimToNull(StringUtils.substringBeforeLast(values, ","));
+                values += ")";
+
+                base += datanames + values;
+                return base;
+            }
+        }
+        return null;
+    }
+
+    /**
      * Provides syntax for certain fields in the database-type. When a unknown parameter was send, this method will return
      * null. This method is private because it's not interesting for the outside world.
      * @param type Type of field
@@ -109,6 +150,27 @@ public class SQLLiteQueryCreator {
             }
         }
         // TODO Logging
+        return null;
+    }
+
+    /**
+     * Parses 'normal' String values into values in SQLite-style. For example; Varchars can not be inserted without quotes
+     * around the string. This method will handles those exceptions for you.
+     * @param pair The key-value pair. Given from the fields-map from the subject.
+     * @param initMap The initialisation-map from the subject
+     * @return Value corrected by SQLite norms.
+     * @see SQLLiteQueryCreator#createInsertQuery(Subject)
+     * @see Subject
+     */
+    private static Object parseValue(Map.Entry pair, Map initMap) {
+        String datatype = (String) initMap.get(pair.getKey());
+        if(datatype != null) {
+            if(datatype.equals("string") || datatype.equals("date")) {
+                return StringUtils.trimToNull("'" + pair.getValue() + "'");
+            } else {
+                return pair.getValue();
+            }
+        }
         return null;
     }
 

@@ -2,10 +2,10 @@ package org.shopkeeper.parsers;
 
 import org.shopkeeper.subjects.Subject;
 import org.shopkeeper.subjects.SubjectTypes;
-import org.shopkeeper.subjectsmodules.CategoryModule;
-import org.shopkeeper.subjectsmodules.CustomerModule;
-import org.shopkeeper.subjectsmodules.ItemModule;
-import org.shopkeeper.subjectsmodules.SubjectModule;
+import org.shopkeeper.subjects.modules.CategoryModule;
+import org.shopkeeper.subjects.modules.CustomerModule;
+import org.shopkeeper.subjects.modules.ItemModule;
+import org.shopkeeper.subjects.modules.SubjectModule;
 
 import java.util.logging.Logger;
 

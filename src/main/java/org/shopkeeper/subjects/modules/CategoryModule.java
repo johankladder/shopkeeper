@@ -1,4 +1,4 @@
-package org.shopkeeper.subjectsmodules;
+package org.shopkeeper.subjects.modules;
 
 import org.shopkeeper.subjects.Subject;
 

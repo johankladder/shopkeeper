@@ -7,11 +7,9 @@ import org.shopkeeper.subjects.Subject;
 import org.shopkeeper.subjects.categories.Category;
 import org.shopkeeper.subjects.customer.Customer;
 import org.shopkeeper.subjects.items.Item;
+import org.shopkeeper.util.DateTimeGenerator;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 
 /**
@@ -26,7 +24,7 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
 
     @Override
     public void add(Subject subject) {
-        System.out.println(subject);
+
     }
 
 
@@ -46,25 +44,26 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
     }
 
 
-    public void processQueryNoResult() {
+    public void processQueryNoResult(String query) {
         if(WAS_INITIALIZED && CONNECTED) {
 
         }
     }
 
-    public void processQueryResult() {
+    public ResultSet processQueryResult(String query) {
         if(WAS_INITIALIZED && CONNECTED) {
 
         }
+        return null;
     }
 
 
     private static void initDatabase() {
         try {
             Statement stmt = CONNECTION.createStatement();
-            stmt.execute(SQLLiteQueryCreator.createInitQuery(Item.getFields(), DatabaseTypes.DATABASETYPE_SQLLITE));
-            stmt.execute(SQLLiteQueryCreator.createInitQuery(Customer.getFields(), DatabaseTypes.DATABASETYPE_SQLLITE));
-            stmt.execute(SQLLiteQueryCreator.createInitQuery(Category.getFields(), DatabaseTypes.DATABASETYPE_SQLLITE));
+            stmt.execute(SQLLiteQueryCreator.createInitQuery(Item.getInitFields(), DatabaseTypes.DATABASETYPE_SQLLITE));
+            stmt.execute(SQLLiteQueryCreator.createInitQuery(Customer.getInitFields(), DatabaseTypes.DATABASETYPE_SQLLITE));
+            stmt.execute(SQLLiteQueryCreator.createInitQuery(Category.getInitFields(), DatabaseTypes.DATABASETYPE_SQLLITE));
             WAS_INITIALIZED = true; // Set status
         } catch (SQLException e) {
             e.printStackTrace();
@@ -102,14 +101,5 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
             }
         }
     }
-
-
-    public static void main(String[] args) {
-        System.out.println("test");
-    }
-
-
-
-
 
 }

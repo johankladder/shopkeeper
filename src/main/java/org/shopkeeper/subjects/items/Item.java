@@ -18,6 +18,7 @@ public class Item extends Subject {
 
     public Item(Long identificationNumber, String name, Double price, DateTime dateAdded) {
         super(identificationNumber, name, dateAdded);
+        super.INITFIELD=getInitFields();
         this.price = price;
     }
 
@@ -30,8 +31,18 @@ public class Item extends Subject {
         this.price = price;
     }
 
-    // TODO Make abstract
-    public static Map getFields() {
+    @Override
+    public Map getFields() {
+        Map fields = new HashMap();
+        fields.put("tablename", TABLENAME);
+        fields.put("price", price);
+        fields.put("id", getIdentificationNumber());
+        fields.put("name", getName());
+        fields.put("dateadded", getDateAdded());
+        return fields;
+    }
+
+    public static Map getInitFields() {
         Map fields = new HashMap();
         fields.put("tablename", TABLENAME);
         fields.put("price", "double");
@@ -40,4 +51,6 @@ public class Item extends Subject {
         fields.put("dateadded", "date");
         return fields;
     }
+
+
 }

@@ -5,7 +5,7 @@ import org.shopkeeper.subjects.Subject;
 /**
  * Created by typhooncoaster on 4-12-15.
  */
-public abstract class DatabaseModule {
+public abstract class DatabaseModule implements Runnable{
 
     public Integer TYPE;
     protected static final String DBNAME = "shopkeeper";

@@ -1,4 +1,4 @@
-package org.shopkeeper.subjectsmodules;
+package org.shopkeeper.subjects.modules;
 
 import org.shopkeeper.database.modules.DatabaseChooser;
 import org.shopkeeper.database.modules.DatabaseModule;
@@ -14,11 +14,12 @@ public abstract class SubjectModule {
 
     private static ArrayList<Subject> SUBJECTS = new ArrayList<Subject>();
     private static boolean started = false;
-    protected static DatabaseModule DB = null; // TODO init dbmodule here from db chooser
+    protected static DatabaseModule DB = null;
 
     public SubjectModule() {
         if(!started) {
-            DatabaseChooser.start();
+            DB = DatabaseChooser.getDatabase(DatabaseTypes.DATABASETYPE_SQLLITE); // TODO From preferences.
+            DatabaseChooser.start(DB);
             started = true;
         }
     }

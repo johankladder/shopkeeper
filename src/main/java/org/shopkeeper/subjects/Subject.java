@@ -13,6 +13,7 @@ public abstract class Subject {
     private String name;
     private DateTime dateAdded;
     private Long identificationNumber;
+    public Map INITFIELD;
 
     public Integer TYPE;
 
@@ -40,6 +41,9 @@ public abstract class Subject {
     public Long getIdentificationNumber() {
         return identificationNumber;
     }
+
+    public abstract Map getFields();
+
 
 
 

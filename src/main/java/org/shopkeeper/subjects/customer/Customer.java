@@ -68,7 +68,8 @@ public class Customer extends Subject {
         this.email = email;
     }
 
-    public static  Map getFields() {
+    @Override
+    public  Map getFields() {
         Map fields = new HashMap();
         fields.put("tablename", "customers");
         fields.put("id", "integer");
@@ -79,6 +80,16 @@ public class Customer extends Subject {
         fields.put("zipcode", "string");
         fields.put("phone", "string");
         fields.put("email", "string");
+        return fields;
+    }
+
+    public static Map getInitFields() {
+        Map fields = new HashMap();
+        fields.put("tablename", "customers");
+        fields.put("price", "double");
+        fields.put("id", "integer");
+        fields.put("name", "string");
+        fields.put("dateadded", "date");
         return fields;
     }
 }
