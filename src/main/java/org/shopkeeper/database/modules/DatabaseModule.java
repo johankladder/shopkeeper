@@ -1,6 +1,7 @@
 package org.shopkeeper.database.modules;
 
 import org.shopkeeper.subjects.Subject;
+import org.shopkeeper.subjects.SubjectTypes;
 
 /**
  * Created by typhooncoaster on 4-12-15.
@@ -21,13 +22,8 @@ public abstract class DatabaseModule implements Runnable{
 
     public abstract void update(Subject subject);
 
-    public abstract void showAll(Subject subject);
+    public abstract void showAll(Integer subjectType);
 
-    /**
-     * Shows whether the database is connected. When connected it will return true, if not it will return false.
-     *
-     * @return Status of connection
-     */
     public static boolean isConnected() {
         return CONNECTED;
     }

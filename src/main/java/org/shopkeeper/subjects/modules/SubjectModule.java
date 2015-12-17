@@ -1,5 +1,6 @@
 package org.shopkeeper.subjects.modules;
 
+import org.shopkeeper.database.DatabaseHandler;
 import org.shopkeeper.database.modules.DatabaseChooser;
 import org.shopkeeper.database.modules.DatabaseModule;
 import org.shopkeeper.database.modules.DatabaseTypes;
@@ -15,11 +16,13 @@ public abstract class SubjectModule {
     private static ArrayList<Subject> SUBJECTS = new ArrayList<Subject>();
     private static boolean started = false;
     protected static DatabaseModule DB = null;
+    private Integer SUBJECTTYPE = null;
 
-    public SubjectModule() {
+    public SubjectModule(Integer subjecttype) {
+        SUBJECTTYPE = subjecttype;
         if(!started) {
             DB = DatabaseChooser.getDatabase(DatabaseTypes.DATABASETYPE_SQLLITE); // TODO From preferences.
-            DatabaseChooser.start(DB);
+            DatabaseHandler.start(DB);
             started = true;
         }
     }
@@ -29,6 +32,11 @@ public abstract class SubjectModule {
     public abstract void update(Subject subject);
 
     public abstract void delete(Subject subject);
+
+    public void refresh() {
+        SUBJECTS.clear();
+        DB.showAll(SUBJECTTYPE);
+    }
 
     public int getTotalSubjects() {
         return SUBJECTS.size();
@@ -41,5 +49,6 @@ public abstract class SubjectModule {
     public static void removeFromList(Subject subject) {
         SUBJECTS.remove(subject);
     }
+
 
 }

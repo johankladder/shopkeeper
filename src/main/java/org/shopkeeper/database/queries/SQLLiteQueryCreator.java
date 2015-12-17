@@ -128,6 +128,14 @@ public class SQLLiteQueryCreator {
                 return base;
             }
         }
+
+        return null;
+    }
+
+    public static String createSelectAllQuery(String tablename) {
+        if(tablename != null && StringUtils.isNotBlank(tablename)) {
+            return "SELECT * FROM " + tablename + ";";
+        }
         return null;
     }
 
@@ -173,7 +181,6 @@ public class SQLLiteQueryCreator {
         }
         return null;
     }
-
 
 
 }

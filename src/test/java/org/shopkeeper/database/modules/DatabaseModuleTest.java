@@ -2,7 +2,9 @@ package org.shopkeeper.database.modules;
 
 import org.junit.Test;
 import org.shopkeeper.database.modules.sqllite.SQLLiteModule;
+import org.shopkeeper.subjects.items.Item;
 import org.shopkeeper.subjects.modules.ItemModule;
+import org.shopkeeper.util.DateTimeGenerator;
 
 import static org.junit.Assert.*;
 
@@ -14,14 +16,21 @@ public class DatabaseModuleTest {
     @Test
     public void testDatabase() throws InterruptedException {
         ItemModule module =  new ItemModule();
-        Thread.sleep(1000);
-        assertTrue(DatabaseModule.isConnected());
-        assertEquals(DatabaseTypes.DATABASETYPE_SQLLITE, DatabaseChooser.CURRENTDB);
-        assertTrue(SQLLiteModule.WAS_INITIALIZED);
-        assertTrue(SQLLiteModule.RUNNING);
-        assertTrue(SQLLiteModule.CONNECTED);
-
-        module.add(null);
+        module.add(new Item(null, "testw", 12.54, DateTimeGenerator.generateDateTimeNow()));
+        module.add(new Item(null, "tests", 12.54, DateTimeGenerator.generateDateTimeNow()));
+        module.add(new Item(null, "tests", 12.54, DateTimeGenerator.generateDateTimeNow()));
+        module.add(new Item(null, "tests", 12.54, DateTimeGenerator.generateDateTimeNow()));
+        module.add(new Item(null, "tests", 12.54, DateTimeGenerator.generateDateTimeNow()));
+        module.add(new Item(null, "tests", 12.54, DateTimeGenerator.generateDateTimeNow()));
+        module.add(new Item(null, "tests", 12.54, DateTimeGenerator.generateDateTimeNow()));
+        module.add(new Item(null, "tests", 12.54, DateTimeGenerator.generateDateTimeNow()));
+        module.add(new Item(null, "tests", 12.54, DateTimeGenerator.generateDateTimeNow()));
+        module.add(new Item(null, "tests", 12.54, DateTimeGenerator.generateDateTimeNow()));
+        module.add(new Item(null, "tests", 12.54, DateTimeGenerator.generateDateTimeNow()));
+        module.add(new Item(null, "tests", 12.54, DateTimeGenerator.generateDateTimeNow()));
+        module.add(new Item(null, "tests", 12.54, DateTimeGenerator.generateDateTimeNow()));
+        module.add(new Item(null, "tests", 12.54, DateTimeGenerator.generateDateTimeNow()));
+        Thread.sleep(5000);
 
     }
 
