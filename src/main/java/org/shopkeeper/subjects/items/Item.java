@@ -8,9 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by typhooncoaster on 4-12-15.
- */
+
 public class Item extends Subject {
 
     public Double price;

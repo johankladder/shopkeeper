@@ -7,9 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by typhooncoaster on 4-12-15.
- */
+
 public class Category extends Subject {
     public static final String TABLENAME = "categories";
     public Category(Long identificationNumber, String name, DateTime dateAdded) {

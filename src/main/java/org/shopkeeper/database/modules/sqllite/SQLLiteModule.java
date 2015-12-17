@@ -14,9 +14,7 @@ import java.sql.*;
 import java.util.LinkedList;
 
 
-/**
- * Created by typhooncoaster on 4-12-15.
- */
+
 // TODO Process bulk queries
 public class SQLLiteModule extends DatabaseModule implements Runnable {
 
@@ -56,11 +54,12 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
 
     // TODO PREPARED STATMENT
     public void processQueryNoResult(String query) {
+        if(query != null) {
             synchronized (queue) {
                 queue.addLast(query);
                 queue.notify();
             }
-
+        }
     }
 
     public ResultSet processQueryResult(String query) {
@@ -78,6 +77,7 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
     }
 
 
+    // TODO Put in abstract class and make initparser
     private static void initDatabase() {
         try {
             Statement stmt = CONNECTION.createStatement();
@@ -93,6 +93,7 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
     }
 
 
+    // TODO Connection checking
     public void run() {
         if (!RUNNING) {  // Check if the database is already RUNNING:
             RUNNING = true;
@@ -101,7 +102,7 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
                 CONNECTION = DriverManager.getConnection("jdbc:sqlite:" + DBNAME);
                 System.out.println("Connection established in: " + Thread.currentThread().getName());
                 CONNECTED = true;
-                initDatabase(); // Inititializes tables in this database
+                initDatabase(); // Initializes tables in this database
 
                 String query;
 
@@ -115,17 +116,15 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
                             }
                         }
 
-                        query = (String) queue.removeFirst(); // TODO check if query needs a result or not
+                        query = (String) queue.removeFirst(); // TODO Build 'result or not' parser
                     }
 
-                    // If we don't catch RuntimeException,
-                    // the pool could leak threads
                     try {
-                       Statement stmt = CONNECTION.createStatement();
+                        Statement stmt = CONNECTION.createStatement();
                         stmt.execute(query);
                         System.out.println("Executed query: " + query);
                     } catch (RuntimeException e) {
-                        // You might want to log something here
+
                     }
                 }
 
