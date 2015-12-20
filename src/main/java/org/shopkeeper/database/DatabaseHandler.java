@@ -9,9 +9,18 @@ import org.xml.sax.SAXException;
 public class DatabaseHandler {
 
     private static Thread DBTHREAD = null;
+    private static boolean STARTED = false;
 
     public static void start(DatabaseModule module) {
-        DBTHREAD = new Thread(module, "DATABASETHREAD");
-        DBTHREAD.start();
+        if(!STARTED) {
+            DBTHREAD = new Thread(module, "DATABASETHREAD");
+            DBTHREAD.start();
+            STARTED = true;
+        }
     }
+
+    public static void connectionNotEstablished() {
+        STARTED = false;
+    }
+
 }

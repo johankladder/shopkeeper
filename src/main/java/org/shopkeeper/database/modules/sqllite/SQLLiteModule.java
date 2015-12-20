@@ -1,5 +1,6 @@
 package org.shopkeeper.database.modules.sqllite;
 
+import org.shopkeeper.database.DatabaseHandler;
 import org.shopkeeper.database.modules.DatabaseModule;
 import org.shopkeeper.database.modules.DatabaseTypes;
 import org.shopkeeper.database.queries.SQLLiteQueryCreator;
@@ -124,11 +125,14 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
                         stmt.execute(query);
                         System.out.println("Executed query: " + query);
                     } catch (RuntimeException e) {
-
+                        // TODO Log why query was not excecuted correctly
                     }
                 }
 
             } catch (Exception e) {
+                // Set status:
+                CONNECTED = false;
+                DatabaseHandler.connectionNotEstablished();
                 System.err.println(e.getClass().getName() + ": " + e.getMessage());
             }
 
