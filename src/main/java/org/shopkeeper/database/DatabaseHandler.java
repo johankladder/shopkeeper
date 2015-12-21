@@ -13,7 +13,7 @@ public class DatabaseHandler {
 
     public static void start(DatabaseModule module) {
         if(!STARTED) {
-            DBTHREAD = new Thread(module, "DATABASETHREAD FOR " + module.getClass().getName());
+            DBTHREAD = new Thread(module, "DATABASETHREAD");
             DBTHREAD.start();
             STARTED = true;
         }
