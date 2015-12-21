@@ -1,7 +1,7 @@
 package org.shopkeeper.subjects;
 
 import org.joda.time.DateTime;
-import org.shopkeeper.parsers.SubjectParser;
+import org.shopkeeper.subjects.parsers.SubjectParser;
 
 import java.util.Map;
 

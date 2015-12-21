@@ -1,4 +1,4 @@
-package org.shopkeeper.parsers;
+package org.shopkeeper.subjects.parsers;
 
 import org.shopkeeper.subjects.Subject;
 import org.shopkeeper.subjects.SubjectTypes;

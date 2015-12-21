@@ -3,20 +3,17 @@ package org.shopkeeper.database.modules.sqllite;
 import org.shopkeeper.database.DatabaseHandler;
 import org.shopkeeper.database.modules.DatabaseModule;
 import org.shopkeeper.database.modules.DatabaseTypes;
-import org.shopkeeper.database.queries.SQLLiteQueryCreator;
+import org.shopkeeper.database.parsers.SQLLiteQueryCreator;
 import org.shopkeeper.subjects.Subject;
 import org.shopkeeper.subjects.SubjectTypes;
 import org.shopkeeper.subjects.categories.Category;
 import org.shopkeeper.subjects.customer.Customer;
 import org.shopkeeper.subjects.items.Item;
-import org.shopkeeper.util.DateTimeGenerator;
 
 import java.sql.*;
 import java.util.LinkedList;
-
-
-
-// TODO Process bulk queries
+// TODO Write status notificationer
+// TODO Process bulk parsers
 public class SQLLiteModule extends DatabaseModule implements Runnable {
 
     public static Connection CONNECTION = null;
@@ -111,7 +108,7 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
                     synchronized (queue) {
                         while (queue.isEmpty()) {
                             try {
-                                System.out.println("Waiting for queries to be added in the queue");
+                                System.out.println("Waiting for parsers to be added in the queue");
                                 queue.wait();
                             } catch (InterruptedException ignored) {
                             }

@@ -1,4 +1,4 @@
-package org.shopkeeper.database.queries;
+package org.shopkeeper.database.parsers;
 
 import org.apache.commons.lang3.StringUtils;
 import org.shopkeeper.database.modules.DatabaseTypes;

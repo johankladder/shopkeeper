@@ -1,4 +1,4 @@
-package org.shopkeeper.parsers;
+package org.shopkeeper.subjects.parsers;
 
 import org.joda.time.DateTime;
 import org.junit.Test;
