@@ -3,6 +3,7 @@ package org.shopkeeper.database.modules.sqllite;
 import org.shopkeeper.database.DatabaseHandler;
 import org.shopkeeper.database.modules.DatabaseModule;
 import org.shopkeeper.database.modules.DatabaseTypes;
+import org.shopkeeper.database.parsers.ResultParser;
 import org.shopkeeper.database.parsers.SQLLiteQueryCreator;
 import org.shopkeeper.subjects.Subject;
 import org.shopkeeper.subjects.SubjectTypes;
@@ -20,6 +21,7 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
     public static boolean RUNNING = false;
     public static boolean WAS_INITIALIZED = false;
     public final LinkedList queue = new LinkedList();
+    public static ResultSet RESULTSET = null;
 
 
     @Override
@@ -114,13 +116,19 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
                             }
                         }
 
-                        query = (String) queue.removeFirst(); // TODO Build 'result or not' parser
+                        query = (String) queue.removeFirst();
                     }
 
                     try {
-                        Statement stmt = CONNECTION.createStatement();
-                        stmt.execute(query);
-                        System.out.println("Executed query: " + query);
+                        if(!ResultParser.queryWithResult(query)) {
+                            Statement stmt = CONNECTION.createStatement();
+                            stmt.execute(query);
+                            System.out.println("Executed query: " + query);
+                        } else {
+                            Statement stmt = CONNECTION.createStatement();
+                            RESULTSET = stmt.executeQuery(query);
+                            System.out.println("Executed query: " + query);
+                        }
                     } catch (RuntimeException e) {
                         // TODO Log why query was not excecuted correctly
                     }
