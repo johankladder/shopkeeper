@@ -88,3 +88,4 @@ local.properties
 
 ## SQLite database
 '*.sqlite3'
+shopkeeper
