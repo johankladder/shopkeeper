@@ -13,6 +13,16 @@ public class DatabaseHandler implements Runnable {
     private static boolean running = false;
     private static DatabaseModule module;
 
+<<<<<<< HEAD
+=======
+    public static void start(DatabaseModule module) {
+        if(!STARTED) {
+            DBTHREAD = new Thread(module, "DATABASETHREAD");
+            DBTHREAD.start();
+            STARTED = true;
+        }
+    }
+>>>>>>> 4ba6fda71f582aa17654196ccb17249bcac14485
 
     public DatabaseHandler(DatabaseModule module) {
         this.module = module;

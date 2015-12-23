@@ -20,6 +20,11 @@ public abstract class SubjectModule {
 
     public SubjectModule(Integer subjecttype) {
         SUBJECTTYPE = subjecttype;
+<<<<<<< HEAD
+=======
+        DB = DatabaseChooser.getDatabase(DatabaseTypes.DATABASETYPE_SQLLITE); // TODO From preferences.
+        DatabaseHandler.start(DB);
+>>>>>>> 4ba6fda71f582aa17654196ccb17249bcac14485
     }
 
     public abstract void add(Subject subject);

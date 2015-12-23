@@ -1,6 +1,7 @@
 package org.shopkeeper.database.modules;
 
 import org.junit.Test;
+import org.shopkeeper.Notificationer;
 import org.shopkeeper.database.modules.sqllite.SQLLiteModule;
 import org.shopkeeper.subjects.items.Item;
 import org.shopkeeper.subjects.modules.ItemModule;
@@ -31,7 +32,8 @@ public class DatabaseModuleTest {
         module.add(new Item(null, "tests", 12.54, DateTimeGenerator.generateDateTimeNow()));
         module.add(new Item(null, "tests", 12.54, DateTimeGenerator.generateDateTimeNow()));
         Thread.sleep(5000);
-
+        assertTrue(Notificationer.CONNECTED);
+        assertTrue(Notificationer.WASINITIALISED);
     }
 
 }

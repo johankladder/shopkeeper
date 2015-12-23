@@ -85,3 +85,7 @@ local.properties
  
 # PDT-specific
 .buildpath
+
+## SQLite database
+'*.sqlite3'
+shopkeeper
