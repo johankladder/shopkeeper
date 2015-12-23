@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import org.shopkeeper.database.DatabaseHandler;
 import org.shopkeeper.database.modules.DatabaseChooser;
 import org.shopkeeper.database.modules.DatabaseTypes;
+import org.shopkeeper.preferences.PreferenceHandler;
 import org.shopkeeper.subjects.SubjectHandler;
 
 import java.util.ArrayList;
@@ -54,12 +55,13 @@ public class Preloader extends Application {
     public static void initPreloader() {
         MODULES.add(new DatabaseHandler(DatabaseChooser.getDatabase(DatabaseTypes.DATABASETYPE_SQLLITE)));
         MODULES.add(new SubjectHandler());
+        MODULES.add(new PreferenceHandler());
     }
 
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        // GUI preloader
+        // GUI:
         primaryStage.setTitle("Shopkeeper");
         BorderPane root = new BorderPane();
         PROGRESSBAR = new ProgressBar();
@@ -68,7 +70,7 @@ public class Preloader extends Application {
         primaryStage.setScene(new Scene(root, 600, 250));
         primaryStage.show();
 
-        // Start the preloader
+        // STARTING THE PRELOADER:
         Preloader.startPreloader();
     }
 
