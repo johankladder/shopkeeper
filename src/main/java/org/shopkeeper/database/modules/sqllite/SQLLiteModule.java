@@ -1,10 +1,6 @@
 package org.shopkeeper.database.modules.sqllite;
 
-<<<<<<< HEAD
 import org.shopkeeper.preloader.Preloader;
-=======
-import org.shopkeeper.Notificationer;
->>>>>>> 4ba6fda71f582aa17654196ccb17249bcac14485
 import org.shopkeeper.database.DatabaseHandler;
 import org.shopkeeper.database.modules.DatabaseModule;
 import org.shopkeeper.database.modules.DatabaseTypes;
@@ -89,14 +85,12 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
             stmt.execute(SQLLiteQueryCreator.createInitQuery(Item.getInitFields(), DatabaseTypes.DATABASETYPE_SQLLITE));
             stmt.execute(SQLLiteQueryCreator.createInitQuery(Customer.getInitFields(), DatabaseTypes.DATABASETYPE_SQLLITE));
             stmt.execute(SQLLiteQueryCreator.createInitQuery(Category.getInitFields(), DatabaseTypes.DATABASETYPE_SQLLITE));
-            Notificationer.setInitialised(true, SQLLiteModule.this, Thread.currentThread());
             WAS_INITIALIZED = true; // Set status
             synchronized (Preloader.ready) {
                 Preloader.ready.notify();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-            Notificationer.setInitialised(false, SQLLiteModule.this, Thread.currentThread());
+            e.printStackTrace();;
             WAS_INITIALIZED = false;
         }
 
@@ -110,10 +104,6 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
             try {
                 Class.forName("org.sqlite.JDBC");
                 CONNECTION = DriverManager.getConnection("jdbc:sqlite:" + DBNAME);
-<<<<<<< HEAD
-=======
-                Notificationer.setConnected(true, SQLLiteModule.this, Thread.currentThread());
->>>>>>> 4ba6fda71f582aa17654196ccb17249bcac14485
                 CONNECTED = true;
                 initDatabase(); // Initializes tables in this database
 
@@ -150,7 +140,6 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
                 // Set status:
                 DatabaseHandler.connectionNotEstablished();
                 CONNECTED = false;
-                Notificationer.setConnected(false, SQLLiteModule.this, Thread.currentThread());
             }
 
         }

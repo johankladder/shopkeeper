@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import org.shopkeeper.database.DatabaseHandler;
 import org.shopkeeper.database.modules.DatabaseChooser;
 import org.shopkeeper.database.modules.DatabaseTypes;
+import org.shopkeeper.subjects.SubjectHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +53,7 @@ public class Preloader extends Application {
 
     public static void initPreloader() {
         MODULES.add(new DatabaseHandler(DatabaseChooser.getDatabase(DatabaseTypes.DATABASETYPE_SQLLITE)));
+        MODULES.add(new SubjectHandler());
     }
 
 
