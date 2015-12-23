@@ -1,5 +1,6 @@
 package org.shopkeeper.subjects.modules;
 
+import org.shopkeeper.database.DatabaseHandler;
 import org.shopkeeper.database.modules.DatabaseChooser;
 import org.shopkeeper.database.modules.DatabaseModule;
 import org.shopkeeper.database.modules.DatabaseTypes;
@@ -19,7 +20,6 @@ public abstract class SubjectModule {
 
     public SubjectModule(Integer subjecttype) {
         SUBJECTTYPE = subjecttype;
-        DB = DatabaseChooser.getDatabase(DatabaseTypes.DATABASETYPE_SQLLITE); // TODO From preferences.
     }
 
     public abstract void add(Subject subject);

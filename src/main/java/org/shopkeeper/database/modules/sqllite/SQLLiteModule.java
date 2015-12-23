@@ -1,5 +1,6 @@
 package org.shopkeeper.database.modules.sqllite;
 
+import org.shopkeeper.preloader.Preloader;
 import org.shopkeeper.database.DatabaseHandler;
 import org.shopkeeper.database.modules.DatabaseModule;
 import org.shopkeeper.database.modules.DatabaseTypes;
@@ -83,6 +84,9 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
             stmt.execute(SQLLiteQueryCreator.createInitQuery(Customer.getInitFields(), DatabaseTypes.DATABASETYPE_SQLLITE));
             stmt.execute(SQLLiteQueryCreator.createInitQuery(Category.getInitFields(), DatabaseTypes.DATABASETYPE_SQLLITE));
             WAS_INITIALIZED = true; // Set status
+            synchronized (Preloader.ready) {
+                Preloader.ready.notify();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
             WAS_INITIALIZED = false;
@@ -98,7 +102,6 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
             try {
                 Class.forName("org.sqlite.JDBC");
                 CONNECTION = DriverManager.getConnection("jdbc:sqlite:" + DBNAME);
-                System.out.println("Connection established in: " + Thread.currentThread().getName());
                 CONNECTED = true;
                 initDatabase(); // Initializes tables in this database
 
@@ -108,7 +111,6 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
                     synchronized (queue) {
                         while (queue.isEmpty()) {
                             try {
-                                System.out.println("Waiting for parsers to be added in the queue");
                                 queue.wait();
                             } catch (InterruptedException ignored) {
                             }
