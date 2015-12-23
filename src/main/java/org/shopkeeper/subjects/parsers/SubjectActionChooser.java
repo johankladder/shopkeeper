@@ -1,10 +1,8 @@
 package org.shopkeeper.subjects.parsers;
 
-import org.shopkeeper.subjects.Subject;
-import org.shopkeeper.subjects.SubjectTypes;
-import org.shopkeeper.subjects.modules.CategoryModule;
-import org.shopkeeper.subjects.modules.CustomerModule;
-import org.shopkeeper.subjects.modules.ItemModule;
+import org.shopkeeper.subjects.subjecttypes.Subject;
+import org.shopkeeper.subjects.SubjectHandler;
+import org.shopkeeper.subjects.subjecttypes.SubjectTypes;
 import org.shopkeeper.subjects.modules.SubjectModule;
 
 import java.util.logging.Logger;
@@ -22,11 +20,6 @@ public class SubjectActionChooser {
     public static final int UPDATE = 1;
     public static final int ADD = 2;
 
-    // Modules
-    private static final ItemModule ITEMMODULE = new ItemModule();
-    private static final CategoryModule CATEGORYMODULE = new CategoryModule();
-    private static final CustomerModule CUSTOMER_MODULE = new CustomerModule();
-
 
     /**
      * Method for performing an action with a subject. This can be all sorts of actions. Most of them are already described
@@ -41,11 +34,11 @@ public class SubjectActionChooser {
     public static void actionOnSubject(Subject subject, Integer action) {
         if (subject != null) {
             if (subject.TYPE == SubjectTypes.ITEM) {
-                performAction(ITEMMODULE, subject, action);
+                performAction(SubjectHandler.getModule("itemmodule"), subject, action);
             } else if (subject.TYPE == SubjectTypes.CATEGORY) {
-                performAction(CATEGORYMODULE, subject, action);
+                performAction(SubjectHandler.getModule("categorymodule"), subject, action);
             } else if (subject.TYPE == SubjectTypes.CUSTOMER) {
-                performAction(CUSTOMER_MODULE, subject, action);
+                performAction(SubjectHandler.getModule("customermodule"), subject, action);
             } else {
                 LOGGER.warning("There is no module for a NULL object ;)!");
             }
@@ -53,15 +46,17 @@ public class SubjectActionChooser {
     }
 
     private static void performAction(SubjectModule module, Subject subject, Integer action) {
-        if (action != null) {
-            if (action == DELETE) {
-                module.delete(subject);
-            } else if (action == UPDATE) {
-                module.update(subject);
-            } else if (action == ADD) {
-                module.add(subject);
-            } else {
-                LOGGER.warning("The action can't be found! Do you want more actions? :)");
+        if(module != null) {
+            if (action != null) {
+                if (action == DELETE) {
+                    module.delete(subject);
+                } else if (action == UPDATE) {
+                    module.update(subject);
+                } else if (action == ADD) {
+                    module.add(subject);
+                } else {
+                    LOGGER.warning("The action can't be found! Do you want more actions? :)");
+                }
             }
         }
     }

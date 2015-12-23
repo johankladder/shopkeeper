@@ -1,10 +1,9 @@
 package org.shopkeeper.subjects.modules;
 
-import org.shopkeeper.database.DatabaseHandler;
 import org.shopkeeper.database.modules.DatabaseChooser;
 import org.shopkeeper.database.modules.DatabaseModule;
 import org.shopkeeper.database.modules.DatabaseTypes;
-import org.shopkeeper.subjects.Subject;
+import org.shopkeeper.subjects.subjecttypes.Subject;
 
 import java.util.ArrayList;
 

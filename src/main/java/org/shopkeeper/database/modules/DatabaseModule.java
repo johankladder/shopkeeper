@@ -1,6 +1,6 @@
 package org.shopkeeper.database.modules;
 
-import org.shopkeeper.subjects.Subject;
+import org.shopkeeper.subjects.subjecttypes.Subject;
 /**
  * The Database-module gives the user the opportunity the communicate with databases. This can be a wide range of
  * database-types whom can be found in the DatabaseTypes class. Make sure that you call the start method first, otherwise

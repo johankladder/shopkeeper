@@ -2,11 +2,11 @@ package org.shopkeeper.subjects.parsers;
 
 import org.joda.time.DateTime;
 import org.junit.Test;
-import org.shopkeeper.subjects.SubjectTypes;
-import org.shopkeeper.subjects.categories.Category;
-import org.shopkeeper.subjects.customer.Customer;
-import org.shopkeeper.subjects.items.Item;
-import org.shopkeeper.subjects.SubjectFields;
+import org.shopkeeper.subjects.subjecttypes.SubjectTypes;
+import org.shopkeeper.subjects.subjecttypes.categories.Category;
+import org.shopkeeper.subjects.subjecttypes.customer.Customer;
+import org.shopkeeper.subjects.subjecttypes.items.Item;
+import org.shopkeeper.subjects.subjecttypes.SubjectFields;
 
 import java.util.HashMap;
 

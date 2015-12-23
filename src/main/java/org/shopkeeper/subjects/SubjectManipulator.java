@@ -2,9 +2,11 @@ package org.shopkeeper.subjects;
 
 import org.apache.commons.lang3.StringUtils;
 import org.shopkeeper.subjects.parsers.SubjectActionChooser;
-import org.shopkeeper.subjects.categories.Category;
-import org.shopkeeper.subjects.customer.Customer;
-import org.shopkeeper.subjects.items.Item;
+import org.shopkeeper.subjects.subjecttypes.Subject;
+import org.shopkeeper.subjects.subjecttypes.SubjectFields;
+import org.shopkeeper.subjects.subjecttypes.categories.Category;
+import org.shopkeeper.subjects.subjecttypes.customer.Customer;
+import org.shopkeeper.subjects.subjecttypes.items.Item;
 import org.shopkeeper.util.DateTimeGenerator;
 import org.shopkeeper.util.PriceGenerator;
 

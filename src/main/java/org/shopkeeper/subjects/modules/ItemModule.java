@@ -1,9 +1,7 @@
 package org.shopkeeper.subjects.modules;
 
-import org.shopkeeper.subjects.Subject;
-import org.shopkeeper.subjects.SubjectTypes;
-import org.shopkeeper.subjects.items.Item;
-import org.shopkeeper.util.DateTimeGenerator;
+import org.shopkeeper.subjects.subjecttypes.Subject;
+import org.shopkeeper.subjects.subjecttypes.SubjectTypes;
 
 /**
  * Created by typhooncoaster on 4-12-15.

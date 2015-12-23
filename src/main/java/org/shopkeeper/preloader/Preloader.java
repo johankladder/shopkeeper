@@ -60,11 +60,12 @@ public class Preloader extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         // GUI preloader
-        primaryStage.setTitle("The preloader");
+        primaryStage.setTitle("Shopkeeper");
         BorderPane root = new BorderPane();
         PROGRESSBAR = new ProgressBar();
         root.setBottom(PROGRESSBAR);
-        primaryStage.setScene(new Scene(root, 300, 250));
+        PROGRESSBAR.setMinWidth(600);
+        primaryStage.setScene(new Scene(root, 600, 250));
         primaryStage.show();
 
         // Start the preloader

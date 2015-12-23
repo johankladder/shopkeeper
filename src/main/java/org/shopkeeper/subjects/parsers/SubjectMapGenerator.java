@@ -1,9 +1,9 @@
 package org.shopkeeper.subjects.parsers;
 
-import org.shopkeeper.subjects.Subject;
-import org.shopkeeper.subjects.SubjectFields;
+import org.shopkeeper.subjects.subjecttypes.Subject;
+import org.shopkeeper.subjects.subjecttypes.SubjectFields;
 import org.shopkeeper.subjects.SubjectManipulator;
-import org.shopkeeper.subjects.SubjectTypes;
+import org.shopkeeper.subjects.subjecttypes.SubjectTypes;
 
 import java.util.HashMap;
 import java.util.logging.Logger;

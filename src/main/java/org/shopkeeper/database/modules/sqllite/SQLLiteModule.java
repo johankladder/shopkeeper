@@ -6,11 +6,11 @@ import org.shopkeeper.database.modules.DatabaseModule;
 import org.shopkeeper.database.modules.DatabaseTypes;
 import org.shopkeeper.database.parsers.ResultParser;
 import org.shopkeeper.database.parsers.SQLLiteQueryCreator;
-import org.shopkeeper.subjects.Subject;
-import org.shopkeeper.subjects.SubjectTypes;
-import org.shopkeeper.subjects.categories.Category;
-import org.shopkeeper.subjects.customer.Customer;
-import org.shopkeeper.subjects.items.Item;
+import org.shopkeeper.subjects.subjecttypes.Subject;
+import org.shopkeeper.subjects.subjecttypes.SubjectTypes;
+import org.shopkeeper.subjects.subjecttypes.categories.Category;
+import org.shopkeeper.subjects.subjecttypes.customer.Customer;
+import org.shopkeeper.subjects.subjecttypes.items.Item;
 
 import java.sql.*;
 import java.util.LinkedList;

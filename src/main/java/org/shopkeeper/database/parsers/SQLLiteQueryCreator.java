@@ -2,7 +2,7 @@ package org.shopkeeper.database.parsers;
 
 import org.apache.commons.lang3.StringUtils;
 import org.shopkeeper.database.modules.DatabaseTypes;
-import org.shopkeeper.subjects.Subject;
+import org.shopkeeper.subjects.subjecttypes.Subject;
 
 import java.util.Iterator;
 import java.util.Map;
