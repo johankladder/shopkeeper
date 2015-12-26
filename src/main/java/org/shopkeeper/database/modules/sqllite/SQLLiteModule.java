@@ -45,6 +45,7 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
     public void showAll(Integer subjectType) {
         if (subjectType == SubjectTypes.ITEM) {
             String query = SQLLiteQueryCreator.createSelectAllQuery((String) Item.getInitFields().get("tablename"));
+            processQueryResult(query);
         } else if (subjectType == SubjectTypes.CATEGORY) {
 
         } else if (subjectType == SubjectTypes.CUSTOMER) {
@@ -64,15 +65,11 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
     }
 
     public ResultSet processQueryResult(String query) {
-        if (WAS_INITIALIZED && CONNECTED) {
-            try {
-                Statement stmt = CONNECTION.createStatement();
-                ResultSet result = stmt.executeQuery(query);
-                System.out.println(result.toString());
-            } catch (SQLException e) {
-                e.printStackTrace();
+        if(query != null) {
+            synchronized (queue) {
+                queue.addLast(query);
+                queue.notify();
             }
-
         }
         return null;
     }

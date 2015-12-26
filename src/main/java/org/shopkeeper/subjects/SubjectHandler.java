@@ -16,6 +16,7 @@ public class SubjectHandler implements Runnable {
 
     public static Map<String, SubjectModule> MODULES = new HashMap<>();
 
+
     @Override
     public void run() {
         MODULES.put("itemmodule",new ItemModule());
@@ -23,6 +24,7 @@ public class SubjectHandler implements Runnable {
         MODULES.put("customermodule",new CustomerModule());
 
         // For each module, get all the objects from the database:
+
 
         synchronized (Preloader.ready) {
             Preloader.ready.notify();
