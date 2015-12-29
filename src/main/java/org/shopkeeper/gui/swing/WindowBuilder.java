@@ -4,6 +4,7 @@ import org.shopkeeper.gui.swing.controller.SubjectsViewController;
 import org.shopkeeper.gui.swing.model.ItemModel;
 import org.shopkeeper.gui.swing.view.AbstractView;
 import org.shopkeeper.gui.swing.view.ListView;
+import org.shopkeeper.preloader.Preloader;
 import org.shopkeeper.subjects.SubjectHandler;
 
 import javax.swing.*;
@@ -30,6 +31,10 @@ public class WindowBuilder {
         SubjectsViewController subjects_view_controller = new SubjectsViewController(null);
         JPanel panel_with_head_and_buttom = new JPanel(new BorderLayout());
         panel_with_head_and_buttom.add(subjects_view_controller, BorderLayout.NORTH);
+
+        JPanel release_notes = new JPanel(new BorderLayout());
+        release_notes.add(new JLabel(Preloader.RELEASE_NOTES, JLabel.CENTER));
+        panel_with_head_and_buttom.add(release_notes, BorderLayout.SOUTH);
 
         WINDOW.add(panel_with_head_and_buttom);
         WINDOW.setExtendedState(Frame.MAXIMIZED_BOTH); // Set fullscreen

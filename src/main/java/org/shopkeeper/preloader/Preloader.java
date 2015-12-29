@@ -53,7 +53,7 @@ public class Preloader extends Application {
 
     // NOTES:
     private static final String RELEASE_NUMBER = "TEST";
-    private static final String RELEASE_NOTES = "Version: " + RELEASE_NUMBER + " by Johan Kladder";
+    public static final String RELEASE_NOTES = "Version: " + RELEASE_NUMBER + " by Johan Kladder";
 
 
     private static void startPreloader() throws InterruptedException {
