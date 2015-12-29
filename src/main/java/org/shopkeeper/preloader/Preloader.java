@@ -102,7 +102,7 @@ public class Preloader extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         // Images:
-        Image image = new Image("/images/preloader_image.jpg");
+        Image image = new Image("/images/preloader_image.png");
         ImageView imageView = new ImageView(image);
         // GUI:
         stage = primaryStage;

@@ -19,7 +19,7 @@ public abstract class AbstractModel {
     }
 
     public void add(Subject subject) {
-    
+
     }
 
     public void update(Subject subject) {
