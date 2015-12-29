@@ -2,6 +2,7 @@ package org.shopkeeper.gui.fx.completeviews;
 
 import javafx.geometry.Pos;
 import javafx.scene.layout.BorderPane;
+import org.shopkeeper.gui.swing.completeviews.CompleteViewCustomer;
 import org.shopkeeper.subjects.subjecttypes.SubjectTypes;
 
 
@@ -17,9 +18,11 @@ public class CompleteViewModuleFX {
             BorderPane newView = CompleteViewItemFX.getView();
             MAIN.setTop(newView);
         } else if (subjectType == SubjectTypes.CATEGORY) {
-
+            BorderPane newView = CompleteViewItemFX.getView();
+            MAIN.setTop(newView);
         } else if (subjectType == SubjectTypes.CUSTOMER) {
-
+            BorderPane newView = CompleteViewCustomerFX.getView();
+            MAIN.setTop(newView);
         } else {
 
         }

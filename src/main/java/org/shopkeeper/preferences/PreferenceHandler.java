@@ -19,7 +19,7 @@ public class PreferenceHandler implements Runnable {
 
         // Create preferences:
         Preference.setDatabaseType(prefs.get(ID1, "sqlite"));
-        Preference.setGuiType(prefs.get(ID2, "swing"));
+        Preference.setGuiType(prefs.get(ID2, "fx"));
 
         synchronized (Preloader.ready) {
             Preloader.ready.notify();

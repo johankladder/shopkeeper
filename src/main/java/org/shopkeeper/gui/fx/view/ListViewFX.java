@@ -17,7 +17,8 @@ public class ListViewFX extends javafx.scene.control.ListView implements Abstrac
 
     public ListViewFX(AbstractModelFX model) {
         MODEL = model;
-        setMaxSize(Preference.PREF_WIDTH_LIST_CONTAINERS, Preference.PREF_HEIGHT_LIST_CONTAINERS);
+        setPrefSize(Preference.PREF_WIDTH_LIST_CONTAINERS, Preference.PREF_HEIGHT_LIST_CONTAINERS);
+        setMaxWidth(Preference.PREF_WIDTH_LIST_CONTAINERS); // TODO Needs to be double for some reason
     }
 
     @Override
