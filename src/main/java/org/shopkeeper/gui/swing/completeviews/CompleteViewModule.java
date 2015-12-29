@@ -27,7 +27,7 @@ public class CompleteViewModule {
             if (LASTADDED != null) {
                 MAIN.remove(LASTADDED);
             }
-            JPanel newView = CompleteViewItem.getView();
+            JPanel newView = CompleteViewCategory.getView();
             MAIN.add(newView, BorderLayout.CENTER);
             MAIN.repaint();
             MAIN.revalidate();

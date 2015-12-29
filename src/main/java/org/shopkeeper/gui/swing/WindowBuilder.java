@@ -2,6 +2,7 @@ package org.shopkeeper.gui.swing;
 
 import org.shopkeeper.gui.swing.completeviews.CompleteViewModule;
 import org.shopkeeper.gui.swing.controller.SubjectsViewController;
+import org.shopkeeper.gui.swing.model.CategoryModel;
 import org.shopkeeper.gui.swing.model.CustomerModel;
 import org.shopkeeper.gui.swing.model.ItemModel;
 import org.shopkeeper.gui.swing.view.AbstractView;
@@ -23,6 +24,7 @@ public class WindowBuilder {
     public static JFrame WINDOW = new JFrame("Shopkeeper");
     public static ItemModel ITEMMODEL = new ItemModel(SubjectHandler.getModule("itemmodule"));
     public static CustomerModel CUSTOMERMODEL = new CustomerModel(SubjectHandler.getModule("customermodule"));
+    public static CategoryModel CATEGORYMODEL = new CategoryModel(SubjectHandler.getModule("categorymodule"));
     public static JPanel MAIN_PANEL = new JPanel();
 
 
@@ -33,9 +35,9 @@ public class WindowBuilder {
         JPanel panel_with_head_and_buttom = new JPanel(new BorderLayout());
         panel_with_head_and_buttom.add(subjects_view_controller, BorderLayout.NORTH);
 
-            // Init the 'Main"- panel -> For projecting the complete views.
-            panel_with_head_and_buttom.add(MAIN_PANEL, BorderLayout.CENTER);
-            CompleteViewModule.MAIN = MAIN_PANEL;
+        // Init the 'Main"- panel -> For projecting the complete views.
+        panel_with_head_and_buttom.add(MAIN_PANEL, BorderLayout.CENTER);
+        CompleteViewModule.MAIN = MAIN_PANEL;
 
         JPanel release_notes = new JPanel(new BorderLayout());
         release_notes.add(new JLabel(Preloader.RELEASE_NOTES, JLabel.CENTER));

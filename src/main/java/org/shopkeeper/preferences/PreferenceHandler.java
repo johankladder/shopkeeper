@@ -7,8 +7,6 @@ import java.util.prefs.Preferences;
  */
 public class PreferenceHandler implements Runnable {
 
-
-
     @Override
     public void run() {
         // Look if preferences exist:
@@ -19,7 +17,7 @@ public class PreferenceHandler implements Runnable {
 
         // Create preferences:
         Preference.setDatabaseType(prefs.get(ID1, "sqlite"));
-        Preference.setGuiType(prefs.get(ID2, "fx"));
+        Preference.setGuiType(prefs.get(ID2, "swing"));
 
         synchronized (Preloader.ready) {
             Preloader.ready.notify();
