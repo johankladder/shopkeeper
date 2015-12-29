@@ -124,7 +124,7 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
                         }
 
                         query = (String) queue.removeFirst();
-                        System.out.println(query);
+//                        System.out.println(query);
                     }
 
                     try {
@@ -137,7 +137,7 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
                             RESULTSET = stmt.executeQuery(query);
 
                             // TODO Results needs to be passed someway through the right module
-                            // But there there doesnt always needs to by a synchronized with this class.
+                            // But there there doesnt always needs to be a synchronized with this class.
                             synchronized (SubjectHandler.class) {
                                 SubjectResultParser.addResultToListModule(RESULTSET, REQUESTEDTYPE);
                                 REQUESTEDTYPE = null;
@@ -146,7 +146,7 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
 
                         }
                     } catch (RuntimeException e) {
-                        // TODO Log why query was not excecuted correctly
+                        e.printStackTrace();
                     }
                 }
 

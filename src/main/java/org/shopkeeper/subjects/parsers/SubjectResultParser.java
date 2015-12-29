@@ -1,6 +1,10 @@
 package org.shopkeeper.subjects.parsers;
 
+import org.joda.time.DateTime;
+import org.shopkeeper.subjects.SubjectHandler;
 import org.shopkeeper.subjects.subjecttypes.SubjectTypes;
+import org.shopkeeper.subjects.subjecttypes.categories.Category;
+import org.shopkeeper.subjects.subjecttypes.items.Item;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,7 +27,13 @@ public class SubjectResultParser {
     private static void parseItems(ResultSet set) {
         try {
             while(set.next()) {
-                System.out.println("test items");
+                Item item = new Item(
+                        new Long(set.getInt("id")),
+                        set.getString("name"),
+                        set.getDouble("price"),
+                        DateTime.parse(set.getString("dateadded"))
+                );
+                SubjectHandler.getModule("itemmodule").addToList(item);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -33,7 +43,13 @@ public class SubjectResultParser {
     private static void parseCategories(ResultSet set) {
         try {
             while(set.next()) {
-                System.out.println("test categories");
+                Category category = new Category(
+                        new Long(set.getInt("id")),
+                        set.getString("name"),
+                        DateTime.parse(set.getString("dateadded"))
+                );
+                SubjectHandler.getModule("categorymodule").addToList(category);
+                System.out.println("test");
             }
         } catch (SQLException e) {
             e.printStackTrace();

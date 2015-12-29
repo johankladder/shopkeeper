@@ -11,6 +11,8 @@ import org.shopkeeper.database.modules.DatabaseChooser;
 import org.shopkeeper.database.modules.DatabaseTypes;
 import org.shopkeeper.preferences.PreferenceHandler;
 import org.shopkeeper.subjects.SubjectHandler;
+import org.shopkeeper.subjects.subjecttypes.categories.Category;
+import org.shopkeeper.util.DateTimeGenerator;
 
 import java.util.ArrayList;
 import java.util.List;

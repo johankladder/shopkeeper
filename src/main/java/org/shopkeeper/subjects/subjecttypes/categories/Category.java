@@ -11,6 +11,7 @@ public class Category extends Subject {
     public static final String TABLENAME = "categories";
     public Category(Long identificationNumber, String name, DateTime dateAdded) {
         super(identificationNumber, name, dateAdded);
+        super.INITFIELD=getInitFields();
     }
 
 
@@ -18,16 +19,15 @@ public class Category extends Subject {
     public Map getFields() {
         Map fields = new HashMap();
         fields.put("tablename", TABLENAME);
-        fields.put("id", "integer");
-        fields.put("name", "string");
-        fields.put("dateadded", "date");
+        fields.put("id", getIdentificationNumber());
+        fields.put("name", getName());
+        fields.put("dateadded", getDateAdded());
         return fields;
     }
 
     public static Map getInitFields() {
         Map fields = new HashMap();
         fields.put("tablename", TABLENAME);
-        fields.put("price", "double");
         fields.put("id", "integer");
         fields.put("name", "string");
         fields.put("dateadded", "date");

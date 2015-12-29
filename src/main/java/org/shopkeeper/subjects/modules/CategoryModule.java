@@ -14,16 +14,16 @@ public class CategoryModule extends SubjectModule {
 
     @Override
     public void add(Subject subject) {
-
+        DB.add(subject);
     }
 
     @Override
     public void update(Subject subject) {
-
+        DB.update(subject);
     }
 
     @Override
     public void delete(Subject subject) {
-
+        DB.delete(subject);
     }
 }
