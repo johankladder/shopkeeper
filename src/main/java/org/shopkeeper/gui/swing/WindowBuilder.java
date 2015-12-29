@@ -8,6 +8,7 @@ import org.shopkeeper.preloader.Preloader;
 import org.shopkeeper.subjects.SubjectHandler;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -31,6 +32,9 @@ public class WindowBuilder {
         SubjectsViewController subjects_view_controller = new SubjectsViewController(null);
         JPanel panel_with_head_and_buttom = new JPanel(new BorderLayout());
         panel_with_head_and_buttom.add(subjects_view_controller, BorderLayout.NORTH);
+
+            // Init the 'Main"- panel -> For projecting the complete views.
+            panel_with_head_and_buttom.add(MAIN_PANEL, BorderLayout.CENTER);
 
         JPanel release_notes = new JPanel(new BorderLayout());
         release_notes.add(new JLabel(Preloader.RELEASE_NOTES, JLabel.CENTER));
