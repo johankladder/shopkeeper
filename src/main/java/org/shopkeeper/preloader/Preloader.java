@@ -53,7 +53,6 @@ public class Preloader extends Application {
     private static final String RELEASE_NOTES = "Version: " + RELEASE_NUMBER + " by Johan Kladder";
 
 
-
     public static void startPreloader() throws InterruptedException {
         Thread thread = new Thread(new Runnable() {
             @Override
