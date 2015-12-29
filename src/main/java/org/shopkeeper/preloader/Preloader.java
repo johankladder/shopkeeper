@@ -12,6 +12,7 @@ import org.shopkeeper.database.modules.DatabaseTypes;
 import org.shopkeeper.preferences.PreferenceHandler;
 import org.shopkeeper.subjects.SubjectHandler;
 import org.shopkeeper.subjects.subjecttypes.categories.Category;
+import org.shopkeeper.subjects.subjecttypes.customer.Customer;
 import org.shopkeeper.util.DateTimeGenerator;
 
 import java.util.ArrayList;
@@ -59,7 +60,7 @@ public class Preloader extends Application {
 
             }
         });
-       thread.start();
+        thread.start();
     }
 
     public static void initPreloader() {
@@ -89,7 +90,7 @@ public class Preloader extends Application {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                double p = new Float(procentage)/new Float(MODULES.size());
+                double p = new Float(procentage) / new Float(MODULES.size());
                 PROGRESSBAR.setProgress(p);
             }
         });

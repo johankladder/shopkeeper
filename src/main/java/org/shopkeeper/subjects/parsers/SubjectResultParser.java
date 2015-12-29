@@ -4,6 +4,7 @@ import org.joda.time.DateTime;
 import org.shopkeeper.subjects.SubjectHandler;
 import org.shopkeeper.subjects.subjecttypes.SubjectTypes;
 import org.shopkeeper.subjects.subjecttypes.categories.Category;
+import org.shopkeeper.subjects.subjecttypes.customer.Customer;
 import org.shopkeeper.subjects.subjecttypes.items.Item;
 
 import java.sql.ResultSet;
@@ -15,7 +16,7 @@ import java.sql.SQLException;
 public class SubjectResultParser {
 
     public static void addResultToListModule(ResultSet result, Integer subjectType) {
-        if(subjectType == SubjectTypes.ITEM) {
+        if (subjectType == SubjectTypes.ITEM) {
             parseItems(result);
         } else if (subjectType == SubjectTypes.CATEGORY) {
             parseCategories(result);
@@ -26,7 +27,7 @@ public class SubjectResultParser {
 
     private static void parseItems(ResultSet set) {
         try {
-            while(set.next()) {
+            while (set.next()) {
                 Item item = new Item(
                         new Long(set.getInt("id")),
                         set.getString("name"),
@@ -42,14 +43,13 @@ public class SubjectResultParser {
 
     private static void parseCategories(ResultSet set) {
         try {
-            while(set.next()) {
+            while (set.next()) {
                 Category category = new Category(
                         new Long(set.getInt("id")),
                         set.getString("name"),
                         DateTime.parse(set.getString("dateadded"))
                 );
                 SubjectHandler.getModule("categorymodule").addToList(category);
-                System.out.println("test");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -59,8 +59,18 @@ public class SubjectResultParser {
     private static void parseCustomers(ResultSet set) {
 
         try {
-            while(set.next()) {
-                System.out.println("test customers");
+            while (set.next()) {
+                Customer customer = new Customer(
+                        new Long(set.getInt("id")),
+                        set.getString("name"),
+                        DateTime.parse(set.getString("dateadded")),
+                        set.getString("place"),
+                        set.getString("address"),
+                        set.getString("zipcode"),
+                        set.getString("phone"),
+                        set.getString("email")
+                );
+                SubjectHandler.getModule("customermodule").addToList(customer);
             }
         } catch (SQLException e) {
             e.printStackTrace();

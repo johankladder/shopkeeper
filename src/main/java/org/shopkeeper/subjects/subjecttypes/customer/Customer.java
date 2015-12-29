@@ -11,6 +11,8 @@ import java.util.Map;
  */
 public class Customer extends Subject {
 
+    public static final String TABLENAME = "customers";
+
     private String placeOfLiving;
     private String address;
     private String zipcode;
@@ -72,7 +74,21 @@ public class Customer extends Subject {
     @Override
     public  Map getFields() {
         Map fields = new HashMap();
-        fields.put("tablename", "customers");
+        fields.put("tablename", TABLENAME);
+        fields.put("id", getIdentificationNumber());
+        fields.put("name", getName());
+        fields.put("dateadded", getDateAdded());
+        fields.put("place", getPlaceOfLiving());
+        fields.put("address", getAddress());
+        fields.put("zipcode", getZipcode());
+        fields.put("phone", getPhone());
+        fields.put("email", getEmail());
+        return fields;
+    }
+
+    public static Map getInitFields() {
+        Map fields = new HashMap();
+        fields.put("tablename", TABLENAME);
         fields.put("id", "integer");
         fields.put("name", "string");
         fields.put("dateadded", "date");
@@ -81,16 +97,6 @@ public class Customer extends Subject {
         fields.put("zipcode", "string");
         fields.put("phone", "string");
         fields.put("email", "string");
-        return fields;
-    }
-
-    public static Map getInitFields() {
-        Map fields = new HashMap();
-        fields.put("tablename", "customers");
-        fields.put("price", "double");
-        fields.put("id", "integer");
-        fields.put("name", "string");
-        fields.put("dateadded", "date");
         return fields;
     }
 }
