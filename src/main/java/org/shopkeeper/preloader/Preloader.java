@@ -25,12 +25,12 @@ public class Preloader extends Application {
     private static List<Runnable> MODULES = new ArrayList<>(); // The list with all the runnables:
     private static Integer JOBCOUNTER = 0;
     private static ProgressBar PROGRESSBAR = null;
+    private static Stage stage = null;
 
     public static void startPreloader() throws InterruptedException {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-
                 initPreloader();
                 for (Runnable tasks : MODULES) {
                     Thread thread = new Thread(tasks);
@@ -38,8 +38,9 @@ public class Preloader extends Application {
                     synchronized (Preloader.ready) {
                         try {
                             ready.wait();
+                            System.out.println("done");
                             JOBCOUNTER++;
-                            updateProgressBar(JOBCOUNTER,JOBCOUNTER + " out of " + MODULES.size() + " jobs done...");
+                            updateProgressBar(JOBCOUNTER);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -47,6 +48,13 @@ public class Preloader extends Application {
                     }
 
                 }
+                try {
+                    Thread.sleep(2000); // TODO For showing the logo and information
+                    closePreloader();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
             }
         });
        thread.start();
@@ -62,6 +70,7 @@ public class Preloader extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         // GUI:
+        stage = primaryStage;
         primaryStage.setTitle("Shopkeeper");
         BorderPane root = new BorderPane();
         PROGRESSBAR = new ProgressBar();
@@ -74,11 +83,10 @@ public class Preloader extends Application {
         Preloader.startPreloader();
     }
 
-    public static void updateProgressBar(Integer procentage, String message) {
+    public static void updateProgressBar(Integer procentage) {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                System.out.println(message);
                 double p = new Float(procentage)/new Float(MODULES.size());
                 PROGRESSBAR.setProgress(p);
             }
@@ -86,8 +94,19 @@ public class Preloader extends Application {
 
     }
 
+
     public static void main(String[] args) throws InterruptedException {
         launch(args);
+    }
+
+    public static void closePreloader() {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                stage.close();
+                // TODO Build the application its GUI
+            }
+        });
     }
 
 

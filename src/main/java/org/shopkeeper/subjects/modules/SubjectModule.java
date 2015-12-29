@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public abstract class SubjectModule {
 
-    private static ArrayList<Subject> SUBJECTS = new ArrayList<Subject>();
+    private ArrayList<Subject> SUBJECTS = new ArrayList<Subject>();
     private static boolean started = false;
     protected static DatabaseModule DB = null;
     private Integer SUBJECTTYPE = null;
@@ -37,11 +37,11 @@ public abstract class SubjectModule {
         return SUBJECTS.size();
     }
 
-    public static void addToList(Subject subject) {
+    public void addToList(Subject subject) {
         SUBJECTS.add(subject);
     }
 
-    public static void removeFromList(Subject subject) {
+    public void removeFromList(Subject subject) {
         SUBJECTS.remove(subject);
     }
 

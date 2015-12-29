@@ -15,4 +15,8 @@ public class DateTimeGenerator {
     public static String dateTimeToString(DateTime time) {
         return null; // TODO DATE TIME TO GIVEN STRING -> Nicely formated
     }
+
+    public static DateTime generateTimeFromSQLLite(String datetime) {
+        return DateTime.parse(datetime);
+    }
 }

@@ -6,6 +6,7 @@ import org.shopkeeper.subjects.modules.CustomerModule;
 import org.shopkeeper.subjects.modules.ItemModule;
 import org.shopkeeper.subjects.modules.SubjectModule;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,24 +15,42 @@ import java.util.Map;
  */
 public class SubjectHandler implements Runnable {
 
-    public static Map<String, SubjectModule> MODULES = new HashMap<>();
+    public static ArrayList<SubjectModule> MODULES = new ArrayList<>();
+    public static HashMap<String,SubjectModule> MODULESMAP = new HashMap<>();
+    public static Boolean done = false;
 
 
     @Override
     public void run() {
-        MODULES.put("itemmodule",new ItemModule());
-        MODULES.put("categorymodule",new CategoryModule());
-        MODULES.put("customermodule",new CustomerModule());
+        ItemModule itemModule = new ItemModule();
+        CategoryModule categoryModule = new CategoryModule();
+        CustomerModule customerModule = new CustomerModule();
+
+        MODULESMAP.put("itemmodule",itemModule);
+        MODULESMAP.put("categorymodule",categoryModule);
+        MODULESMAP.put("customermodule",customerModule);
+        MODULES.add(itemModule);
+        MODULES.add(categoryModule);
+        MODULES.add(customerModule);
 
         // For each module, get all the objects from the database:
-
-
+        synchronized (SubjectHandler.class) {
+            for (SubjectModule module : MODULES) {
+                module.refresh();
+                try {
+                    SubjectHandler.class.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
         synchronized (Preloader.ready) {
+
             Preloader.ready.notify();
         }
     }
 
     public static SubjectModule getModule(String name) {
-        return MODULES.get(name);
+        return MODULESMAP.get(name);
     }
 }
