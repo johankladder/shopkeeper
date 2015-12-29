@@ -119,6 +119,7 @@ public class Preloader extends Application {
         PROGRESSBAR.setMinWidth(600);
         primaryStage.setScene(new Scene(root, PRELOADER_WIDTH, PRELOADER_HEIGTH));
         primaryStage.show();
+        primaryStage.setResizable(false);
 
         // STARTING THE PRELOADER:
         Preloader.startPreloader();

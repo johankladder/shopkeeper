@@ -18,6 +18,7 @@ public class SubjectsViewControllerFX extends HBox {
     public static Button ITEM_BUTTON = new Button("Items");
     public static Button CAT_BUTTON = new Button("Categories");
     public static Button CUS_BUTTON = new Button("Customers");
+    public static Button HOME_BUTTON = new Button("Home");
     private static CompleteViewModuleFX MODULE = null;
 
     // Listeners:
@@ -26,12 +27,13 @@ public class SubjectsViewControllerFX extends HBox {
         ITEM_BUTTON.setOnAction(handler);
         CUS_BUTTON.setOnAction(handler);
         CAT_BUTTON.setOnAction(handler);
+        HOME_BUTTON.setOnAction(handler);
     }
 
     public SubjectsViewControllerFX(CompleteViewModuleFX module) {
         super(10);
         MODULE = module;
-        Button[] buttons = {ITEM_BUTTON, CAT_BUTTON, CUS_BUTTON};
+        Button[] buttons = {HOME_BUTTON,ITEM_BUTTON, CAT_BUTTON, CUS_BUTTON};
         getChildren().addAll(buttons);
         for (Button b : buttons) {
             HBox.setHgrow(b, Priority.ALWAYS);

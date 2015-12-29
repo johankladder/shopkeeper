@@ -60,9 +60,12 @@ public class WindowBuilderFX {
 
         primaryStage.setScene(new Scene(pane_head_and_buttom));
         primaryStage.setTitle("Shopkeeper");
+
+        // Set begin screen:
+        CompleteViewModuleFX.getCompleteview(null);
         primaryStage.show();
 
-        ITEMMODEL.add(null);
+
     }
 
 }

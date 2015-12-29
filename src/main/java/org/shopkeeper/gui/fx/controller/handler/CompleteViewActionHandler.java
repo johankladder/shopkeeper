@@ -21,6 +21,8 @@ public class CompleteViewActionHandler implements EventHandler<ActionEvent> {
             CompleteViewModuleFX.getCompleteview(SubjectTypes.CUSTOMER);
         } else if (event.getSource() == SubjectsViewControllerFX.CAT_BUTTON) {
             CompleteViewModuleFX.getCompleteview(SubjectTypes.CATEGORY);
+        } else if (event.getSource() == SubjectsViewControllerFX.HOME_BUTTON) {
+            CompleteViewModuleFX.getCompleteview(null);
         }
     }
 }
