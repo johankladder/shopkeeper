@@ -1,5 +1,6 @@
 package org.shopkeeper.gui.swing;
 
+import org.shopkeeper.gui.swing.completeviews.CompleteViewModule;
 import org.shopkeeper.gui.swing.controller.SubjectsViewController;
 import org.shopkeeper.gui.swing.model.ItemModel;
 import org.shopkeeper.gui.swing.view.AbstractView;
@@ -17,16 +18,11 @@ import java.util.ArrayList;
  */
 public class WindowBuilder {
     public static JFrame WINDOW = new JFrame("Shopkeeper");
-    private static ItemModel ITEMMODEL = new ItemModel(SubjectHandler.getModule("itemmodule"));
+    public static ItemModel ITEMMODEL = new ItemModel(SubjectHandler.getModule("itemmodule"));
     public static JPanel MAIN_PANEL = new JPanel();
 
 
     public static void start() {
-        // Itemmodel init:
-        ArrayList<AbstractView> itemViews = new ArrayList<>();
-        ListView view = new ListView(ITEMMODEL);
-        itemViews.add(view);
-        ITEMMODEL.setViewPackage(itemViews);
 
         // Init head and buttom:
         SubjectsViewController subjects_view_controller = new SubjectsViewController(null);
@@ -35,6 +31,7 @@ public class WindowBuilder {
 
             // Init the 'Main"- panel -> For projecting the complete views.
             panel_with_head_and_buttom.add(MAIN_PANEL, BorderLayout.CENTER);
+            CompleteViewModule.MAIN = MAIN_PANEL;
 
         JPanel release_notes = new JPanel(new BorderLayout());
         release_notes.add(new JLabel(Preloader.RELEASE_NOTES, JLabel.CENTER));

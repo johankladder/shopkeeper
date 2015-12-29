@@ -21,7 +21,7 @@ public class ItemModel extends AbstractModel {
 
     @Override
     public void add(Subject subject) {
-
+        updateViews();
     }
 
     @Override

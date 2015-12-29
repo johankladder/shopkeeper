@@ -22,6 +22,8 @@ public class Preference {
     public static void setGuiType(String pref) {
         if(StringUtils.contains(pref,"fx")) {
             GUI_TYPE = GuiTypes.FX;
+        } else {
+            GUI_TYPE = GuiTypes.SWING;
         }
     }
 
