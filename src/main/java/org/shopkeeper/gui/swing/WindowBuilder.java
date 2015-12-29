@@ -5,20 +5,15 @@ import org.shopkeeper.gui.swing.controller.SubjectsViewController;
 import org.shopkeeper.gui.swing.model.CategoryModel;
 import org.shopkeeper.gui.swing.model.CustomerModel;
 import org.shopkeeper.gui.swing.model.ItemModel;
-import org.shopkeeper.gui.swing.view.AbstractView;
-import org.shopkeeper.gui.swing.view.ListView;
 import org.shopkeeper.preferences.Preference;
 import org.shopkeeper.preloader.Preloader;
 import org.shopkeeper.subjects.SubjectHandler;
-import org.shopkeeper.subjects.subjecttypes.customer.Customer;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
-import java.util.ArrayList;
 
 /**
- * Created by typhooncoaster on 29-12-15.
+ * Goal to keep the swing gui as light as possible.
  */
 public class WindowBuilder {
     public static JFrame WINDOW = new JFrame("Shopkeeper");
