@@ -14,12 +14,11 @@ public abstract class SubjectModule {
 
     private ArrayList<Subject> SUBJECTS = new ArrayList<Subject>();
     private static boolean started = false;
-    protected static DatabaseModule DB = null;
+    public static DatabaseModule DB = null;
     private Integer SUBJECTTYPE = null;
 
     public SubjectModule(Integer subjecttype) {
         SUBJECTTYPE = subjecttype;
-        DB = DatabaseChooser.getDatabase(DatabaseTypes.DATABASETYPE_SQLLITE); // TODO From preferences.
     }
 
     public abstract void add(Subject subject);
