@@ -21,7 +21,7 @@ public class CompleteViewItem {
         ListView list = new ListView(WindowBuilder.ITEMMODEL);
         views.add(list);
         WindowBuilder.ITEMMODEL.setViewPackage(views);
-        WindowBuilder.ITEMMODEL.add(null);
+        WindowBuilder.ITEMMODEL.updateViews();
         panel.add(list, BorderLayout.CENTER);
         return panel;
 

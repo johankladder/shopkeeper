@@ -26,7 +26,7 @@ public class CompleteViewCategory {
         ListView list = new ListView(WindowBuilder.CATEGORYMODEL);
         views.add(list);
         WindowBuilder.CATEGORYMODEL.setViewPackage(views);
-        WindowBuilder.CATEGORYMODEL.add(null);
+        WindowBuilder.CATEGORYMODEL.updateViews();
         panel.add(list, BorderLayout.CENTER);
         return panel;
 

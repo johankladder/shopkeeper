@@ -26,7 +26,7 @@ public class CompleteViewCustomer {
         ListView list = new ListView(WindowBuilder.CUSTOMERMODEL);
         views.add(list);
         WindowBuilder.CUSTOMERMODEL.setViewPackage(views);
-        WindowBuilder.CUSTOMERMODEL.add(null);
+        WindowBuilder.CUSTOMERMODEL.updateViews();
         panel.add(list, BorderLayout.CENTER);
         return panel;
 
