@@ -7,7 +7,7 @@ import org.shopkeeper.database.parsers.ResultParser;
 import org.shopkeeper.database.parsers.SQLLiteQueryCreator;
 import org.shopkeeper.preloader.Preloader;
 import org.shopkeeper.subjects.SubjectHandler;
-import org.shopkeeper.subjects.parsers.SubjectResultParser;
+import org.shopkeeper.subjects.parsers.SubjectResultSetParser;
 import org.shopkeeper.subjects.subjecttypes.Subject;
 import org.shopkeeper.subjects.subjecttypes.SubjectTypes;
 import org.shopkeeper.subjects.subjecttypes.categories.Category;
@@ -139,7 +139,7 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
                             // TODO Results needs to be passed someway through the right module
                             // But there there doesnt always needs to be a synchronized with this class.
                             synchronized (SubjectHandler.class) {
-                                SubjectResultParser.addResultToListModule(RESULTSET, REQUESTEDTYPE);
+                                SubjectResultSetParser.parseResultSetToModule(RESULTSET, REQUESTEDTYPE);
                                 REQUESTEDTYPE = null;
                                 SubjectHandler.class.notify();
                             }

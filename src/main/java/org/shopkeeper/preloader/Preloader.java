@@ -41,7 +41,7 @@ public class Preloader extends Application {
                     synchronized (Preloader.ready) {
                         try {
                             ready.wait();
-                            System.out.println("done");
+                            System.out.println("done with " + tasks.getClass().getName());
                             JOBCOUNTER++;
                             updateProgressBar(JOBCOUNTER);
                         } catch (InterruptedException e) {
@@ -64,9 +64,9 @@ public class Preloader extends Application {
     }
 
     public static void initPreloader() {
+        MODULES.add(new PreferenceHandler());
         MODULES.add(new DatabaseHandler(DatabaseChooser.getDatabase(DatabaseTypes.DATABASETYPE_SQLLITE)));
         MODULES.add(new SubjectHandler());
-        MODULES.add(new PreferenceHandler());
     }
 
 
