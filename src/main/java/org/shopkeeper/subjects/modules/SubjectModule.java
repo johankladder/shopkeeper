@@ -37,6 +37,10 @@ public abstract class SubjectModule {
         return SUBJECTS.size();
     }
 
+    public ArrayList<Subject> getModuleSubjects() {
+        return SUBJECTS;
+    }
+
     public void addToList(Subject subject) {
         SUBJECTS.add(subject);
     }

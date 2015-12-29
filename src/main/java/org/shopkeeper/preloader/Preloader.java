@@ -10,13 +10,16 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import org.joda.time.DateTime;
 import org.shopkeeper.database.DatabaseHandler;
 import org.shopkeeper.database.modules.DatabaseChooser;
 import org.shopkeeper.database.modules.DatabaseTypes;
+import org.shopkeeper.gui.GuiChooser;
 import org.shopkeeper.preferences.PreferenceHandler;
 import org.shopkeeper.subjects.SubjectHandler;
 import org.shopkeeper.subjects.subjecttypes.categories.Category;
 import org.shopkeeper.subjects.subjecttypes.customer.Customer;
+import org.shopkeeper.subjects.subjecttypes.items.Item;
 import org.shopkeeper.util.DateTimeGenerator;
 
 import java.awt.*;
@@ -76,6 +79,9 @@ public class Preloader extends Application {
                 }
                 try {
                     Thread.sleep(5000); // TODO For showing the logo and information
+//                    for(int i = 0; i < 30; i++) {
+//                        SubjectHandler.getModule("itemmodule").add(new Item(null, "testitem"+i, 12.31, DateTimeGenerator.generateDateTimeNow()));
+//                    }
                     closePreloader();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -100,7 +106,7 @@ public class Preloader extends Application {
         ImageView imageView = new ImageView(image);
         // GUI:
         stage = primaryStage;
-        primaryStage.setTitle("Shopkeeper");
+        primaryStage.setTitle("Shopkeeper - pre-loader");
         BorderPane root = new BorderPane();
         PROGRESSBAR = new ProgressBar();
         root.setTop(imageView);
@@ -136,6 +142,7 @@ public class Preloader extends Application {
             @Override
             public void run() {
                 stage.close();
+                 GuiChooser.startGUI();
                 // TODO Build the application its GUI
             }
         });
