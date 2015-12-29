@@ -12,14 +12,16 @@ public class GuiChooser {
 
     public static void startGUI() {
 
-        if(Preference.GUI_TYPE == GuiTypes.FX) {
+        if (Preference.GUI_TYPE == GuiTypes.FX) {
             try {
                 WindowBuilderFX.start(new Stage());
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else {
+        } else if (Preference.GUI_TYPE == GuiTypes.SWING) {
             WindowBuilder.start();
+        } else {
+
         }
     }
 }
