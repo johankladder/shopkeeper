@@ -18,7 +18,7 @@ public class CompleteViewModuleFX {
             BorderPane newView = CompleteViewItemFX.getView();
             MAIN.setTop(newView);
         } else if (subjectType == SubjectTypes.CATEGORY) {
-            BorderPane newView = CompleteViewItemFX.getView();
+            BorderPane newView = CompleteViewCategoryFX.getView();
             MAIN.setTop(newView);
         } else if (subjectType == SubjectTypes.CUSTOMER) {
             BorderPane newView = CompleteViewCustomerFX.getView();

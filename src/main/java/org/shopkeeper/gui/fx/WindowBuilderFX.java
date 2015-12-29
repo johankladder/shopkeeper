@@ -10,6 +10,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.shopkeeper.gui.fx.completeviews.CompleteViewModuleFX;
 import org.shopkeeper.gui.fx.controller.SubjectsViewControllerFX;
+import org.shopkeeper.gui.fx.model.CategoryModelFX;
 import org.shopkeeper.gui.fx.model.CustomerModelFX;
 import org.shopkeeper.gui.fx.model.ItemModelFX;
 import org.shopkeeper.gui.fx.view.AbstractViewFX;
@@ -27,6 +28,7 @@ import java.util.ArrayList;
 public class WindowBuilderFX {
     public static ItemModelFX ITEMMODEL = new ItemModelFX(SubjectHandler.getModule("itemmodule"));
     public static CustomerModelFX CUSTOMER_MODEL = new CustomerModelFX(SubjectHandler.getModule("customermodule"));
+    public static CategoryModelFX CATEGORY_MODEL = new CategoryModelFX(SubjectHandler.getModule("categorymodule"));
     public static BorderPane MAIN = new BorderPane();
 
 
