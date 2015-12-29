@@ -16,9 +16,10 @@ import java.sql.SQLException;
 public class SubjectResultSetParser {
 
     /**
-     * This method will parsesss
-     * @param result
-     * @param subjectType
+     * This method will parse the given result-set to Subject objects. The subject-type is needed because of choosing
+     * the right module for the performed parse.
+     * @param result The ResultSet from a database-response
+     * @param subjectType The subject-type of the response
      */
     public static void parseResultSetToModule(ResultSet result, Integer subjectType) {
         if (subjectType == SubjectTypes.ITEM) {
