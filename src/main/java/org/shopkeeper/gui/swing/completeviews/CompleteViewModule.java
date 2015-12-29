@@ -24,9 +24,23 @@ public class CompleteViewModule {
             MAIN.revalidate();
             LASTADDED = newView;
         } else if (subjectType == SubjectTypes.CATEGORY) {
-
+            if (LASTADDED != null) {
+                MAIN.remove(LASTADDED);
+            }
+            JPanel newView = CompleteViewItem.getView();
+            MAIN.add(newView, BorderLayout.CENTER);
+            MAIN.repaint();
+            MAIN.revalidate();
+            LASTADDED = newView;
         } else if (subjectType == SubjectTypes.CUSTOMER) {
-
+            if (LASTADDED != null) {
+                MAIN.remove(LASTADDED);
+            }
+            JPanel newView = CompleteViewCustomer.getView();
+            MAIN.add(newView, BorderLayout.CENTER);
+            MAIN.repaint();
+            MAIN.revalidate();
+            LASTADDED = newView;
         } else {
 
         }

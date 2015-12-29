@@ -2,12 +2,14 @@ package org.shopkeeper.gui.swing;
 
 import org.shopkeeper.gui.swing.completeviews.CompleteViewModule;
 import org.shopkeeper.gui.swing.controller.SubjectsViewController;
+import org.shopkeeper.gui.swing.model.CustomerModel;
 import org.shopkeeper.gui.swing.model.ItemModel;
 import org.shopkeeper.gui.swing.view.AbstractView;
 import org.shopkeeper.gui.swing.view.ListView;
 import org.shopkeeper.preferences.Preference;
 import org.shopkeeper.preloader.Preloader;
 import org.shopkeeper.subjects.SubjectHandler;
+import org.shopkeeper.subjects.subjecttypes.customer.Customer;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -20,6 +22,7 @@ import java.util.ArrayList;
 public class WindowBuilder {
     public static JFrame WINDOW = new JFrame("Shopkeeper");
     public static ItemModel ITEMMODEL = new ItemModel(SubjectHandler.getModule("itemmodule"));
+    public static CustomerModel CUSTOMERMODEL = new CustomerModel(SubjectHandler.getModule("customermodule"));
     public static JPanel MAIN_PANEL = new JPanel();
 
 

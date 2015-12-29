@@ -17,9 +17,9 @@ public class CompleteViewActionListener implements ActionListener{
         if(e.getSource() == SubjectsViewController.ITEM_BUTTON) {
             CompleteViewModule.getCompleteview(SubjectTypes.ITEM);
         } else if(e.getSource() == SubjectsViewController.CAT_BUTTON) {
-            System.out.println("test catbutton");
+            CompleteViewModule.getCompleteview(SubjectTypes.CATEGORY);
         } else if(e.getSource() == SubjectsViewController.CUS_BUTTON) {
-            System.out.println("test customers");
+            CompleteViewModule.getCompleteview(SubjectTypes.CUSTOMER);
         }
     }
 }
