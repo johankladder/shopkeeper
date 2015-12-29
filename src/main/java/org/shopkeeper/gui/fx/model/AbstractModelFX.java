@@ -19,7 +19,7 @@ public abstract class AbstractModelFX {
     }
 
     public void add(Subject subject) {
-
+        
     }
 
     public void update(Subject subject){
@@ -29,6 +29,7 @@ public abstract class AbstractModelFX {
     public void delete(Subject subject) {
 
     }
+
 
     public void setViewPackage(ArrayList<AbstractViewFX> views) {
         this.views = views;

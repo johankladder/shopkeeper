@@ -18,7 +18,7 @@ public class CompleteViewCategoryFX {
         ListViewFX list = new ListViewFX(WindowBuilderFX.CATEGORY_MODEL);
         views.add(list);
         WindowBuilderFX.CATEGORY_MODEL.setViewPackage(views);
-        WindowBuilderFX.CATEGORY_MODEL.add(null);
+        WindowBuilderFX.CATEGORY_MODEL.updateViews();
         panel.setCenter(list);
         return panel;
 
