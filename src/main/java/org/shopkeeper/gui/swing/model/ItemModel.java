@@ -19,32 +19,36 @@ public class ItemModel extends AbstractModel {
         MODULE = module;
     }
 
+    @Override
     public void add(Subject subject) {
 
     }
 
+    @Override
     public void update(Subject subject) {
 
     }
 
+    @Override
     public void delete(Subject subject) {
 
     }
 
+    @Override
     public void setViewPackage(ArrayList<AbstractView> views) {
         ItemModel.views = views;
     }
 
+    @Override
     public ArrayList<Subject> getSubjects() {
         return MODULE.getModuleSubjects();
     }
 
     public void updateViews() {
-        for(AbstractView view : views) {
+        for (AbstractView view : views) {
             view.updateView();
         }
     }
-
 
 
 }

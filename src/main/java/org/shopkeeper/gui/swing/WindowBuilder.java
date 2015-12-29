@@ -17,7 +17,7 @@ public class WindowBuilder {
     private static ItemModel ITEMMODEL = new ItemModel(SubjectHandler.getModule("itemmodule"));
 
     public static void start() {
-       ListView view=  new ListView(ITEMMODEL);
+        ListView view = new ListView(ITEMMODEL);
         ArrayList<AbstractView> test = new ArrayList<>();
         test.add(view);
         ITEMMODEL.setViewPackage(test);
