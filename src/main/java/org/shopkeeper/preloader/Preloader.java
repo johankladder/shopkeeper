@@ -2,8 +2,12 @@ package org.shopkeeper.preloader;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import org.shopkeeper.database.DatabaseHandler;
@@ -15,6 +19,11 @@ import org.shopkeeper.subjects.subjecttypes.categories.Category;
 import org.shopkeeper.subjects.subjecttypes.customer.Customer;
 import org.shopkeeper.util.DateTimeGenerator;
 
+import java.awt.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,11 +33,26 @@ import java.util.List;
  */
 public class Preloader extends Application {
 
-    public static Boolean ready = false;
+    // Locking:
+    public static final Boolean ready = false;
+
+    // Modules:
     private static List<Runnable> MODULES = new ArrayList<>(); // The list with all the runnables:
+
+    // Progress:
     private static Integer JOBCOUNTER = 0;
     private static ProgressBar PROGRESSBAR = null;
+
+    // GUI:
     private static Stage stage = null;
+    private static final Integer PRELOADER_WIDTH = 600;
+    private static final Integer PRELOADER_HEIGTH = 300;
+
+    // NOTES:
+    private static final String RELEASE_NUMBER = "TEST";
+    private static final String RELEASE_NOTES = "Version: " + RELEASE_NUMBER + " by Johan Kladder";
+
+
 
     public static void startPreloader() throws InterruptedException {
         Thread thread = new Thread(new Runnable() {
@@ -52,7 +76,7 @@ public class Preloader extends Application {
 
                 }
                 try {
-                    Thread.sleep(2000); // TODO For showing the logo and information
+                    Thread.sleep(5000); // TODO For showing the logo and information
                     closePreloader();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -72,14 +96,23 @@ public class Preloader extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        // Images:
+        Image image = new Image("/images/preloader_image.jpg");
+        ImageView imageView = new ImageView(image);
         // GUI:
         stage = primaryStage;
         primaryStage.setTitle("Shopkeeper");
         BorderPane root = new BorderPane();
         PROGRESSBAR = new ProgressBar();
-        root.setBottom(PROGRESSBAR);
+        root.setTop(imageView);
+        root.setCenter(PROGRESSBAR);
+        BorderPane labelBorder = new BorderPane();
+        Label label = new Label(RELEASE_NOTES);
+        label.setAlignment(Pos.CENTER);
+        labelBorder.setCenter(label);
+        root.setBottom(labelBorder);
         PROGRESSBAR.setMinWidth(600);
-        primaryStage.setScene(new Scene(root, 600, 250));
+        primaryStage.setScene(new Scene(root, PRELOADER_WIDTH, PRELOADER_HEIGTH));
         primaryStage.show();
 
         // STARTING THE PRELOADER:
@@ -87,12 +120,9 @@ public class Preloader extends Application {
     }
 
     public static void updateProgressBar(Integer procentage) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                double p = new Float(procentage) / new Float(MODULES.size());
-                PROGRESSBAR.setProgress(p);
-            }
+        Platform.runLater(() -> {
+            double p = new Float(procentage) / new Float(MODULES.size());
+            PROGRESSBAR.setProgress(p);
         });
 
     }
