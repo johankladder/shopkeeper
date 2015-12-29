@@ -5,6 +5,7 @@ import org.shopkeeper.gui.swing.controller.SubjectsViewController;
 import org.shopkeeper.gui.swing.model.ItemModel;
 import org.shopkeeper.gui.swing.view.AbstractView;
 import org.shopkeeper.gui.swing.view.ListView;
+import org.shopkeeper.preferences.Preference;
 import org.shopkeeper.preloader.Preloader;
 import org.shopkeeper.subjects.SubjectHandler;
 
@@ -39,6 +40,7 @@ public class WindowBuilder {
 
         WINDOW.add(panel_with_head_and_buttom);
         WINDOW.setExtendedState(Frame.MAXIMIZED_BOTH); // Set fullscreen
+        WINDOW.setMinimumSize(new Dimension(Preference.MIN_WIDTH_APPLICATION, Preference.MIN_HEIGHT_APPLICATION));
         WINDOW.setVisible(true);    // Set visible
     }
 }
