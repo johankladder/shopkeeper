@@ -1,6 +1,7 @@
 package org.shopkeeper.gui.fx.model;
 
 import org.shopkeeper.gui.fx.view.AbstractViewFX;
+import org.shopkeeper.subjects.modules.SubjectModule;
 import org.shopkeeper.subjects.subjecttypes.Subject;
 
 import java.util.ArrayList;
@@ -10,13 +11,36 @@ import java.util.ArrayList;
  */
 public abstract class AbstractModelFX {
 
-    public abstract void add(Subject subject);
+    private SubjectModule MODULE = null;
+    private ArrayList<AbstractViewFX> views = null;
 
-    public abstract void update(Subject subject);
+    public AbstractModelFX(SubjectModule module) {
+        MODULE = module;
+    }
 
-    public abstract void delete(Subject subject);
+    public void add(Subject subject) {
 
-    public abstract void setViewPackage(ArrayList<AbstractViewFX> views);
+    }
 
-    public abstract ArrayList<Subject> getSubjects();
+    public void update(Subject subject){
+
+    }
+
+    public void delete(Subject subject) {
+
+    }
+
+    public void setViewPackage(ArrayList<AbstractViewFX> views) {
+        this.views = views;
+    }
+
+    public  ArrayList<Subject> getSubjects() {
+        return MODULE.getModuleSubjects();
+    }
+
+    public void updateViews() {
+        for (AbstractViewFX view : views) {
+            view.updateView();
+        }
+    }
 }
