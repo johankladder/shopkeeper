@@ -1,5 +1,6 @@
 package org.shopkeeper.gui.swing;
 
+import org.shopkeeper.gui.swing.controller.SubjectsViewController;
 import org.shopkeeper.gui.swing.model.ItemModel;
 import org.shopkeeper.gui.swing.view.AbstractView;
 import org.shopkeeper.gui.swing.view.ListView;
@@ -15,14 +16,22 @@ import java.util.ArrayList;
 public class WindowBuilder {
     public static JFrame WINDOW = new JFrame("Shopkeeper");
     private static ItemModel ITEMMODEL = new ItemModel(SubjectHandler.getModule("itemmodule"));
+    public static JPanel MAIN_PANEL = new JPanel();
+
 
     public static void start() {
+        // Itemmodel init:
+        ArrayList<AbstractView> itemViews = new ArrayList<>();
         ListView view = new ListView(ITEMMODEL);
-        ArrayList<AbstractView> test = new ArrayList<>();
-        test.add(view);
-        ITEMMODEL.setViewPackage(test);
+        itemViews.add(view);
+        ITEMMODEL.setViewPackage(itemViews);
 
-        WINDOW.add(view);
+        // Init head and buttom:
+        SubjectsViewController subjects_view_controller = new SubjectsViewController(null);
+        JPanel panel_with_head_and_buttom = new JPanel(new BorderLayout());
+        panel_with_head_and_buttom.add(subjects_view_controller, BorderLayout.NORTH);
+
+        WINDOW.add(panel_with_head_and_buttom);
         WINDOW.setExtendedState(Frame.MAXIMIZED_BOTH); // Set fullscreen
         WINDOW.setVisible(true);    // Set visible
     }

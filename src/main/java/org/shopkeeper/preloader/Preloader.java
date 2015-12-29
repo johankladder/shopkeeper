@@ -56,7 +56,7 @@ public class Preloader extends Application {
     private static final String RELEASE_NOTES = "Version: " + RELEASE_NUMBER + " by Johan Kladder";
 
 
-    public static void startPreloader() throws InterruptedException {
+    private static void startPreloader() throws InterruptedException {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -92,7 +92,7 @@ public class Preloader extends Application {
         thread.start();
     }
 
-    public static void initPreloader() {
+    private static void initPreloader() {
         MODULES.add(new PreferenceHandler());
         MODULES.add(new DatabaseHandler(DatabaseChooser.getDatabase(DatabaseTypes.DATABASETYPE_SQLLITE)));
         MODULES.add(new SubjectHandler());
@@ -124,7 +124,7 @@ public class Preloader extends Application {
         Preloader.startPreloader();
     }
 
-    public static void updateProgressBar(Integer procentage) {
+    private static void updateProgressBar(Integer procentage) {
         Platform.runLater(() -> {
             double p = new Float(procentage) / new Float(MODULES.size());
             PROGRESSBAR.setProgress(p);
@@ -137,12 +137,12 @@ public class Preloader extends Application {
         launch(args);
     }
 
-    public static void closePreloader() {
+    private static void closePreloader() {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 stage.close();
-                 GuiChooser.startGUI();
+                GuiChooser.startGUI();
                 // TODO Build the application its GUI
             }
         });
