@@ -1,13 +1,5 @@
 package org.shopkeeper.preferences;
-
-import org.json.simple.JSONObject;
 import org.shopkeeper.preloader.Preloader;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.prefs.Preferences;
 
 /**
@@ -23,9 +15,11 @@ public class PreferenceHandler implements Runnable {
         Preferences prefs = Preferences.userRoot().node(this.getClass().getName());
 
         String ID1 = "database_type";
+        String ID2 = "gui_type";
 
         // Create preferences:
         Preference.setDatabaseType(prefs.get(ID1, "sqlite"));
+        Preference.setGuiType(prefs.get(ID2, "fx"));
 
 
         synchronized (Preloader.ready) {
