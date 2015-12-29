@@ -12,42 +12,8 @@ import java.util.ArrayList;
  */
 public class CustomerModel extends AbstractModel {
 
-    private static SubjectModule MODULE = null;
-    private static ArrayList<AbstractView> views = new ArrayList<>();
-
     public CustomerModel(SubjectModule module) {
-        MODULE = module;
-    }
-
-    @Override
-    public void add(Subject subject) {
-        updateViews();
-    }
-
-    @Override
-    public void update(Subject subject) {
-
-    }
-
-    @Override
-    public void delete(Subject subject) {
-
-    }
-
-    @Override
-    public void setViewPackage(ArrayList<AbstractView> views) {
-        CustomerModel.views = views;
-    }
-
-    @Override
-    public ArrayList<Subject> getSubjects() {
-        return MODULE.getModuleSubjects();
-    }
-
-    public void updateViews() {
-        for (AbstractView view : views) {
-            view.updateView();
-        }
+        super(module);
     }
 
 

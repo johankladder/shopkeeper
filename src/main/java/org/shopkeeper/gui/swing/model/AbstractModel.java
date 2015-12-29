@@ -1,6 +1,7 @@
 package org.shopkeeper.gui.swing.model;
 
 import org.shopkeeper.gui.swing.view.AbstractView;
+import org.shopkeeper.subjects.modules.SubjectModule;
 import org.shopkeeper.subjects.subjecttypes.Subject;
 
 import java.util.ArrayList;
@@ -10,13 +11,36 @@ import java.util.ArrayList;
  */
 public abstract class AbstractModel {
 
-    public abstract void add(Subject subject);
+    private SubjectModule MODULE = null;
+    private ArrayList<AbstractView> views = null;
 
-    public abstract void update(Subject subject);
+    public AbstractModel(SubjectModule module) {
+        MODULE = module;
+    }
 
-    public abstract void delete(Subject subject);
+    public void add(Subject subject) {
+        updateViews();
+    }
 
-    public abstract void setViewPackage(ArrayList<AbstractView> views);
+    public void update(Subject subject) {
 
-    public abstract ArrayList<Subject> getSubjects();
+    }
+
+    public void delete(Subject subject) {
+
+    }
+
+    public void setViewPackage(ArrayList<AbstractView> views) {
+        this.views = views;
+    }
+
+    public ArrayList<Subject> getSubjects() {
+        return MODULE.getModuleSubjects();
+    }
+
+    public void updateViews() {
+        for (AbstractView view : views) {
+            view.updateView();
+        }
+    }
 }
