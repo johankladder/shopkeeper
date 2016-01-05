@@ -6,6 +6,8 @@ package org.shopkeeper.gui.swing.completeviews;
 
 import org.shopkeeper.gui.swing.WindowBuilder;
 import org.shopkeeper.gui.swing.view.AbstractView;
+import org.shopkeeper.gui.swing.view.selection.AbstractSelectionView;
+import org.shopkeeper.gui.swing.view.selection.InformationView;
 import org.shopkeeper.gui.swing.view.ListView;
 
 import javax.swing.*;
@@ -22,10 +24,17 @@ public class CompleteViewCustomer {
 
     public static JPanel getView() {
         JPanel panel = new JPanel(new BorderLayout());
-        ArrayList<AbstractView> views = new ArrayList<>();
-        ListView list = new ListView(WindowBuilder.CUSTOMERMODEL);
-        views.add(list);
-        WindowBuilder.CUSTOMERMODEL.setViewPackage(views);
+
+
+        InformationView info_view = new InformationView();
+        ArrayList<AbstractSelectionView> views_list = new ArrayList<>();
+        views_list.add(info_view);
+
+        ListView list = new ListView(WindowBuilder.CUSTOMERMODEL, views_list);
+
+        ArrayList<AbstractView> views_model = new ArrayList<>();
+        views_model.add(list);
+        WindowBuilder.CUSTOMERMODEL.setViewPackage(views_model);
         WindowBuilder.CUSTOMERMODEL.updateViews();
         panel.add(list, BorderLayout.CENTER);
         return panel;

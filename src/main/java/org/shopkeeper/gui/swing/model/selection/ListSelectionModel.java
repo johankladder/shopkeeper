@@ -1,6 +1,6 @@
 package org.shopkeeper.gui.swing.model.selection;
 
-import org.shopkeeper.gui.swing.view.AbstractView;
+import org.shopkeeper.gui.swing.view.selection.AbstractSelectionView;
 import org.shopkeeper.subjects.subjecttypes.Subject;
 
 import javax.swing.*;
@@ -14,19 +14,31 @@ import java.util.ArrayList;
 public class ListSelectionModel implements ListSelectionListener {
 
     private static Subject SELECTED_SUBJECT = null;
-    private static ArrayList<AbstractView> VIEWS = new ArrayList<>();
+    private static ArrayList<AbstractSelectionView> VIEWS = new ArrayList<>();
 
-    public static void setViewPackage(ArrayList views) {
-        VIEWS = views;
+    public void setViewPackage(ArrayList<AbstractSelectionView> views) {
+        if(views != null) {
+            VIEWS = views;
+            for (AbstractSelectionView view : views) {
+                view.setModel(this);
+            }
+        }
+
     }
 
-    public static void setSelectedSubject(Subject subject) {
-        SELECTED_SUBJECT = subject;
-        updateViews();
+    public void setSelectedSubject(Subject subject) {
+        if(subject != null) {
+            SELECTED_SUBJECT = subject;
+            updateViews();
+        }
     }
 
-    private static void updateViews() {
-        for(AbstractView view : VIEWS) {
+    public Subject getSelectedSubject() {
+        return SELECTED_SUBJECT;
+    }
+
+    private void updateViews() {
+        for(AbstractSelectionView view : VIEWS) {
             view.updateView();
         }
     }

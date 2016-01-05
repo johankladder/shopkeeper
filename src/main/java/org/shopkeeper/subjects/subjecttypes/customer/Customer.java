@@ -77,12 +77,12 @@ public class Customer extends Subject {
         fields.put("tablename", TABLENAME);
         fields.put("id", getIdentificationNumber());
         fields.put("name", getName());
-        fields.put("dateadded", getDateAdded());
         fields.put("place", getPlaceOfLiving());
         fields.put("address", getAddress());
         fields.put("zipcode", getZipcode());
         fields.put("phone", getPhone());
         fields.put("email", getEmail());
+        fields.put("dateadded", getDateAdded());
         return fields;
     }
 
@@ -91,12 +91,12 @@ public class Customer extends Subject {
         fields.put("tablename", TABLENAME);
         fields.put("id", "integer");
         fields.put("name", "string");
-        fields.put("dateadded", "date");
         fields.put("place", "string");
         fields.put("address", "string");
         fields.put("zipcode", "string");
         fields.put("phone", "string");
         fields.put("email", "string");
+        fields.put("dateadded", "date");
         return fields;
     }
 }
