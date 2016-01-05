@@ -35,6 +35,7 @@ public class CompleteViewCategory {
         WindowBuilder.CATEGORYMODEL.setViewPackage(views);
         WindowBuilder.CATEGORYMODEL.updateViews();
         panel.add(list, BorderLayout.CENTER);
+        panel.add(info_view, BorderLayout.SOUTH);
         return panel;
 
     }

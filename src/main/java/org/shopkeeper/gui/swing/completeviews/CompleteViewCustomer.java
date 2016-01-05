@@ -37,6 +37,7 @@ public class CompleteViewCustomer {
         WindowBuilder.CUSTOMERMODEL.setViewPackage(views_model);
         WindowBuilder.CUSTOMERMODEL.updateViews();
         panel.add(list, BorderLayout.CENTER);
+        panel.add(info_view, BorderLayout.SOUTH);
         return panel;
 
     }
