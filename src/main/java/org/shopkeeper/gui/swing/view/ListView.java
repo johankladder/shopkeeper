@@ -10,12 +10,14 @@ import java.awt.*;
 /**
  * Created by typhooncoaster on 29-12-15.
  */
-public class ListView extends JList implements AbstractView{
+public class ListView extends JScrollPane implements AbstractView{
 
     private AbstractModel MODEL = null;
+    private JList LIST = new JList();
 
     public ListView(AbstractModel model) {
         MODEL = model;
+        setViewportView(LIST);
         setPreferredSize(new Dimension(Preference.PREF_WIDTH_LIST_CONTAINERS, Preference.PREF_HEIGHT_LIST_CONTAINERS));
     }
 
@@ -25,6 +27,6 @@ public class ListView extends JList implements AbstractView{
         for(Subject subject : MODEL.getSubjects()) {
            model.addElement(subject);
         }
-        setModel(model);
+        LIST.setModel(model);
     }
 }
