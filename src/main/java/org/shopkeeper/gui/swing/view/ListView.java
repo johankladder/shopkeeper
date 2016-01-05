@@ -1,5 +1,7 @@
 package org.shopkeeper.gui.swing.view;
 
+import org.shopkeeper.gui.swing.model.selection.*;
+import org.shopkeeper.gui.swing.model.selection.ListSelectionModel;
 import org.shopkeeper.gui.swing.model.subjects.AbstractModel;
 import org.shopkeeper.preferences.Preference;
 import org.shopkeeper.subjects.subjecttypes.Subject;
@@ -19,6 +21,7 @@ public class ListView extends JScrollPane implements AbstractView{
         MODEL = model;
         setViewportView(LIST);
         setPreferredSize(new Dimension(Preference.PREF_WIDTH_LIST_CONTAINERS, Preference.PREF_HEIGHT_LIST_CONTAINERS));
+        LIST.addListSelectionListener(new ListSelectionModel());
     }
 
     @Override
