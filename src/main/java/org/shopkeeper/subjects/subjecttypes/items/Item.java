@@ -4,6 +4,7 @@ import org.joda.time.DateTime;
 import org.shopkeeper.subjects.subjecttypes.Subject;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 
@@ -29,22 +30,24 @@ public class Item extends Subject {
 
     @Override
     public Map getFields() {
-        Map fields = new HashMap();
-        fields.put("tablename", TABLENAME);
+        Map fields = new LinkedHashMap<>();
+
         fields.put("id", getIdentificationNumber());
         fields.put("name", getName());
         fields.put("price", price);
         fields.put("dateadded", getDateAdded());
+        fields.put("tablename", TABLENAME);
         return fields;
     }
 
     public static Map getInitFields() {
-        Map fields = new HashMap();
-        fields.put("tablename", TABLENAME);
+        Map fields = new LinkedHashMap<>();
+
         fields.put("id", "integer");
         fields.put("name", "string");
         fields.put("price", "double");
         fields.put("dateadded", "date");
+        fields.put("tablename", TABLENAME);
         return fields;
     }
 

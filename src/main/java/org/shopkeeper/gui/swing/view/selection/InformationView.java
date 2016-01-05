@@ -1,13 +1,11 @@
 package org.shopkeeper.gui.swing.view.selection;
 
-import com.sun.javafx.collections.MappingChange;
-import org.shopkeeper.gui.swing.model.selection.*;
 import org.shopkeeper.gui.swing.model.selection.ListSelectionModel;
-import org.shopkeeper.gui.swing.view.AbstractView;
 import org.shopkeeper.subjects.subjecttypes.Subject;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -29,10 +27,34 @@ public class InformationView extends JPanel implements AbstractSelectionView {
 
     @Override
     public void updateView() {
-        Subject subject = model.getSelectedSubject();
-        Map map = subject.INIT_FIELD;
-        map.forEach((k, v) -> System.out.println(k + " + " + v));
+        // Subject information:
+        removeAll();
+        initComponents();
+        repaint();
 
+        Subject subject = model.getSelectedSubject();
+        Map subject_fields = subject.getFields();
+
+
+        Map map = subject.INIT_FIELD;
+        Map<String, JLabel> labels = new LinkedHashMap<>();
+        map.forEach((k, v) -> {
+            labels.put((String) k, new JLabel((String) k));
+        });
+
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.HORIZONTAL;
+        final Integer[] counter_y = {0};
+
+        labels.forEach((k,v) -> {
+            c.gridy = counter_y[0];
+            c.gridx = 0;
+            add(v,c);
+            c.gridx = 1;
+            add(new JLabel(subject_fields.get((k)).toString()),c);
+            counter_y[0] = counter_y[0] + 1;
+        } );
+        revalidate();
     }
 
     @Override
