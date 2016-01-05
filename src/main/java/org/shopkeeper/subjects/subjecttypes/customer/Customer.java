@@ -28,7 +28,7 @@ public class Customer extends Subject {
         this.zipcode = zipcode;
         this.phone = phone;
         this.email = email;
-        super.INITFIELD=getInitFields();
+        super.INIT_FIELD =getInitFields();
     }
 
     public String getPlaceOfLiving() {

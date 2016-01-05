@@ -14,7 +14,7 @@ public class Item extends Subject {
 
     public Item(Long identificationNumber, String name, Double price, DateTime dateAdded) {
         super(identificationNumber, name, dateAdded);
-        super.INITFIELD=getInitFields();
+        super.INIT_FIELD =getInitFields();
         this.price = price;
     }
 

@@ -13,7 +13,7 @@ public abstract class Subject {
     private String name;
     private DateTime dateAdded;
     private Long identificationNumber;
-    public Map INITFIELD;
+    public Map INIT_FIELD;
 
     public Integer TYPE;
 
@@ -26,10 +26,6 @@ public abstract class Subject {
 
     public DateTime getDateAdded() {
         return dateAdded;
-    }
-
-    public void setDateAdded(DateTime dateAdded) {
-        this.dateAdded = dateAdded;
     }
 
     public void setName(String name) {

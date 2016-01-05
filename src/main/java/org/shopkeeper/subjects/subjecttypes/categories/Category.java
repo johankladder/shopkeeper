@@ -11,7 +11,7 @@ public class Category extends Subject {
     public static final String TABLENAME = "categories";
     public Category(Long identificationNumber, String name, DateTime dateAdded) {
         super(identificationNumber, name, dateAdded);
-        super.INITFIELD=getInitFields();
+        super.INIT_FIELD =getInitFields();
     }
 
 

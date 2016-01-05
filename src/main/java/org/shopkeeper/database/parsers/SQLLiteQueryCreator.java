@@ -115,7 +115,7 @@ public class SQLLiteQueryCreator {
                         if(!pair.getKey().equals("id") && !pair.getKey().equals("tablename")) {
                             datanames += pair.getKey() + ", ";
                             // Create values
-                            values += parseValue(pair, subject.INITFIELD) + ", ";
+                            values += parseValue(pair, subject.INIT_FIELD) + ", ";
                         }
                 }
                 // Trim and normalise:
