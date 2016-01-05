@@ -1,6 +1,6 @@
 package org.shopkeeper.gui.swing.view;
 
-import org.shopkeeper.gui.swing.model.AbstractModel;
+import org.shopkeeper.gui.swing.model.subjects.AbstractModel;
 import org.shopkeeper.preferences.Preference;
 import org.shopkeeper.subjects.subjecttypes.Subject;
 

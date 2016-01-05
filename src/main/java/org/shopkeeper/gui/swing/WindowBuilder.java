@@ -2,9 +2,9 @@ package org.shopkeeper.gui.swing;
 
 import org.shopkeeper.gui.swing.completeviews.CompleteViewModule;
 import org.shopkeeper.gui.swing.controller.SubjectsViewController;
-import org.shopkeeper.gui.swing.model.CategoryModel;
-import org.shopkeeper.gui.swing.model.CustomerModel;
-import org.shopkeeper.gui.swing.model.ItemModel;
+import org.shopkeeper.gui.swing.model.subjects.CategoryModel;
+import org.shopkeeper.gui.swing.model.subjects.CustomerModel;
+import org.shopkeeper.gui.swing.model.subjects.ItemModel;
 import org.shopkeeper.preferences.Preference;
 import org.shopkeeper.preloader.Preloader;
 import org.shopkeeper.subjects.SubjectHandler;

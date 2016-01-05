@@ -5,7 +5,6 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Priority;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.shopkeeper.gui.fx.completeviews.CompleteViewModuleFX;
@@ -13,14 +12,8 @@ import org.shopkeeper.gui.fx.controller.SubjectsViewControllerFX;
 import org.shopkeeper.gui.fx.model.CategoryModelFX;
 import org.shopkeeper.gui.fx.model.CustomerModelFX;
 import org.shopkeeper.gui.fx.model.ItemModelFX;
-import org.shopkeeper.gui.fx.view.AbstractViewFX;
-import org.shopkeeper.gui.fx.view.ListViewFX;
-import org.shopkeeper.gui.swing.model.ItemModel;
 import org.shopkeeper.preloader.Preloader;
 import org.shopkeeper.subjects.SubjectHandler;
-
-import javax.swing.*;
-import java.util.ArrayList;
 
 /**
  * Created by typhooncoaster on 29-12-15.

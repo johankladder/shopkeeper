@@ -1,4 +1,4 @@
-package org.shopkeeper.gui.swing.model;
+package org.shopkeeper.gui.swing.model.subjects;
 
 import org.shopkeeper.gui.swing.view.AbstractView;
 import org.shopkeeper.subjects.modules.SubjectModule;
