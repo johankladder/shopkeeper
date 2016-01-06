@@ -20,14 +20,17 @@ public class CompleteViewModuleFX {
                 BorderPane newView = CompleteViewItemFX.getView();
                 MAIN.setTop(newView);
                 LAST_ADDED = newView;
+                removeLogo();
             } else if (subjectType == SubjectTypes.CATEGORY) {
                 BorderPane newView = CompleteViewCategoryFX.getView();
                 MAIN.setTop(newView);
                 LAST_ADDED = newView;
+                removeLogo();
             } else if (subjectType == SubjectTypes.CUSTOMER) {
                 BorderPane newView = CompleteViewCustomerFX.getView();
                 MAIN.setTop(newView);
                 LAST_ADDED = newView;
+                removeLogo();
             } else {
 
             }
@@ -38,5 +41,9 @@ public class CompleteViewModuleFX {
             BorderPane newView = CompleteViewHomeFX.getView();
             MAIN.setCenter(newView);
         }
+    }
+
+    private static void removeLogo() {
+        MAIN.setCenter(null);
     }
 }
