@@ -15,7 +15,7 @@ public class CompleteViewItemFX {
     public static BorderPane getView() {
         BorderPane panel = new BorderPane();
         ArrayList<AbstractViewFX> views = new ArrayList<>();
-        ListViewFX list = new ListViewFX(WindowBuilderFX.ITEMMODEL);
+        ListViewFX list = new ListViewFX(WindowBuilderFX.ITEMMODEL, null);
         views.add(list);
         WindowBuilderFX.ITEMMODEL.setViewPackage(views);
         WindowBuilderFX.ITEMMODEL.updateViews();

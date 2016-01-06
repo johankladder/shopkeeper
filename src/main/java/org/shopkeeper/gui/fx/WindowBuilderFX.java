@@ -9,9 +9,9 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.shopkeeper.gui.fx.completeviews.CompleteViewModuleFX;
 import org.shopkeeper.gui.fx.controller.SubjectsViewControllerFX;
-import org.shopkeeper.gui.fx.model.CategoryModelFX;
-import org.shopkeeper.gui.fx.model.CustomerModelFX;
-import org.shopkeeper.gui.fx.model.ItemModelFX;
+import org.shopkeeper.gui.fx.model.subjects.CategoryModelFX;
+import org.shopkeeper.gui.fx.model.subjects.CustomerModelFX;
+import org.shopkeeper.gui.fx.model.subjects.ItemModelFX;
 import org.shopkeeper.preloader.Preloader;
 import org.shopkeeper.subjects.SubjectHandler;
 

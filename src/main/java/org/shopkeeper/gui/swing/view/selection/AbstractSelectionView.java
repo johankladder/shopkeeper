@@ -1,6 +1,6 @@
 package org.shopkeeper.gui.swing.view.selection;
 
-import org.shopkeeper.gui.swing.model.selection.ListSelectionModel;
+        import org.shopkeeper.gui.swing.model.selection.ListSelectionModel;
 
 /**
  * Created by typhooncoaster on 5-1-16.

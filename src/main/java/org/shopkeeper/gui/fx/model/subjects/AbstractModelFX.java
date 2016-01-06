@@ -1,4 +1,4 @@
-package org.shopkeeper.gui.fx.model;
+package org.shopkeeper.gui.fx.model.subjects;
 
 import org.shopkeeper.gui.fx.view.AbstractViewFX;
 import org.shopkeeper.subjects.modules.SubjectModule;

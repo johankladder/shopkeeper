@@ -1,5 +1,7 @@
 package org.shopkeeper.gui.fx.completeviews;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import org.shopkeeper.gui.fx.WindowBuilderFX;
 import org.shopkeeper.gui.fx.view.AbstractViewFX;
@@ -10,18 +12,13 @@ import java.util.ArrayList;
 /**
  * Created by typhooncoaster on 29-12-15.
  */
-public class CompleteViewCustomerFX {
-
+public class CompleteViewHomeFX {
     public static BorderPane getView() {
         BorderPane panel = new BorderPane();
-        ArrayList<AbstractViewFX> views = new ArrayList<>();
-        ListViewFX list = new ListViewFX(WindowBuilderFX.CUSTOMER_MODEL, null);
-        views.add(list);
-        WindowBuilderFX.CUSTOMER_MODEL.setViewPackage(views);
-        WindowBuilderFX.CUSTOMER_MODEL.updateViews();
-        panel.setCenter(list);
+        Image image = new Image("/images/preloader_image.png");
+        ImageView imageView = new ImageView(image);
+        panel.setCenter(imageView);
         return panel;
-
     }
 
-}
+    }
