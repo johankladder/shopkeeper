@@ -2,6 +2,7 @@ package org.shopkeeper.subjects.subjecttypes.items;
 
 import org.joda.time.DateTime;
 import org.shopkeeper.subjects.subjecttypes.Subject;
+import org.shopkeeper.util.DateTimeGenerator;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -22,6 +23,14 @@ public class Item extends Subject {
 
     public Double getPrice() {
         return price;
+    }
+
+    public Long getId() {
+        return getIdentificationNumber();
+    }
+
+    public String getDateadded() {
+        return DateTimeGenerator.dateTimeToString(getDateAdded());
     }
 
     public void setPrice(Double price) {

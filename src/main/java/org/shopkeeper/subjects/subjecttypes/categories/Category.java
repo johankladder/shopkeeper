@@ -2,6 +2,7 @@ package org.shopkeeper.subjects.subjecttypes.categories;
 
 import org.joda.time.DateTime;
 import org.shopkeeper.subjects.subjecttypes.Subject;
+import org.shopkeeper.util.DateTimeGenerator;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -13,6 +14,14 @@ public class Category extends Subject {
     public Category(Long identificationNumber, String name, DateTime dateAdded) {
         super(identificationNumber, name, dateAdded);
         super.INIT_FIELD =getInitFields();
+    }
+
+    public Long getId() {
+        return getIdentificationNumber();
+    }
+
+    public String getDateadded() {
+        return DateTimeGenerator.dateTimeToString(getDateAdded());
     }
 
 

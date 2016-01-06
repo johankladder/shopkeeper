@@ -15,12 +15,8 @@ public class DateTimeGenerator {
     }
 
     public static String dateTimeToString(DateTime time) {
-        if(time != null) {
-            DateTimeFormatter fmt = DateTimeFormat.forPattern("D-M-YYYY H:M:S");
-            return fmt.print(time);
-        } else {
-            return null;
-        }
+        DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+        return fmt.print(time);
     }
 
     public static DateTime generateTimeFromSQLLite(String datetime) {
