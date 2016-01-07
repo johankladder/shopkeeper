@@ -60,7 +60,6 @@ public class InformationViewFX extends BorderPane implements  AbstractSelectionV
             total_view_box.add(v,0, counter_y[0]);
             total_view_box.add(text_field, 1, counter_y[0]);
             counter_y[0] = counter_y[0] + 1;
-//            label.setStyle("-fx-background-color: #336699;");
         } );
 
         ColumnConstraints col1Constraints = new ColumnConstraints();

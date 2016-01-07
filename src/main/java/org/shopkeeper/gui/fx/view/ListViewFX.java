@@ -46,8 +46,5 @@ public class ListViewFX extends TableView implements AbstractViewFX {
         ObservableList<Subject> names = FXCollections.observableArrayList(list);
         setItems(names);
 
-
-        // Init combos:
-
     }
 }

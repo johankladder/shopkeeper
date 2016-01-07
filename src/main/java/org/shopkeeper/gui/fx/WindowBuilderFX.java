@@ -1,5 +1,6 @@
 package org.shopkeeper.gui.fx;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
@@ -41,8 +42,9 @@ public class WindowBuilderFX {
         BorderPane pane_head_and_buttom = new BorderPane();
         pane_head_and_buttom.setTop(subjects_view_controller);
 
-            pane_head_and_buttom.setCenter(MAIN);
-            CompleteViewModuleFX.MAIN = MAIN;
+        pane_head_and_buttom.setCenter(MAIN);
+        CompleteViewModuleFX.MAIN = MAIN;
+        MAIN.setPadding(new Insets(5,10,5,10));
 
         BorderPane release_pane = new BorderPane();
         Label label = new Label(Preloader.RELEASE_NOTES);

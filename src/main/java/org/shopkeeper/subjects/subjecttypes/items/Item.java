@@ -44,7 +44,7 @@ public class Item extends Subject {
         fields.put("id", getIdentificationNumber());
         fields.put("name", getName());
         fields.put("price", price);
-        fields.put("dateadded", getDateAdded());
+        fields.put("dateadded", DateTimeGenerator.dateTimeToString(getDateAdded()));
         fields.put("tablename", TABLENAME);
         return fields;
     }

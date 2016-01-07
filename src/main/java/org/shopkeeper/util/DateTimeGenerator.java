@@ -19,7 +19,4 @@ public class DateTimeGenerator {
         return fmt.print(time);
     }
 
-    public static DateTime generateTimeFromSQLLite(String datetime) {
-        return DateTime.parse(datetime);
-    }
 }
