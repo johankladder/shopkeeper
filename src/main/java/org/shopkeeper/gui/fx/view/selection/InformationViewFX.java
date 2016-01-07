@@ -3,6 +3,8 @@ package org.shopkeeper.gui.fx.view.selection;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import org.shopkeeper.gui.fx.model.selection.ListSelectionModelFX;
 import org.shopkeeper.preferences.Preference;
@@ -37,7 +39,7 @@ public class InformationViewFX extends BorderPane implements  AbstractSelectionV
     @Override
     public void updateView() {
         GridPane total_view_box = new GridPane();
-        total_view_box.setHgap(10);
+        total_view_box.setVgap(10);
 
         setCenter(total_view_box);
         setMaxWidth(Double.MAX_VALUE);
@@ -54,9 +56,9 @@ public class InformationViewFX extends BorderPane implements  AbstractSelectionV
         final int[] counter_y = {0};
 
         labels.forEach((k,v) -> {
-            Label label = new Label(subject_fields.get((k)).toString());
+            TextField text_field = new TextField(subject_fields.get((k)).toString());
             total_view_box.add(v,0, counter_y[0]);
-            total_view_box.add(label, 1, counter_y[0]);
+            total_view_box.add(text_field, 1, counter_y[0]);
             counter_y[0] = counter_y[0] + 1;
 //            label.setStyle("-fx-background-color: #336699;");
         } );
@@ -66,7 +68,5 @@ public class InformationViewFX extends BorderPane implements  AbstractSelectionV
         ColumnConstraints col2Constraints = new ColumnConstraints();
         col2Constraints.setPercentWidth(70);
         total_view_box.getColumnConstraints().addAll(col1Constraints,col2Constraints);
-        setStyle("-fx-background-color: #336699;");
-
     }
 }
