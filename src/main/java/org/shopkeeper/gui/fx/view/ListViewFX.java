@@ -6,16 +6,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.ComboBoxListCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.shopkeeper.gui.fx.model.selection.ListSelectionModelFX;
 import org.shopkeeper.gui.fx.model.subjects.AbstractModelFX;
 import org.shopkeeper.gui.fx.view.selection.AbstractSelectionViewFX;
-import org.shopkeeper.gui.swing.model.selection.ListSelectionModel;
-import org.shopkeeper.gui.swing.view.selection.AbstractSelectionView;
 import org.shopkeeper.preferences.Preference;
 import org.shopkeeper.subjects.subjecttypes.Subject;
-import org.shopkeeper.util.StringBeatifier;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +42,7 @@ public class ListViewFX extends TableView implements AbstractViewFX {
             Subject temp = MODEL.getSubjects().get(0);
             Map map = temp.getFields();
             map.forEach((k,v) -> {
-                TableColumn col = new TableColumn(StringBeatifier.beautify((String)k));
+                TableColumn col = new TableColumn((String)k);
                 getColumns().add(col);
                 col.setCellValueFactory(new PropertyValueFactory<Subject, String>((String) k));
             });
