@@ -1,6 +1,9 @@
 package org.shopkeeper.gui.fx.completeviews;
 
+import javafx.geometry.Insets;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import org.shopkeeper.gui.fx.WindowBuilderFX;
 import org.shopkeeper.gui.fx.view.AbstractViewFX;
@@ -28,12 +31,16 @@ public class CompleteViewCategoryFX {
         WindowBuilderFX.CATEGORY_MODEL.setViewPackage(views);
         WindowBuilderFX.CATEGORY_MODEL.updateViews();
 
-        VBox list_info = new VBox();
-        list.setMaxWidth(Double.MAX_VALUE);
-        info_view.setMaxWidth(Double.MAX_VALUE);
-        list_info.getChildren().addAll(list,info_view);
+        GridPane grid = new GridPane();
+        grid.setPadding(new Insets(10, 0, 0, 0)); // TODO CSS
+        grid.setHgap(10);
+        grid.add(list,0,0,2,1);
+        grid.add(info_view,2,0,1,1);
+        ColumnConstraints col1Constraints = new ColumnConstraints();
+        col1Constraints.setPercentWidth(75);
+        grid.getColumnConstraints().addAll(col1Constraints);
+        panel.setCenter(grid);
 
-        panel.setCenter(list_info);
         return panel;
 
     }

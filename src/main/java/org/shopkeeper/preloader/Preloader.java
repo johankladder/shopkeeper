@@ -81,7 +81,7 @@ public class Preloader extends Application {
                     Thread.sleep(5000); // TODO For showing the logo and information
 //                    for(int i = 0; i < 30; i++) {
 //                        SubjectHandler.getModule("itemmodule").add(new Item(null, "testitem"+i, 12.31, DateTimeGenerator.generateDateTimeNow()));
-//                    }
+////                    }
                     closePreloader();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
