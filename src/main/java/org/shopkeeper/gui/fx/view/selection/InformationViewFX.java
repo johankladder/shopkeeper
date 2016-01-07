@@ -1,10 +1,9 @@
 package org.shopkeeper.gui.fx.view.selection;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import org.shopkeeper.gui.fx.model.selection.ListSelectionModelFX;
 import org.shopkeeper.preferences.Preference;
 import org.shopkeeper.subjects.subjecttypes.Subject;
@@ -37,11 +36,11 @@ public class InformationViewFX extends BorderPane implements  AbstractSelectionV
 
     @Override
     public void updateView() {
-        HBox total_view_box = new HBox();
-//        total_view_box.setStyle("-fx-background-color: #336699;");
-        total_view_box.setAlignment(Pos.CENTER);
+        GridPane total_view_box = new GridPane();
+        total_view_box.setHgap(10);
 
         setCenter(total_view_box);
+        setMaxWidth(Double.MAX_VALUE);
         Subject subject = model.getSelectedSubject();
         Map subject_fields = subject.getFields();
 
@@ -51,18 +50,23 @@ public class InformationViewFX extends BorderPane implements  AbstractSelectionV
             labels.put((String) k, new Label((String) k));
         });
 
-        VBox value_labels = new VBox();
-        value_labels.setAlignment(Pos.BASELINE_LEFT);
-        VBox values = new VBox();
-        values.setAlignment(Pos.BASELINE_LEFT);
+
+        final int[] counter_y = {0};
 
         labels.forEach((k,v) -> {
-            value_labels.getChildren().add(v);
             Label label = new Label(subject_fields.get((k)).toString());
-            values.getChildren().add(label);
+            total_view_box.add(v,0, counter_y[0]);
+            total_view_box.add(label, 1, counter_y[0]);
+            counter_y[0] = counter_y[0] + 1;
+//            label.setStyle("-fx-background-color: #336699;");
         } );
 
-        total_view_box.getChildren().addAll(value_labels, values);
+        ColumnConstraints col1Constraints = new ColumnConstraints();
+        col1Constraints.setPercentWidth(30);
+        ColumnConstraints col2Constraints = new ColumnConstraints();
+        col2Constraints.setPercentWidth(70);
+        total_view_box.getColumnConstraints().addAll(col1Constraints,col2Constraints);
+        setStyle("-fx-background-color: #336699;");
 
     }
 }

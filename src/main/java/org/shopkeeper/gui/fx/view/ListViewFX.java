@@ -15,9 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by typhooncoaster on 29-12-15.
- */
 public class ListViewFX extends TableView implements AbstractViewFX {
 
     private AbstractModelFX MODEL = null;
