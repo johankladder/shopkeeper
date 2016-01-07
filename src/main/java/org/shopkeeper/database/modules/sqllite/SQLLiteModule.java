@@ -16,8 +16,7 @@ import org.shopkeeper.subjects.subjecttypes.items.Item;
 
 import java.sql.*;
 import java.util.LinkedList;
-// TODO Write status notificationer
-// TODO Process bulk parsers
+
 public class SQLLiteModule extends DatabaseModule implements Runnable {
 
     public static Connection CONNECTION = null;
@@ -46,7 +45,6 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
 
     @Override
     public void showAll(Integer subjectType) {
-
         if (subjectType == SubjectTypes.ITEM) {
             String query = SQLLiteQueryCreator.createSelectAllQuery((String) Item.getInitFields().get("tablename"));
             processQueryResult(query, SubjectTypes.ITEM);
@@ -81,8 +79,6 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
         return null;
     }
 
-
-    // TODO Put in abstract class and make initparser
     private void initDatabase() {
         try {
             Statement stmt = CONNECTION.createStatement();
@@ -94,7 +90,7 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
                 Preloader.ready.notify();
             }
         } catch (SQLException e) {
-            e.printStackTrace();;
+            e.printStackTrace();
             WAS_INITIALIZED = false;
         }
 
@@ -107,7 +103,7 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
             RUNNING = true;
             try {
                 Class.forName("org.sqlite.JDBC");
-                CONNECTION = DriverManager.getConnection("jdbc:sqlite:" + DBNAME + ".db");
+                CONNECTION = DriverManager.getConnection("jdbc:sqlite:" + DB_NAME + ".db");
                 CONNECTED = true;
 
                 initDatabase(); // Initializes tables in this database
@@ -122,9 +118,7 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
                             } catch (InterruptedException ignored) {
                             }
                         }
-
                         query = (String) queue.removeFirst();
-//                        System.out.println(query);
                     }
 
                     try {
@@ -137,7 +131,8 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
                             RESULTSET = stmt.executeQuery(query);
 
                             // TODO Results needs to be passed someway through the right module
-                            // But there there doesnt always needs to be a synchronized with this class.
+                            // TIP: Build a class that always with a lock object that always can be requested,
+                            // this class needs to have a lock-time limit, so a lock will always be released.
                             synchronized (SubjectHandler.class) {
                                 SubjectResultSetParser.parseResultSetToModule(RESULTSET, REQUESTEDTYPE);
                                 REQUESTEDTYPE = null;
@@ -145,8 +140,11 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
                             }
 
                         }
+                        // Release a given lock here!
                     } catch (RuntimeException e) {
                         e.printStackTrace();
+                    } finally {
+                        // release a given lock!
                     }
                 }
 
@@ -154,6 +152,8 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
                 // Set status:
                 DatabaseHandler.connectionNotEstablished();
                 CONNECTED = false;
+            } finally {
+                // release a given lock!
             }
 
         }

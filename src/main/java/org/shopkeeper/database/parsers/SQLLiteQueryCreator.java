@@ -6,19 +6,20 @@ import org.shopkeeper.subjects.subjecttypes.Subject;
 
 import java.util.Iterator;
 import java.util.Map;
+import java.util.logging.Logger;
 
 /**
  * Created by typhooncoaster on 14-12-15.
  */
 public class SQLLiteQueryCreator {
-
+    private final static Logger LOGGER = Logger.getLogger(SQLLiteQueryCreator.class.getName());
 
     /**
      * Creates the initialization-query for a given map and database-type. If the map or database-type is not acknowledged,
      * this method will return null. This method will work the best with the 'getFields' method from the Subject's class.
      * A valid database-type is necessary for this method to work as it is supposed to.
      *
-     * @param map Map with the database-fields.
+     * @param map          Map with the database-fields.
      * @param databaseType Type of the database
      * @return Creation-query.
      * @see DatabaseTypes
@@ -38,6 +39,7 @@ public class SQLLiteQueryCreator {
      * the keys in the the map. The 'id' doesn't need to have a value, because it will always be translated in an Integer
      * field -> Primary Key -> AutoIncrement. The tablename needs to have a value. If map is incomplete or doesn't meet the
      * requirements as mentioned above, this method will return null
+     *
      * @param map Map including the database-fields
      * @return Creation-query
      */
@@ -57,8 +59,8 @@ public class SQLLiteQueryCreator {
                         if (StringUtils.isNotBlank(type)) {
                             initString += pair.getKey() + " " + type + ", ";
                         } else {
-                            // TODO Logging
-                            continue; // Continue with looping -> Maybe there are other fields to gather.
+                            LOGGER.warning("Could'nt find a valid datatype -> Query cannot be created!");
+                            return null;
                         }
                     }
                 }
@@ -72,7 +74,7 @@ public class SQLLiteQueryCreator {
 
                 return prefix + initString;
             } else {
-                // TODO Logging
+                LOGGER.warning("The querystring was empty! -> Query cannot be created!");
                 return null;
             }
         }
@@ -81,12 +83,13 @@ public class SQLLiteQueryCreator {
 
     /**
      * Creates a 'drop-table'-query for an SQLite database. Will return null when table-name is invalid, null or empty.
+     *
      * @param tableName The name of the table who you like to 'drop'
      * @return Query for dropping the table
      */
     public static String createDropTableQuery(String tableName) {
-        if(tableName != null) {
-            return "DROP TABLE IF EXISTS " + tableName +";";
+        if (tableName != null) {
+            return "DROP TABLE IF EXISTS " + tableName + ";";
         }
         return null;
     }
@@ -103,20 +106,20 @@ public class SQLLiteQueryCreator {
      */
     // TODO Currently not checking if value is null or empty.
     public static String createInsertQuery(Subject subject) {
-        if(subject != null) {
+        if (subject != null) {
             Map map = subject.getFields();
-            if(map.containsKey("tablename")) {
+            if (map.containsKey("tablename")) {
                 String base = "INSERT INTO " + map.get("tablename");
                 String datanames = "(";
                 String values = "VALUES (";
                 Iterator it = map.entrySet().iterator();
                 while (it.hasNext()) {
                     Map.Entry pair = (Map.Entry) it.next();
-                        if(!pair.getKey().equals("id") && !pair.getKey().equals("tablename")) {
-                            datanames += pair.getKey() + ", ";
-                            // Create values
-                            values += parseValue(pair, subject.INIT_FIELD) + ", ";
-                        }
+                    if (!pair.getKey().equals("id") && !pair.getKey().equals("tablename")) {
+                        datanames += pair.getKey() + ", ";
+                        // Create values
+                        values += parseValue(pair, subject.INIT_FIELD) + ", ";
+                    }
                 }
                 // Trim and normalise:
                 datanames = StringUtils.trimToNull(StringUtils.substringBeforeLast(datanames, ","));
@@ -133,7 +136,7 @@ public class SQLLiteQueryCreator {
     }
 
     public static String createSelectAllQuery(String tablename) {
-        if(tablename != null && StringUtils.isNotBlank(tablename)) {
+        if (tablename != null && StringUtils.isNotBlank(tablename)) {
             return "SELECT * FROM " + tablename + ";";
         }
         return null;
@@ -142,6 +145,7 @@ public class SQLLiteQueryCreator {
     /**
      * Provides syntax for certain fields in the database-type. When a unknown parameter was send, this method will return
      * null. This method is private because it's not interesting for the outside world.
+     *
      * @param type Type of field
      * @return Syntax for provided field
      */
@@ -157,14 +161,15 @@ public class SQLLiteQueryCreator {
                 return "INT";
             }
         }
-        // TODO Logging
+        LOGGER.warning("Could'nt find the requested data-type!");
         return null;
     }
 
     /**
      * Parses 'normal' String values into values in SQLite-style. For example; Varchars can not be inserted without quotes
      * around the string. This method will handles those exceptions for you.
-     * @param pair The key-value pair. Given from the fields-map from the subject.
+     *
+     * @param pair    The key-value pair. Given from the fields-map from the subject.
      * @param initMap The initialisation-map from the subject
      * @return Value corrected by SQLite norms.
      * @see SQLLiteQueryCreator#createInsertQuery(Subject)
@@ -172,8 +177,8 @@ public class SQLLiteQueryCreator {
      */
     private static Object parseValue(Map.Entry pair, Map initMap) {
         String datatype = (String) initMap.get(pair.getKey());
-        if(datatype != null) {
-            if(datatype.equals("string") || datatype.equals("date")) {
+        if (datatype != null) {
+            if (datatype.equals("string") || datatype.equals("date")) {
                 return StringUtils.trimToNull("'" + pair.getValue() + "'");
             } else {
                 return pair.getValue();

@@ -17,8 +17,6 @@ public class SubjectHandler implements Runnable {
 
     public static ArrayList<SubjectModule> MODULES = new ArrayList<>();
     public static HashMap<String,SubjectModule> MODULESMAP = new HashMap<>();
-    public static Boolean done = false;
-
 
     @Override
     public void run() {

@@ -13,9 +13,7 @@ import org.shopkeeper.util.PriceGenerator;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
-/**
- * Created by typhooncoaster on 4-12-15.
- */
+// TODO Check this class; IdNumbers cannot be given in front.
 public class SubjectManipulator {
     private final static Logger LOGGER = Logger.getLogger(SubjectManipulator.class.getName());
 
@@ -39,7 +37,7 @@ public class SubjectManipulator {
                     return null;
                 } else {
                     if(price == null) {
-                        return null; // TODO Check needs to be before this
+                        return null;
                     }
                     name = StringUtils.trimToNull(name);
                     return new Item(identificationNumber, name, price, DateTimeGenerator.generateDateTimeNow());

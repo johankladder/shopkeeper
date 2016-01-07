@@ -56,6 +56,7 @@ public class Preloader extends Application {
     public static final String RELEASE_NOTES = "Version: " + RELEASE_NUMBER + " by Johan Kladder";
 
 
+    // TODO Clean up code preloader and fix default waiting time to a time that can be filled in in the preferences.
     private static void startPreloader() throws InterruptedException {
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -78,7 +79,7 @@ public class Preloader extends Application {
 
                 }
                 try {
-                    Thread.sleep(5000); // TODO For showing the logo and information
+                    Thread.sleep(5000);
 //                    for(int i = 0; i < 30; i++) {
 //                        SubjectHandler.getModule("itemmodule").add(new Item(null, "testitem"+i, 12.31, DateTimeGenerator.generateDateTimeNow()));
 ////                    }
@@ -127,26 +128,21 @@ public class Preloader extends Application {
 
     private static void updateProgressBar(Integer procentage) {
         Platform.runLater(() -> {
-            double p = new Float(procentage) / new Float(MODULES.size());
+            double p = new Float(procentage) / (float) MODULES.size();
             PROGRESSBAR.setProgress(p);
         });
 
     }
 
+    private static void closePreloader() {
+        Platform.runLater(() -> {
+            stage.close();
+            GuiChooser.startGUI();
+        });
+    }
 
     public static void main(String[] args) throws InterruptedException {
         launch(args);
-    }
-
-    private static void closePreloader() {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                stage.close();
-                GuiChooser.startGUI();
-                // TODO Build the application its GUI
-            }
-        });
     }
 
 
