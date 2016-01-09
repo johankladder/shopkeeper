@@ -1,11 +1,9 @@
 package org.shopkeeper.gui.fx.controller;
 
-import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import org.shopkeeper.gui.fx.completeviews.CompleteViewModuleFX;
 import org.shopkeeper.gui.fx.controller.handler.CompleteViewActionHandler;
 
 /**
@@ -31,7 +29,7 @@ public class SubjectsCompleteViewControllerFX extends HBox {
 
     public SubjectsCompleteViewControllerFX() {
         super(10);
-        Button[] buttons = {HOME_BUTTON,ITEM_BUTTON, CAT_BUTTON, CUS_BUTTON};
+        Button[] buttons = {HOME_BUTTON, ITEM_BUTTON, CAT_BUTTON, CUS_BUTTON};
         getChildren().addAll(buttons);
         for (Button b : buttons) {
             HBox.setHgrow(b, Priority.ALWAYS);
@@ -43,11 +41,7 @@ public class SubjectsCompleteViewControllerFX extends HBox {
     @Override
     protected void layoutChildren() {
         double minPrefWidth = calculatePrefChildWidth();
-        for (Node n : getChildren()) {
-            if (n instanceof Button) {
-                ((Button) n).setMinWidth(minPrefWidth);
-            }
-        }
+        getChildren().stream().filter(n -> n instanceof Button).forEach(n -> ((Button) n).setMinWidth(minPrefWidth));
         super.layoutChildren();
     }
 
