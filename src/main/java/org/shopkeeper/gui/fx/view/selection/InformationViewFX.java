@@ -1,14 +1,13 @@
 package org.shopkeeper.gui.fx.view.selection;
 
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import org.shopkeeper.gui.fx.controller.UpdateSubjectController;
 import org.shopkeeper.gui.fx.model.selection.ListSelectionModelFX;
-import org.shopkeeper.preferences.Preference;
 import org.shopkeeper.subjects.parsers.SubjectMapGenerator;
 import org.shopkeeper.subjects.subjecttypes.Subject;
 
@@ -16,9 +15,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 
-/**
- * Created by typhooncoaster on 6-1-16.
- */
 public class InformationViewFX extends BorderPane implements AbstractSelectionViewFX {
 
     private static ListSelectionModelFX model = null;
@@ -29,7 +25,11 @@ public class InformationViewFX extends BorderPane implements AbstractSelectionVi
 
 
     private void initComponents() {
-
+        // Set logo application in this area before user clicks on a value in the list:
+        Image image = new Image("/images/head.png");
+        ImageView imageView = new ImageView(image);
+        setCenter(imageView);
+        Tooltip.install(imageView, new Tooltip("Click on a subject in the list to view information here"));
     }
 
 
