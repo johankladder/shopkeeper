@@ -2,8 +2,13 @@ package org.shopkeeper.preloader;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
@@ -14,6 +19,7 @@ import org.shopkeeper.database.DatabaseHandler;
 import org.shopkeeper.database.modules.DatabaseChooser;
 import org.shopkeeper.database.modules.DatabaseTypes;
 import org.shopkeeper.gui.GuiChooser;
+import org.shopkeeper.gui.fx.model.selection.ListSelectionModelFX;
 import org.shopkeeper.preferences.Preference;
 import org.shopkeeper.preferences.PreferenceHandler;
 import org.shopkeeper.subjects.SubjectHandler;
@@ -39,7 +45,8 @@ public class Preloader extends Application {
 
     // GUI:
     private static Stage stage = null;
-    
+    private static BorderPane root = null;
+
     private static void startPreloader() throws InterruptedException {
         Thread thread = new Thread(() -> {
             initPreloader();
@@ -83,7 +90,7 @@ public class Preloader extends Application {
         // GUI:
         stage = primaryStage;
         primaryStage.setTitle("Pre-loading all assets");
-        BorderPane root = new BorderPane();
+        root = new BorderPane();
         PROGRESSBAR = new ProgressBar();
         root.setTop(imageView);
         root.setCenter(PROGRESSBAR);
@@ -96,6 +103,7 @@ public class Preloader extends Application {
         primaryStage.setScene(new Scene(root, Preference.PRELOADER_WIDTH, Preference.PRELOADER_HEIGTH));
         primaryStage.show();
         primaryStage.setResizable(false);
+        root.setPadding(new Insets(10,0,0,0));
 
         // STARTING THE PRELOADER:
         Preloader.startPreloader();
@@ -111,8 +119,21 @@ public class Preloader extends Application {
 
     private static void donePreloader() {
         Platform.runLater(() -> {
-            stage.close();
-            GuiChooser.startGUI();
+            Button ready_button = new Button(Preference.START_TEXT,new ImageView(new Image(Preference.HEAD_LOGO_PATH)));
+            ready_button.setContentDisplay(ContentDisplay.TOP);
+            // TODO: place this in a css file.
+            ready_button.setStyle(
+                    "-fx-background-radius: 5em; " +
+                            "-fx-min-width: 250px; " +
+                            "-fx-min-height: 250px; " +
+                            "-fx-max-width: 250px; " +
+                            "-fx-max-height: 250px;"
+            );
+            BorderPane test = new BorderPane();
+            test.setCenter(ready_button);
+            root.setTop(test);
+            root.setCenter(null);
+            ready_button.setOnAction(new SelectionHandler(stage));
         });
     }
 
@@ -121,4 +142,19 @@ public class Preloader extends Application {
     }
 
 
+}
+
+class SelectionHandler implements EventHandler<ActionEvent> {
+    private Stage stage = null;
+    public SelectionHandler(Stage stage) {
+        this.stage = stage;
+    }
+
+    @Override
+    public void handle(ActionEvent event) {
+        Platform.runLater(() -> {
+            stage.close();
+            GuiChooser.startGUI();
+        });
+    }
 }

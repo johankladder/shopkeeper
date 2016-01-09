@@ -19,8 +19,10 @@ public class Preference {
     public static final Integer PRELOADER_WIDTH = 600;
     public static final Integer PRELOADER_HEIGTH = 300;
     public static final String LOGOPATH = "/images/preloader_image.png";
+    public static final String HEAD_LOGO_PATH = "/images/head.png";
     public static final String RELEASE_NUMBER = "TEST";
     public static final String RELEASE_NOTES = "Version: " + RELEASE_NUMBER + " by Johan Kladder";
+    public static final String START_TEXT = "Press me to enter Shopkeeper";
 
     public static void setDatabaseType(String pref) {
         if(StringUtils.contains(pref, "sqlite")) {
