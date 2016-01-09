@@ -3,7 +3,13 @@ package org.shopkeeper.gui.fx.controller;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import org.shopkeeper.gui.fx.WindowBuilderFX;
 import org.shopkeeper.gui.fx.model.selection.ListSelectionModelFX;
+import org.shopkeeper.gui.fx.model.subjects.AbstractModelFX;
+import org.shopkeeper.gui.fx.model.subjects.ModelUtil;
+import org.shopkeeper.subjects.ModuleHandler;
+import org.shopkeeper.subjects.subjecttypes.Subject;
+import org.shopkeeper.subjects.subjecttypes.items.Item;
 
 /**
  * Created by johankladder on 1/9/16.
@@ -38,6 +44,8 @@ class SelectionHandler implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent event) {
-
+        Subject subject = (Subject) model.getSelectedSubject();
+        AbstractModelFX model_db = ModelUtil.getModelFromSubjectType(subject.TYPE);
+        model_db.update(subject);
     }
 }

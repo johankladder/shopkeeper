@@ -21,6 +21,7 @@ import org.shopkeeper.subjects.ModuleHandler;
  * Created by typhooncoaster on 29-12-15.
  */
 public class WindowBuilderFX {
+    // TODO Constructs the models in a model constructor, so its more obvious where to get them.
     public static ItemModelFX ITEMMODEL = new ItemModelFX(ModuleHandler.getModule("itemmodule"));
     public static CustomerModelFX CUSTOMER_MODEL = new CustomerModelFX(ModuleHandler.getModule("customermodule"));
     public static CategoryModelFX CATEGORY_MODEL = new CategoryModelFX(ModuleHandler.getModule("categorymodule"));

@@ -23,7 +23,7 @@ public abstract class AbstractModelFX {
     }
 
     public void update(Subject subject){
-
+        MODULE.update(subject);
     }
 
     public void delete(Subject subject) {

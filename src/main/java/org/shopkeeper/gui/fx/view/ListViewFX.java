@@ -19,31 +19,41 @@ public class ListViewFX extends TableView implements AbstractViewFX {
 
     private AbstractModelFX MODEL = null;
     private static ListSelectionModelFX SELECTION_MODEL = new ListSelectionModelFX();
+    ObservableList<Subject> names = null;
 
     public ListViewFX(AbstractModelFX model, ArrayList<SelectionViewFX> views) {
         MODEL = model;
         SELECTION_MODEL.setViewPackage(views);
         getSelectionModel().selectedItemProperty().addListener(SELECTION_MODEL);
+
+        init();
     }
 
-    @Override
-    public void updateView() {
+    private void init() {
         setItems(null);
-        List<Subject> list = new ArrayList<>();
-        if(MODEL.getSubjects().size() > 0) {
+
+        if (MODEL.getSubjects().size() > 0) {
             Subject temp = MODEL.getSubjects().get(0);
             Map map = temp.getFields();
-            map.forEach((k,v) -> {
-                TableColumn col = new TableColumn((String)k);
+            map.forEach((k, v) -> {
+                TableColumn col = new TableColumn((String) k);
                 getColumns().add(col);
                 col.setCellValueFactory(new PropertyValueFactory<Subject, String>((String) k));
             });
         }
 
+    }
+
+    @Override
+    public void updateView() {
+        if (names != null) {
+            names.clear(); // Clear for refreshing
+        }
+        List<Subject> list = new ArrayList<>();
         for (Subject subject : MODEL.getSubjects()) {
             list.add(subject);
         }
-        ObservableList<Subject> names = FXCollections.observableArrayList(list);
+        names = FXCollections.observableArrayList(list);
         setItems(names);
 
     }
