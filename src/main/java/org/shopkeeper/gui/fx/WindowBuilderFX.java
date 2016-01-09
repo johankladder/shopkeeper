@@ -9,7 +9,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.shopkeeper.gui.fx.completeviews.CompleteViewModuleFX;
-import org.shopkeeper.gui.fx.controller.SubjectsViewControllerFX;
+import org.shopkeeper.gui.fx.controller.SubjectsCompleteViewControllerFX;
 import org.shopkeeper.gui.fx.model.ReleaseModel;
 import org.shopkeeper.gui.fx.model.subjects.CategoryModelFX;
 import org.shopkeeper.gui.fx.model.subjects.CustomerModelFX;
@@ -41,7 +41,7 @@ public class WindowBuilderFX {
 
 
         // Init head and bottom:
-        SubjectsViewControllerFX subjects_view_controller = new SubjectsViewControllerFX(null);
+        SubjectsCompleteViewControllerFX subjects_view_controller = new SubjectsCompleteViewControllerFX();
         BorderPane pane_head_and_buttom = new BorderPane();
         pane_head_and_buttom.setTop(subjects_view_controller);
 

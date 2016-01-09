@@ -13,13 +13,12 @@ import org.shopkeeper.gui.fx.controller.handler.CompleteViewActionHandler;
  * Answered by: jewelsea
  * Found: 29-12-2015
  */
-public class SubjectsViewControllerFX extends HBox {
+public class SubjectsCompleteViewControllerFX extends HBox {
 
     public static Button ITEM_BUTTON = new Button("Items");
     public static Button CAT_BUTTON = new Button("Categories");
     public static Button CUS_BUTTON = new Button("Customers");
     public static Button HOME_BUTTON = new Button("Home");
-    private static CompleteViewModuleFX MODULE = null;
 
     // Listeners:
     static {
@@ -30,9 +29,8 @@ public class SubjectsViewControllerFX extends HBox {
         HOME_BUTTON.setOnAction(handler);
     }
 
-    public SubjectsViewControllerFX(CompleteViewModuleFX module) {
+    public SubjectsCompleteViewControllerFX() {
         super(10);
-        MODULE = module;
         Button[] buttons = {HOME_BUTTON,ITEM_BUTTON, CAT_BUTTON, CUS_BUTTON};
         getChildren().addAll(buttons);
         for (Button b : buttons) {
