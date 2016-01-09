@@ -1,11 +1,14 @@
 package org.shopkeeper.subjects.parsers;
 
+import org.apache.commons.lang3.StringUtils;
 import org.shopkeeper.subjects.subjecttypes.Subject;
 import org.shopkeeper.subjects.subjecttypes.SubjectFields;
 import org.shopkeeper.subjects.SubjectManipulator;
 import org.shopkeeper.subjects.subjecttypes.SubjectTypes;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.logging.Logger;
 
 /**
@@ -144,6 +147,22 @@ public class SubjectMapGenerator {
         } else {
             LOGGER.warning("The map you gave was not valid, please make sure you haven't edited the map_id fields.");
             return null;
+        }
+    }
+
+    public static Map createUserViewMap(Map fieldsMap) {
+        if (!fieldsMap.isEmpty() && fieldsMap != null) {
+            Map userMap = new LinkedHashMap<>();
+
+            fieldsMap.forEach((k, v) -> {
+                if (!StringUtils.contains((String) k, "tablename")) {
+                    userMap.put(k, v);
+                }
+            });
+            return userMap;
+
+        } else {
+            return new LinkedHashMap<>();
         }
     }
 

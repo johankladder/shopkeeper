@@ -8,6 +8,7 @@ import org.shopkeeper.subjects.subjecttypes.SubjectTypes;
 import org.shopkeeper.subjects.subjecttypes.categories.Category;
 import org.shopkeeper.subjects.subjecttypes.customer.Customer;
 import org.shopkeeper.subjects.subjecttypes.items.Item;
+import org.shopkeeper.util.DateTimeGenerator;
 
 import java.util.HashMap;
 
@@ -148,6 +149,12 @@ public class SubjectMapGeneratorTest {
         assertEquals("010101", item.getPhone());
         assertEquals(null, item.getPlaceOfLiving());
         assertEquals("11 as", item.getZipcode());
+    }
+
+    @Test
+    public void testUserMap() {
+        Item item = new Item(new Long(1), "name", 12.31, DateTimeGenerator.generateDateTimeNow());
+        SubjectMapGenerator.createUserViewMap(item.getFields());
     }
 
 
