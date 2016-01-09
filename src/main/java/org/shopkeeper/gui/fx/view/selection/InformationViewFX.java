@@ -47,9 +47,10 @@ public class InformationViewFX extends BorderPane implements AbstractSelectionVi
         setMaxWidth(Double.MAX_VALUE);
         Subject subject = model.getSelectedSubject();
         Map subject_fields = subject.getFields();
-        //subject_fields = SubjectMapGenerator.createUserViewMap(subject_fields);
+        subject_fields = SubjectMapGenerator.createUserViewMap(subject_fields);
 
         Map map = subject.INIT_FIELD;
+        map = SubjectMapGenerator.createUserViewMap(map);
         Map<String, Label> labels = new LinkedHashMap<>();
         map.forEach((k, v) -> {
             labels.put((String) k, new Label((String) k));
@@ -58,8 +59,9 @@ public class InformationViewFX extends BorderPane implements AbstractSelectionVi
         // For usage in a lamba expression:
         final int[] counter_y = {0};
 
+        final Map finalSubject_fields = subject_fields;
         labels.forEach((k, v) -> {
-            TextField text_field = new TextField(subject_fields.get((k)).toString());
+            TextField text_field = new TextField(finalSubject_fields.get((k)).toString());
             total_view_box.add(v, 0, counter_y[0]);
             total_view_box.add(text_field, 1, counter_y[0]);
             counter_y[0] = counter_y[0] + 1;
