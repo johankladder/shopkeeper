@@ -1,7 +1,7 @@
 package org.shopkeeper.gui.fx.model;
 
 import javafx.application.Platform;
-import org.shopkeeper.gui.fx.view.ReleaseView;
+import org.shopkeeper.gui.fx.view.releases.ReleaseView;
 import org.shopkeeper.releases.Release;
 import org.shopkeeper.releases.ReleaseModule;
 
