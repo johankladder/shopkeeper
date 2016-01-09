@@ -16,7 +16,9 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import org.shopkeeper.database.DatabaseHandler;
 import org.shopkeeper.database.modules.DatabaseChooser;
@@ -91,9 +93,11 @@ public class Preloader extends Application {
     public void start(Stage primaryStage) throws Exception {
         // Images:
         Image image = new Image(Preference.LOGOPATH);
+
         imageView = new ImageView(image);
         // GUI:
         stage = primaryStage;
+        stage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setTitle("Pre-loading all assets");
         root = new BorderPane();
         PROGRESSBAR = new ProgressBar();
@@ -105,7 +109,9 @@ public class Preloader extends Application {
         labelBorder.setCenter(label);
         root.setBottom(labelBorder);
         PROGRESSBAR.setMinWidth(600);
-        primaryStage.setScene(new Scene(root, Preference.PRELOADER_WIDTH, Preference.PRELOADER_HEIGTH));
+
+        Scene scene = new Scene(root, Preference.PRELOADER_WIDTH, Preference.PRELOADER_HEIGTH);
+        primaryStage.setScene(scene);
         primaryStage.show();
         primaryStage.setResizable(false);
         root.setPadding(new Insets(10, 0, 0, 0));

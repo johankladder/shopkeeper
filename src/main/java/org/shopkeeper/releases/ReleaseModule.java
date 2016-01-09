@@ -3,10 +3,13 @@ package org.shopkeeper.releases;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.shopkeeper.preferences.Preference;
 import org.shopkeeper.preloader.Preloader;
 
 import java.io.File;
 import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -26,10 +29,9 @@ public class ReleaseModule implements Runnable {
         JSONParser parser = new JSONParser();
 
         try {
-
-            ClassLoader classLoader = ReleaseModule.class.getClassLoader();
-            File file = new File(classLoader.getResource("releases/releasenotes.json").getFile());
-            Object obj = parser.parse(new FileReader(file));
+            InputStream is = ReleaseModule.class.getResourceAsStream(Preference.RELEASE_NOTES_PATH);
+            InputStreamReader isr = new InputStreamReader(is);
+            Object obj = parser.parse(isr);
 
             JSONObject jsonObject = (JSONObject) obj; // Create the json object
             JSONArray releases = (JSONArray) jsonObject.get("releases"); // Get all the releases

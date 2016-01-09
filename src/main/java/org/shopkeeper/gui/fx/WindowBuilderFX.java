@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.shopkeeper.gui.fx.completeviews.CompleteViewModuleFX;
 import org.shopkeeper.gui.fx.controller.SubjectsCompleteViewControllerFX;
 import org.shopkeeper.gui.fx.model.ReleaseModel;
@@ -38,7 +39,6 @@ public class WindowBuilderFX {
         primaryStage.setY(bounds.getMinY());
         primaryStage.setWidth(bounds.getWidth());
         primaryStage.setHeight(bounds.getHeight());
-
 
 
         // Init head and bottom:
