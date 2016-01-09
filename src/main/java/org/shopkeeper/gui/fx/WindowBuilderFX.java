@@ -13,6 +13,7 @@ import org.shopkeeper.gui.fx.controller.SubjectsViewControllerFX;
 import org.shopkeeper.gui.fx.model.subjects.CategoryModelFX;
 import org.shopkeeper.gui.fx.model.subjects.CustomerModelFX;
 import org.shopkeeper.gui.fx.model.subjects.ItemModelFX;
+import org.shopkeeper.preferences.Preference;
 import org.shopkeeper.preloader.Preloader;
 import org.shopkeeper.subjects.SubjectHandler;
 
@@ -47,7 +48,7 @@ public class WindowBuilderFX {
         MAIN.setPadding(new Insets(5,10,5,10));
 
         BorderPane release_pane = new BorderPane();
-        Label label = new Label(Preloader.RELEASE_NOTES);
+        Label label = new Label(Preference.RELEASE_NOTES);
         label.setAlignment(Pos.CENTER);
         release_pane.setCenter(label);
         pane_head_and_buttom.setBottom(release_pane);

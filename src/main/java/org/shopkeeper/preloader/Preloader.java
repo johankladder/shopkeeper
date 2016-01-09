@@ -10,23 +10,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import org.joda.time.DateTime;
 import org.shopkeeper.database.DatabaseHandler;
 import org.shopkeeper.database.modules.DatabaseChooser;
 import org.shopkeeper.database.modules.DatabaseTypes;
 import org.shopkeeper.gui.GuiChooser;
+import org.shopkeeper.preferences.Preference;
 import org.shopkeeper.preferences.PreferenceHandler;
 import org.shopkeeper.subjects.SubjectHandler;
-import org.shopkeeper.subjects.subjecttypes.categories.Category;
-import org.shopkeeper.subjects.subjecttypes.customer.Customer;
-import org.shopkeeper.subjects.subjecttypes.items.Item;
-import org.shopkeeper.util.DateTimeGenerator;
 
-import java.awt.*;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,47 +39,31 @@ public class Preloader extends Application {
 
     // GUI:
     private static Stage stage = null;
-    private static final Integer PRELOADER_WIDTH = 600;
-    private static final Integer PRELOADER_HEIGTH = 300;
-
-    // NOTES:
-    private static final String RELEASE_NUMBER = "TEST";
-    public static final String RELEASE_NOTES = "Version: " + RELEASE_NUMBER + " by Johan Kladder";
-
-
-    // TODO Clean up code preloader and fix default waiting time to a time that can be filled in in the preferences.
+    
     private static void startPreloader() throws InterruptedException {
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                initPreloader();
-                for (Runnable tasks : MODULES) {
-                    Thread thread = new Thread(tasks);
-                    thread.start();
-                    synchronized (Preloader.ready) {
-                        try {
-                            ready.wait();
-                            System.out.println("done with " + tasks.getClass().getName());
-                            JOBCOUNTER++;
-                            updateProgressBar(JOBCOUNTER);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-
+        Thread thread = new Thread(() -> {
+            initPreloader();
+            for (Runnable tasks : MODULES) {
+                Thread thread1 = new Thread(tasks);
+                thread1.start();
+                synchronized (Preloader.ready) {
+                    try {
+                        ready.wait();
+                        System.out.println("PRELOADER DONE:" + tasks.getClass().getName());
+                        JOBCOUNTER++;
+                        updateProgressBar(JOBCOUNTER);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
 
                 }
-                try {
-                    Thread.sleep(5000);
+
+            }
 //                    for(int i = 0; i < 30; i++) {
 //                        SubjectHandler.getModule("itemmodule").add(new Item(null, "testitem"+i, 12.31, DateTimeGenerator.generateDateTimeNow()));
 ////                    }
-                    closePreloader();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+            donePreloader();
 
-            }
         });
         thread.start();
     }
@@ -103,22 +78,22 @@ public class Preloader extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         // Images:
-        Image image = new Image("/images/preloader_image.png");
+        Image image = new Image(Preference.LOGOPATH);
         ImageView imageView = new ImageView(image);
         // GUI:
         stage = primaryStage;
-        primaryStage.setTitle("Shopkeeper - pre-loader");
+        primaryStage.setTitle("Pre-loading all assets");
         BorderPane root = new BorderPane();
         PROGRESSBAR = new ProgressBar();
         root.setTop(imageView);
         root.setCenter(PROGRESSBAR);
         BorderPane labelBorder = new BorderPane();
-        Label label = new Label(RELEASE_NOTES);
+        Label label = new Label(Preference.RELEASE_NOTES);
         label.setAlignment(Pos.CENTER);
         labelBorder.setCenter(label);
         root.setBottom(labelBorder);
         PROGRESSBAR.setMinWidth(600);
-        primaryStage.setScene(new Scene(root, PRELOADER_WIDTH, PRELOADER_HEIGTH));
+        primaryStage.setScene(new Scene(root, Preference.PRELOADER_WIDTH, Preference.PRELOADER_HEIGTH));
         primaryStage.show();
         primaryStage.setResizable(false);
 
@@ -134,7 +109,7 @@ public class Preloader extends Application {
 
     }
 
-    private static void closePreloader() {
+    private static void donePreloader() {
         Platform.runLater(() -> {
             stage.close();
             GuiChooser.startGUI();

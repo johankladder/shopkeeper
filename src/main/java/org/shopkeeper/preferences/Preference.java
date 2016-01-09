@@ -12,10 +12,15 @@ public class Preference {
 
     public static Integer DATABASE_TYPE = null;
     public static Integer GUI_TYPE = null;
-    public static Integer MIN_WIDTH_APPLICATION = 600;
-    public static Integer MIN_HEIGHT_APPLICATION = 300;
-    public static Integer PREF_HEIGHT_LIST_CONTAINERS = 500;
-    public static Integer PREF_WIDTH_LIST_CONTAINERS = 400;
+    public static final Integer MIN_WIDTH_APPLICATION = 600;
+    public static final Integer MIN_HEIGHT_APPLICATION = 300;
+    public static final Integer PREF_HEIGHT_LIST_CONTAINERS = 500;
+    public static final Integer PREF_WIDTH_LIST_CONTAINERS = 400;
+    public static final Integer PRELOADER_WIDTH = 600;
+    public static final Integer PRELOADER_HEIGTH = 300;
+    public static final String LOGOPATH = "/images/preloader_image.png";
+    public static final String RELEASE_NUMBER = "TEST";
+    public static final String RELEASE_NOTES = "Version: " + RELEASE_NUMBER + " by Johan Kladder";
 
     public static void setDatabaseType(String pref) {
         if(StringUtils.contains(pref, "sqlite")) {

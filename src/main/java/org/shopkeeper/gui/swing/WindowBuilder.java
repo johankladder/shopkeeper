@@ -35,7 +35,7 @@ public class WindowBuilder {
         CompleteViewModule.MAIN = MAIN_PANEL;
 
         JPanel release_notes = new JPanel(new BorderLayout());
-        release_notes.add(new JLabel(Preloader.RELEASE_NOTES, JLabel.CENTER));
+        release_notes.add(new JLabel(Preference.RELEASE_NOTES, JLabel.CENTER));
         panel_with_head_and_buttom.add(release_notes, BorderLayout.SOUTH);
 
         WINDOW.add(panel_with_head_and_buttom);
