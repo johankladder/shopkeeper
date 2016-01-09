@@ -157,7 +157,7 @@ public class SubjectMapGeneratorTest {
     @Test
     public void testUserMap() {
         Item item = new Item(new Long(1), "name", 12.31, DateTimeGenerator.generateDateTimeNow());
-        Customer cus = new Customer(new Long(1), "name", DateTimeGenerator.generateDateTimeNow(), "", "", "", "", "");
+        Customer cus = new Customer(new Long(1), "name", DateTimeGenerator.generateDateTimeNow(), "","" ,"","","");
         Category cat = new Category(new Long(1), "name", DateTimeGenerator.generateDateTimeNow());
 
         ArrayList<Subject> s = new ArrayList<>();
@@ -165,18 +165,19 @@ public class SubjectMapGeneratorTest {
         s.add(cus);
         s.add(cat);
 
-        for (Subject su : s) {
+        for(Subject su : s) {
             testGeneratedUserMap(su);
         }
-        
+
+
     }
 
     private void testGeneratedUserMap(Subject subject) {
         final boolean[] hit = {false};
         Map userViewMap = SubjectMapGenerator.createUserViewMap(subject.getFields());
 
-        userViewMap.forEach((k, v) -> {
-            if (StringUtils.contains((String) k, "tablename")) {
+        userViewMap.forEach((k,v) -> {
+            if(StringUtils.contains((String) k, "tablename")) {
                 hit[0] = true;
             }
         });
