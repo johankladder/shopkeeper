@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
+import org.shopkeeper.gui.fx.controller.UpdateSubjectController;
 import org.shopkeeper.gui.fx.model.selection.ListSelectionModelFX;
 import org.shopkeeper.preferences.Preference;
 import org.shopkeeper.subjects.subjecttypes.Subject;
@@ -61,6 +62,8 @@ public class InformationViewFX extends BorderPane implements  AbstractSelectionV
             total_view_box.add(text_field, 1, counter_y[0]);
             counter_y[0] = counter_y[0] + 1;
         } );
+
+        total_view_box.add(new UpdateSubjectController(model),0,counter_y[0],2,1);
 
         ColumnConstraints col1Constraints = new ColumnConstraints();
         col1Constraints.setPercentWidth(30);
