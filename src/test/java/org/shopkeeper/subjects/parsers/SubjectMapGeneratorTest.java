@@ -1,5 +1,6 @@
 package org.shopkeeper.subjects.parsers;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.shopkeeper.subjects.subjecttypes.Subject;
 import org.shopkeeper.subjects.subjecttypes.SubjectFields;
@@ -10,7 +11,9 @@ import org.shopkeeper.subjects.subjecttypes.customer.Customer;
 import org.shopkeeper.subjects.subjecttypes.items.Item;
 import org.shopkeeper.util.DateTimeGenerator;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -154,7 +157,31 @@ public class SubjectMapGeneratorTest {
     @Test
     public void testUserMap() {
         Item item = new Item(new Long(1), "name", 12.31, DateTimeGenerator.generateDateTimeNow());
-        SubjectMapGenerator.createUserViewMap(item.getFields());
+        Customer cus = new Customer(new Long(1), "name", DateTimeGenerator.generateDateTimeNow(), "", "", "", "", "");
+        Category cat = new Category(new Long(1), "name", DateTimeGenerator.generateDateTimeNow());
+
+        ArrayList<Subject> s = new ArrayList<>();
+        s.add(item);
+        s.add(cus);
+        s.add(cat);
+
+        for (Subject su : s) {
+            testGeneratedUserMap(su);
+        }
+        
+    }
+
+    private void testGeneratedUserMap(Subject subject) {
+        final boolean[] hit = {false};
+        Map userViewMap = SubjectMapGenerator.createUserViewMap(subject.getFields());
+
+        userViewMap.forEach((k, v) -> {
+            if (StringUtils.contains((String) k, "tablename")) {
+                hit[0] = true;
+            }
+        });
+
+        assertFalse(hit[0]);
     }
 
 
