@@ -150,6 +150,15 @@ public class SubjectMapGenerator {
         }
     }
 
+    /**
+     * Creates a new map from the fields-map from a subject with only the interesting values for the user. Will return
+     * a empty map if the given map is null or empty. This method is handy for creating the value maps in a user-view i.e
+     * a information-view for a subject.
+     *
+     * @param fieldsMap The 'normal' fields-map from a subject
+     * @return A map with values that are interesting for the user to see.
+     * @see Subject#getFields()
+     */
     public static Map createUserViewMap(Map fieldsMap) {
         if (!fieldsMap.isEmpty() && fieldsMap != null) {
             Map userMap = new LinkedHashMap<>();

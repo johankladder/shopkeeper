@@ -5,9 +5,7 @@ import org.shopkeeper.subjects.parsers.SubjectParser;
 
 import java.util.Map;
 
-/**
- * Created by typhooncoaster on 4-12-15.
- */
+// TODO: Documentation methods!
 public abstract class Subject {
 
     private String name;
