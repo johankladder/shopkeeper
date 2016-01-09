@@ -45,7 +45,7 @@ public class InformationViewFX extends BorderPane implements AbstractSelectionVi
 
         setCenter(total_view_box);
         setMaxWidth(Double.MAX_VALUE);
-        Subject subject = model.getSelectedSubject();
+        Subject subject = (Subject) model.getSelectedSubject();
         Map subject_fields = subject.getFields();
         subject_fields = SubjectMapGenerator.createUserViewMap(subject_fields);
 

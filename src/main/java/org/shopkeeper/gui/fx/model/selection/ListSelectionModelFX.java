@@ -10,9 +10,9 @@ import java.util.ArrayList;
 /**
  * Created by typhooncoaster on 5-1-16.
  */
-public class ListSelectionModelFX implements ChangeListener<Subject>{
+public class ListSelectionModelFX implements ChangeListener<Object>{
 
-    private static Subject SELECTED_SUBJECT = null;
+    private static Object SELECTED_SUBJECT = null;
     private static ArrayList<AbstractSelectionViewFX> VIEWS = new ArrayList<>();
 
     public void setViewPackage(ArrayList<AbstractSelectionViewFX> views) {
@@ -25,14 +25,14 @@ public class ListSelectionModelFX implements ChangeListener<Subject>{
 
     }
 
-    public void setSelectedSubject(Subject subject) {
+    public void setSelectedSubject(Object subject) {
         if(subject != null) {
             SELECTED_SUBJECT = subject;
             updateViews();
         }
     }
 
-    public Subject getSelectedSubject() {
+    public Object getSelectedSubject() {
         return SELECTED_SUBJECT;
     }
 
@@ -43,7 +43,7 @@ public class ListSelectionModelFX implements ChangeListener<Subject>{
     }
 
     @Override
-    public void changed(ObservableValue<? extends Subject> observable, Subject oldValue, Subject selectedSubject) {
+    public void changed(ObservableValue<? extends Object> observable, Object oldValue, Object selectedSubject) {
         setSelectedSubject(selectedSubject);
     }
 
