@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.shopkeeper.database.modules.DatabaseTypes;
 import org.shopkeeper.subjects.subjecttypes.Subject;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -135,6 +136,50 @@ public class SQLLiteQueryCreator {
         return null;
     }
 
+    public static String createUpdateQuery(Subject subject) {
+        if(subject != null) {
+            ArrayList<String> done_values = new ArrayList<>();
+            final String[] base = {"UPDATE "};
+            String prefix = "SET ";
+            Map map = subject.getFields();
+            if(map.containsKey("tablename")) {
+                if(map.containsKey("id")) {
+                    base[0] += StringUtils.trimToNull((String) map.get("tablename")) + " ";
+                    done_values.add("tablename");
+                    base[0] += prefix + " ";
+                    Long id = (Long) map.get("id");
+                    done_values.add("id");
+
+
+                    // The important keys and values are now gathered, lets loop through the others:
+                    map.forEach((k,v)-> {
+                        if(!done_values.contains(k)) {
+                            String sub_base = k + " = "; // example: 'dateadded =
+                            sub_base += parseValue((String) k, subject.INIT_FIELD, v);
+                            sub_base += ", ";
+                            base[0] += sub_base;
+                            done_values.add((String) k);
+                        }
+                    });
+
+                    // Remove the last comma:
+                    base[0] = StringUtils.trimToNull(StringUtils.substringBeforeLast(base[0], ","));
+                    base[0] += " " + "WHERE id =" + id;
+                    base[0] = StringUtils.trimToNull(base[0]);
+
+                    return base[0];
+
+                } else {
+                    return null; // Can't know the id of the subject, so can't create query
+                }
+            } else {
+                return null; // Can't know the table name, so can't create query
+            }
+
+        }
+        return null;
+    }
+
     public static String createSelectAllQuery(String tablename) {
         if (tablename != null && StringUtils.isNotBlank(tablename)) {
             return "SELECT * FROM " + tablename + ";";
@@ -182,6 +227,18 @@ public class SQLLiteQueryCreator {
                 return StringUtils.trimToNull("'" + pair.getValue() + "'");
             } else {
                 return pair.getValue();
+            }
+        }
+        return null;
+    }
+
+    private static Object parseValue(String key, Map initMap, Object value) {
+        String datatype = (String) initMap.get(key);
+        if (datatype != null) {
+            if (datatype.equals("string") || datatype.equals("date")) {
+                return StringUtils.trimToNull("'" + value + "'");
+            } else {
+                return value;
             }
         }
         return null;
