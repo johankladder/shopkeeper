@@ -6,7 +6,7 @@ import org.shopkeeper.database.modules.DatabaseTypes;
 import org.shopkeeper.database.parsers.ResultParser;
 import org.shopkeeper.database.parsers.SQLLiteQueryCreator;
 import org.shopkeeper.preloader.Preloader;
-import org.shopkeeper.subjects.SubjectHandler;
+import org.shopkeeper.subjects.ModuleHandler;
 import org.shopkeeper.subjects.parsers.SubjectResultSetParser;
 import org.shopkeeper.subjects.subjecttypes.Subject;
 import org.shopkeeper.subjects.subjecttypes.SubjectTypes;
@@ -133,10 +133,10 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
                             // TODO Results needs to be passed someway through the right module
                             // TIP: Build a class that always with a lock object that always can be requested,
                             // this class needs to have a lock-time limit, so a lock will always be released.
-                            synchronized (SubjectHandler.class) {
+                            synchronized (ModuleHandler.class) {
                                 SubjectResultSetParser.parseResultSetToModule(RESULTSET, REQUESTEDTYPE);
                                 REQUESTEDTYPE = null;
-                                SubjectHandler.class.notify();
+                                ModuleHandler.class.notify();
                             }
 
                         }

@@ -19,11 +19,10 @@ import org.shopkeeper.database.DatabaseHandler;
 import org.shopkeeper.database.modules.DatabaseChooser;
 import org.shopkeeper.database.modules.DatabaseTypes;
 import org.shopkeeper.gui.GuiChooser;
-import org.shopkeeper.gui.fx.model.selection.ListSelectionModelFX;
 import org.shopkeeper.preferences.Preference;
 import org.shopkeeper.preferences.PreferenceHandler;
 import org.shopkeeper.releases.ReleaseModule;
-import org.shopkeeper.subjects.SubjectHandler;
+import org.shopkeeper.subjects.ModuleHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +67,7 @@ public class Preloader extends Application {
 
             }
 //                    for(int i = 0; i < 30; i++) {
-//                        SubjectHandler.getModule("itemmodule").add(new Item(null, "testitem"+i, 12.31, DateTimeGenerator.generateDateTimeNow()));
+//                        ModuleHandler.getModule("itemmodule").add(new Item(null, "testitem"+i, 12.31, DateTimeGenerator.generateDateTimeNow()));
 ////                    }
             donePreloader();
 
@@ -79,7 +78,7 @@ public class Preloader extends Application {
     private static void initPreloader() {
         MODULES.add(new PreferenceHandler());
         MODULES.add(new DatabaseHandler(DatabaseChooser.getDatabase(DatabaseTypes.DATABASETYPE_SQLLITE)));
-        MODULES.add(new SubjectHandler());
+        MODULES.add(new ModuleHandler());
         MODULES.add(new ReleaseModule());
     }
 

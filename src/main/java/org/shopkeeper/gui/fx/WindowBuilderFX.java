@@ -10,20 +10,21 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.shopkeeper.gui.fx.completeviews.CompleteViewModuleFX;
 import org.shopkeeper.gui.fx.controller.SubjectsViewControllerFX;
+import org.shopkeeper.gui.fx.model.ReleaseModel;
 import org.shopkeeper.gui.fx.model.subjects.CategoryModelFX;
 import org.shopkeeper.gui.fx.model.subjects.CustomerModelFX;
 import org.shopkeeper.gui.fx.model.subjects.ItemModelFX;
 import org.shopkeeper.preferences.Preference;
-import org.shopkeeper.preloader.Preloader;
-import org.shopkeeper.subjects.SubjectHandler;
+import org.shopkeeper.subjects.ModuleHandler;
 
 /**
  * Created by typhooncoaster on 29-12-15.
  */
 public class WindowBuilderFX {
-    public static ItemModelFX ITEMMODEL = new ItemModelFX(SubjectHandler.getModule("itemmodule"));
-    public static CustomerModelFX CUSTOMER_MODEL = new CustomerModelFX(SubjectHandler.getModule("customermodule"));
-    public static CategoryModelFX CATEGORY_MODEL = new CategoryModelFX(SubjectHandler.getModule("categorymodule"));
+    public static ItemModelFX ITEMMODEL = new ItemModelFX(ModuleHandler.getModule("itemmodule"));
+    public static CustomerModelFX CUSTOMER_MODEL = new CustomerModelFX(ModuleHandler.getModule("customermodule"));
+    public static CategoryModelFX CATEGORY_MODEL = new CategoryModelFX(ModuleHandler.getModule("categorymodule"));
+    public static ReleaseModel RELEASE_MODEL = new ReleaseModel(ModuleHandler.RELEASE_MODULE);
     public static BorderPane MAIN = new BorderPane();
 
 
@@ -60,7 +61,6 @@ public class WindowBuilderFX {
         // Set begin screen:
         CompleteViewModuleFX.getCompleteview(null);
         primaryStage.show();
-
 
     }
 

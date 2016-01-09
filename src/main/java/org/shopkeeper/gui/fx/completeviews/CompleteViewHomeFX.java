@@ -19,7 +19,7 @@ public class CompleteViewHomeFX {
         Image image = new Image("/images/preloader_image.png");
         ImageView imageView = new ImageView(image);
         panel.setCenter(imageView);
-        panel.setBottom(new ReleaseView());
+        panel.setBottom(new ReleaseView(WindowBuilderFX.RELEASE_MODEL));
         return panel;
     }
 

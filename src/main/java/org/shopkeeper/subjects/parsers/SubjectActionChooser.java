@@ -1,7 +1,7 @@
 package org.shopkeeper.subjects.parsers;
 
+import org.shopkeeper.subjects.ModuleHandler;
 import org.shopkeeper.subjects.subjecttypes.Subject;
-import org.shopkeeper.subjects.SubjectHandler;
 import org.shopkeeper.subjects.subjecttypes.SubjectTypes;
 import org.shopkeeper.subjects.modules.SubjectModule;
 
@@ -34,11 +34,11 @@ public class SubjectActionChooser {
     public static void actionOnSubject(Subject subject, Integer action) {
         if (subject != null) {
             if (subject.TYPE == SubjectTypes.ITEM) {
-                performAction(SubjectHandler.getModule("itemmodule"), subject, action);
+                performAction(ModuleHandler.getModule("itemmodule"), subject, action);
             } else if (subject.TYPE == SubjectTypes.CATEGORY) {
-                performAction(SubjectHandler.getModule("categorymodule"), subject, action);
+                performAction(ModuleHandler.getModule("categorymodule"), subject, action);
             } else if (subject.TYPE == SubjectTypes.CUSTOMER) {
-                performAction(SubjectHandler.getModule("customermodule"), subject, action);
+                performAction(ModuleHandler.getModule("customermodule"), subject, action);
             } else {
                 LOGGER.warning("There is no module for a NULL object ;)!");
             }

@@ -6,8 +6,7 @@ import org.shopkeeper.gui.swing.model.subjects.CategoryModel;
 import org.shopkeeper.gui.swing.model.subjects.CustomerModel;
 import org.shopkeeper.gui.swing.model.subjects.ItemModel;
 import org.shopkeeper.preferences.Preference;
-import org.shopkeeper.preloader.Preloader;
-import org.shopkeeper.subjects.SubjectHandler;
+import org.shopkeeper.subjects.ModuleHandler;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,9 +16,9 @@ import java.awt.*;
  */
 public class WindowBuilder {
     public static JFrame WINDOW = new JFrame("Shopkeeper");
-    public static ItemModel ITEMMODEL = new ItemModel(SubjectHandler.getModule("itemmodule"));
-    public static CustomerModel CUSTOMERMODEL = new CustomerModel(SubjectHandler.getModule("customermodule"));
-    public static CategoryModel CATEGORYMODEL = new CategoryModel(SubjectHandler.getModule("categorymodule"));
+    public static ItemModel ITEMMODEL = new ItemModel(ModuleHandler.getModule("itemmodule"));
+    public static CustomerModel CUSTOMERMODEL = new CustomerModel(ModuleHandler.getModule("customermodule"));
+    public static CategoryModel CATEGORYMODEL = new CategoryModel(ModuleHandler.getModule("categorymodule"));
     public static JPanel MAIN_PANEL = new JPanel();
 
 

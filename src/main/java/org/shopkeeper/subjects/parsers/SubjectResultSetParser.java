@@ -1,7 +1,7 @@
 package org.shopkeeper.subjects.parsers;
 
 import org.joda.time.DateTime;
-import org.shopkeeper.subjects.SubjectHandler;
+import org.shopkeeper.subjects.ModuleHandler;
 import org.shopkeeper.subjects.subjecttypes.SubjectTypes;
 import org.shopkeeper.subjects.subjecttypes.categories.Category;
 import org.shopkeeper.subjects.subjecttypes.customer.Customer;
@@ -40,7 +40,7 @@ public class SubjectResultSetParser {
                         set.getDouble("price"),
                         DateTime.parse(set.getString("dateadded"))
                 );
-                SubjectHandler.getModule("itemmodule").addToList(item);
+                ModuleHandler.getModule("itemmodule").addToList(item);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -55,7 +55,7 @@ public class SubjectResultSetParser {
                         set.getString("name"),
                         DateTime.parse(set.getString("dateadded"))
                 );
-                SubjectHandler.getModule("categorymodule").addToList(category);
+                ModuleHandler.getModule("categorymodule").addToList(category);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -76,7 +76,7 @@ public class SubjectResultSetParser {
                         set.getString("phone"),
                         set.getString("email")
                 );
-                SubjectHandler.getModule("customermodule").addToList(customer);
+                ModuleHandler.getModule("customermodule").addToList(customer);
             }
         } catch (SQLException e) {
             e.printStackTrace();

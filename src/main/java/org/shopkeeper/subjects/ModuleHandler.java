@@ -1,6 +1,7 @@
 package org.shopkeeper.subjects;
 
 import org.shopkeeper.preloader.Preloader;
+import org.shopkeeper.releases.ReleaseModule;
 import org.shopkeeper.subjects.modules.CategoryModule;
 import org.shopkeeper.subjects.modules.CustomerModule;
 import org.shopkeeper.subjects.modules.ItemModule;
@@ -8,15 +9,17 @@ import org.shopkeeper.subjects.modules.SubjectModule;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by johankladder on 12/23/15.
  */
-public class SubjectHandler implements Runnable {
+public class ModuleHandler implements Runnable {
 
     public static ArrayList<SubjectModule> MODULES = new ArrayList<>();
     public static HashMap<String,SubjectModule> MODULESMAP = new HashMap<>();
+
+    // Releases:
+    public static ReleaseModule RELEASE_MODULE = new ReleaseModule();
 
     @Override
     public void run() {
@@ -32,11 +35,11 @@ public class SubjectHandler implements Runnable {
         MODULES.add(customerModule);
 
         // For each module, get all the objects from the database:
-        synchronized (SubjectHandler.class) {
+        synchronized (ModuleHandler.class) {
             for (SubjectModule module : MODULES) {
                 module.refresh();
                 try {
-                    SubjectHandler.class.wait();
+                    ModuleHandler.class.wait();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
