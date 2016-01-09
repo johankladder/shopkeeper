@@ -22,6 +22,7 @@ import org.shopkeeper.gui.GuiChooser;
 import org.shopkeeper.gui.fx.model.selection.ListSelectionModelFX;
 import org.shopkeeper.preferences.Preference;
 import org.shopkeeper.preferences.PreferenceHandler;
+import org.shopkeeper.releases.ReleaseModule;
 import org.shopkeeper.subjects.SubjectHandler;
 
 import java.util.ArrayList;
@@ -79,6 +80,7 @@ public class Preloader extends Application {
         MODULES.add(new PreferenceHandler());
         MODULES.add(new DatabaseHandler(DatabaseChooser.getDatabase(DatabaseTypes.DATABASETYPE_SQLLITE)));
         MODULES.add(new SubjectHandler());
+        MODULES.add(new ReleaseModule());
     }
 
 
@@ -103,7 +105,7 @@ public class Preloader extends Application {
         primaryStage.setScene(new Scene(root, Preference.PRELOADER_WIDTH, Preference.PRELOADER_HEIGTH));
         primaryStage.show();
         primaryStage.setResizable(false);
-        root.setPadding(new Insets(10,0,0,0));
+        root.setPadding(new Insets(10, 0, 0, 0));
 
         // STARTING THE PRELOADER:
         Preloader.startPreloader();
@@ -119,7 +121,7 @@ public class Preloader extends Application {
 
     private static void donePreloader() {
         Platform.runLater(() -> {
-            Button ready_button = new Button(Preference.START_TEXT,new ImageView(new Image(Preference.HEAD_LOGO_PATH)));
+            Button ready_button = new Button(Preference.START_TEXT, new ImageView(new Image(Preference.HEAD_LOGO_PATH)));
             ready_button.setContentDisplay(ContentDisplay.TOP);
             // TODO: place this in a css file.
             ready_button.setStyle(

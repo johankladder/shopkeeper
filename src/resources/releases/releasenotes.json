@@ -1,0 +1,17 @@
+{
+  "releases": [
+    {
+      "prefix": "Initrelease",
+      "notes": [
+        "Testing json"
+      ]
+    },
+    {
+      "prefix": "Second test release",
+      "notes": [
+        "Test multiple values",
+        "Test multiple things"
+      ]
+    }
+  ]
+}
