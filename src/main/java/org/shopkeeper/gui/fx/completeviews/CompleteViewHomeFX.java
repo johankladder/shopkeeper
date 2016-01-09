@@ -3,13 +3,12 @@ package org.shopkeeper.gui.fx.completeviews;
 import javafx.geometry.Insets;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.*;
 import org.shopkeeper.gui.fx.WindowBuilderFX;
 import org.shopkeeper.gui.fx.view.releases.NotesView;
 import org.shopkeeper.gui.fx.view.releases.ReleaseView;
 import org.shopkeeper.gui.fx.view.selection.AbstractSelectionViewFX;
+import org.shopkeeper.preferences.Preference;
 
 import java.util.ArrayList;
 
@@ -33,6 +32,7 @@ public class CompleteViewHomeFX {
         GridPane grid = new GridPane();
         grid.setPadding(new Insets(10, 0, 0, 0)); // TODO CSS
         grid.setHgap(10);
+
         grid.add(release_view,0,0,1,1);
         grid.add(notes_view,1,0,1,1);
         ColumnConstraints col1Constraints = new ColumnConstraints();
@@ -40,6 +40,10 @@ public class CompleteViewHomeFX {
         col1Constraints.setPercentWidth(30);
         col2Constraints.setPercentWidth(70);
         grid.getColumnConstraints().addAll(col1Constraints,col2Constraints);
+        release_view.setMinHeight(1); // reset default min height
+        notes_view.setMinHeight(1); // reset default min height
+        release_view.setMaxHeight(Preference.RELEASE_NOTES_HEIGHT);
+        notes_view.setMaxHeight(Preference.RELEASE_NOTES_HEIGHT);
         panel.setCenter(imageView);
         panel.setBottom(grid);
         return panel;

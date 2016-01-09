@@ -18,6 +18,7 @@ public class Preference {
     public static final Integer PREF_WIDTH_LIST_CONTAINERS = 400;
     public static final Integer PRELOADER_WIDTH = 600;
     public static final Integer PRELOADER_HEIGTH = 300;
+    public static final Integer RELEASE_NOTES_HEIGHT = 200;
     public static final String LOGOPATH = "/images/preloader_image.png";
     public static final String HEAD_LOGO_PATH = "/images/head.png";
     public static final String RELEASE_NUMBER = "TEST";
