@@ -48,7 +48,7 @@ public class ReleaseModule implements Runnable {
                 while (note.hasNext()) {
                     release_notes.add(note.next());
                 }
-
+                release_object.notes = release_notes;
                 RELEASES.add(release_object);
 
             }

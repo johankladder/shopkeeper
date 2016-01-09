@@ -8,5 +8,5 @@ import java.util.ArrayList;
 public class Release {
 
     public String PREFIX = "";
-    public ArrayList<String> notes = null;
+    public ArrayList<String> notes = new ArrayList<>();
 }
