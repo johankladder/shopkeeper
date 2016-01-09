@@ -1,5 +1,7 @@
 package org.shopkeeper.preloader;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -15,6 +17,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.shopkeeper.database.DatabaseHandler;
 import org.shopkeeper.database.modules.DatabaseChooser;
 import org.shopkeeper.database.modules.DatabaseTypes;
@@ -46,6 +49,7 @@ public class Preloader extends Application {
     // GUI:
     private static Stage stage = null;
     private static BorderPane root = null;
+    private static ImageView imageView = null;
 
     private static void startPreloader() throws InterruptedException {
         Thread thread = new Thread(() -> {
@@ -87,7 +91,7 @@ public class Preloader extends Application {
     public void start(Stage primaryStage) throws Exception {
         // Images:
         Image image = new Image(Preference.LOGOPATH);
-        ImageView imageView = new ImageView(image);
+        imageView = new ImageView(image);
         // GUI:
         stage = primaryStage;
         primaryStage.setTitle("Pre-loading all assets");
@@ -120,21 +124,19 @@ public class Preloader extends Application {
 
     private static void donePreloader() {
         Platform.runLater(() -> {
-            Button ready_button = new Button(Preference.START_TEXT, new ImageView(new Image(Preference.HEAD_LOGO_PATH)));
-            ready_button.setContentDisplay(ContentDisplay.TOP);
-            // TODO: place this in a css file.
-            ready_button.setStyle(
-                    "-fx-background-radius: 5em; " +
-                            "-fx-min-width: 250px; " +
-                            "-fx-min-height: 250px; " +
-                            "-fx-max-width: 250px; " +
-                            "-fx-max-height: 250px;"
-            );
-            BorderPane test = new BorderPane();
-            test.setCenter(ready_button);
-            root.setTop(test);
             root.setCenter(null);
-            ready_button.setOnAction(new SelectionHandler(stage));
+            FadeTransition ft = new FadeTransition(Duration.millis(3000), imageView);
+            ft.setFromValue(1.0);
+            ft.setToValue(0.0);
+            ft.setCycleCount(1);
+            ft.setAutoReverse(false);
+            ft.setOnFinished(event -> {
+                Platform.runLater(() -> {
+                    stage.close();
+                    GuiChooser.startGUI();
+                });
+            });
+            ft.play();
         });
     }
 
@@ -142,20 +144,5 @@ public class Preloader extends Application {
         launch(args);
     }
 
-
 }
 
-class SelectionHandler implements EventHandler<ActionEvent> {
-    private Stage stage = null;
-    public SelectionHandler(Stage stage) {
-        this.stage = stage;
-    }
-
-    @Override
-    public void handle(ActionEvent event) {
-        Platform.runLater(() -> {
-            stage.close();
-            GuiChooser.startGUI();
-        });
-    }
-}
