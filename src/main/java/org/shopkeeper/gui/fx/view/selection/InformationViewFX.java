@@ -15,7 +15,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 
-public class InformationViewFX extends BorderPane implements AbstractSelectionViewFX {
+public class InformationViewFX extends BorderPane implements SelectionViewFX {
 
     private static ListSelectionModelFX model = null;
 

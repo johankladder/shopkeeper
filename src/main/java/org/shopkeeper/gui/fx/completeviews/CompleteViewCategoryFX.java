@@ -4,11 +4,10 @@ import javafx.geometry.Insets;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import org.shopkeeper.gui.fx.WindowBuilderFX;
 import org.shopkeeper.gui.fx.view.AbstractViewFX;
 import org.shopkeeper.gui.fx.view.ListViewFX;
-import org.shopkeeper.gui.fx.view.selection.AbstractSelectionViewFX;
+import org.shopkeeper.gui.fx.view.selection.SelectionViewFX;
 import org.shopkeeper.gui.fx.view.selection.InformationViewFX;
 
 import java.util.ArrayList;
@@ -22,7 +21,7 @@ public class CompleteViewCategoryFX {
         BorderPane panel = new BorderPane();
 
         InformationViewFX info_view = new InformationViewFX();
-        ArrayList<AbstractSelectionViewFX> views_list = new ArrayList<>();
+        ArrayList<SelectionViewFX> views_list = new ArrayList<>();
         views_list.add(info_view);
         ListViewFX list = new ListViewFX(WindowBuilderFX.CATEGORY_MODEL, views_list);
 

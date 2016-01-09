@@ -7,7 +7,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.shopkeeper.gui.fx.model.selection.ListSelectionModelFX;
 import org.shopkeeper.gui.fx.model.subjects.AbstractModelFX;
-import org.shopkeeper.gui.fx.view.selection.AbstractSelectionViewFX;
+import org.shopkeeper.gui.fx.view.selection.SelectionViewFX;
 import org.shopkeeper.subjects.subjecttypes.Subject;
 
 
@@ -20,7 +20,7 @@ public class ListViewFX extends TableView implements AbstractViewFX {
     private AbstractModelFX MODEL = null;
     private static ListSelectionModelFX SELECTION_MODEL = new ListSelectionModelFX();
 
-    public ListViewFX(AbstractModelFX model, ArrayList<AbstractSelectionViewFX> views) {
+    public ListViewFX(AbstractModelFX model, ArrayList<SelectionViewFX> views) {
         MODEL = model;
         SELECTION_MODEL.setViewPackage(views);
         getSelectionModel().selectedItemProperty().addListener(SELECTION_MODEL);

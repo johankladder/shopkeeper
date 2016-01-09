@@ -7,8 +7,7 @@ import javafx.scene.control.ListView;
 import javafx.util.Callback;
 import org.shopkeeper.gui.fx.model.ReleaseModel;
 import org.shopkeeper.gui.fx.model.selection.ListSelectionModelFX;
-import org.shopkeeper.gui.fx.view.selection.AbstractSelectionViewFX;
-import org.shopkeeper.gui.swing.view.selection.AbstractSelectionView;
+import org.shopkeeper.gui.fx.view.selection.SelectionViewFX;
 import org.shopkeeper.releases.Release;
 
 import java.util.ArrayList;
@@ -21,7 +20,7 @@ public class ReleaseView extends ListView {
     public ReleaseModel model = null;
     private static ListSelectionModelFX SELECTION_MODEL = new ListSelectionModelFX();
 
-    public ReleaseView(ReleaseModel model, ArrayList<AbstractSelectionViewFX> views) {
+    public ReleaseView(ReleaseModel model, ArrayList<SelectionViewFX> views) {
         this.model = model;
         SELECTION_MODEL.setViewPackage(views);
         getSelectionModel().selectedItemProperty().addListener(SELECTION_MODEL);

@@ -1,12 +1,11 @@
 package org.shopkeeper.gui.fx.completeviews;
 
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.layout.*;
 import org.shopkeeper.gui.fx.WindowBuilderFX;
 import org.shopkeeper.gui.fx.view.AbstractViewFX;
 import org.shopkeeper.gui.fx.view.ListViewFX;
-import org.shopkeeper.gui.fx.view.selection.AbstractSelectionViewFX;
+import org.shopkeeper.gui.fx.view.selection.SelectionViewFX;
 import org.shopkeeper.gui.fx.view.selection.InformationViewFX;
 
 import java.util.ArrayList;
@@ -20,7 +19,7 @@ public class CompleteViewItemFX {
         BorderPane panel = new BorderPane();
 
         InformationViewFX info_view = new InformationViewFX();
-        ArrayList<AbstractSelectionViewFX> views_list = new ArrayList<>();
+        ArrayList<SelectionViewFX> views_list = new ArrayList<>();
         views_list.add(info_view);
         ListViewFX list = new ListViewFX(WindowBuilderFX.ITEMMODEL, views_list);
 

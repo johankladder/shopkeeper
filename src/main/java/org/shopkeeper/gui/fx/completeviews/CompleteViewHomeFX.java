@@ -5,9 +5,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import org.shopkeeper.gui.fx.WindowBuilderFX;
-import org.shopkeeper.gui.fx.view.releases.NotesView;
+import org.shopkeeper.gui.fx.view.selection.NotesView;
 import org.shopkeeper.gui.fx.view.releases.ReleaseView;
-import org.shopkeeper.gui.fx.view.selection.AbstractSelectionViewFX;
+import org.shopkeeper.gui.fx.view.selection.SelectionViewFX;
 import org.shopkeeper.preferences.Preference;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ public class CompleteViewHomeFX {
         BorderPane panel = new BorderPane();
         Image image = new Image("/images/preloader_image.png");
 
-        ArrayList<AbstractSelectionViewFX> release_views = new ArrayList<>();
+        ArrayList<SelectionViewFX> release_views = new ArrayList<>();
         NotesView notes_view = new NotesView();
         release_views.add(notes_view);
         ReleaseView release_view = new ReleaseView(WindowBuilderFX.RELEASE_MODEL, release_views);
