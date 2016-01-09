@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 /**
  * Created by typhooncoaster on 14-12-15.
  */
+// TODO
 public class SQLLiteQueryCreator {
     private final static Logger LOGGER = Logger.getLogger(SQLLiteQueryCreator.class.getName());
 
@@ -136,6 +137,16 @@ public class SQLLiteQueryCreator {
         return null;
     }
 
+    /**
+     * Method for creating an update-query for a subject. The method checks if the subject is null and will only create
+     * a valid query when the fields are valid. It will also check, per value, what kind of value it is; i.e String, date.
+     * <p>
+     * The query that will be created is only valid for an SQLite database and will maybe work on other db-types (MySQL, JDBC)
+     *
+     * @param subject The subject from where a standard update query will be adapted for.
+     * @return A String object that represents the query.
+     * @see Subject#getFields()
+     */
     public static String createUpdateQuery(Subject subject) {
         if(subject != null) {
             ArrayList<String> done_values = new ArrayList<>();
@@ -187,13 +198,7 @@ public class SQLLiteQueryCreator {
         return null;
     }
 
-    /**
-     * Provides syntax for certain fields in the database-type. When a unknown parameter was send, this method will return
-     * null. This method is private because it's not interesting for the outside world.
-     *
-     * @param type Type of field
-     * @return Syntax for provided field
-     */
+
     private static String getDatatypeSqlLite(String type) {
         if (type != null) {
             if (type.equals("string")) {
@@ -210,16 +215,6 @@ public class SQLLiteQueryCreator {
         return null;
     }
 
-    /**
-     * Parses 'normal' String values into values in SQLite-style. For example; Varchars can not be inserted without quotes
-     * around the string. This method will handles those exceptions for you.
-     *
-     * @param pair    The key-value pair. Given from the fields-map from the subject.
-     * @param initMap The initialisation-map from the subject
-     * @return Value corrected by SQLite norms.
-     * @see SQLLiteQueryCreator#createInsertQuery(Subject)
-     * @see Subject
-     */
     private static Object parseValue(Map.Entry pair, Map initMap) {
         String datatype = (String) initMap.get(pair.getKey());
         if (datatype != null) {

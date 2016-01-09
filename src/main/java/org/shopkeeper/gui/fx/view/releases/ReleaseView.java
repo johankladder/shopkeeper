@@ -50,7 +50,7 @@ public class ReleaseView extends ListView {
                     protected void updateItem(Release r, boolean bln) {
                         super.updateItem(r, bln);
                         if (r != null) {
-                            setText("Release prefix: " + r.PREFIX);
+                            setText("Version: " + r.PREFIX);
                         }
                     }
 

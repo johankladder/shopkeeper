@@ -21,7 +21,7 @@ public class Preference {
     public static final Integer RELEASE_NOTES_HEIGHT = 200;
     public static final String LOGOPATH = "/images/preloader_image.png";
     public static final String HEAD_LOGO_PATH = "/images/head.png";
-    public static final String RELEASE_NUMBER = "TEST";
+    public static final String RELEASE_NUMBER = "0.01";
     public static final String RELEASE_NOTES = "Version: " + RELEASE_NUMBER + " by Johan Kladder";
     public static final String START_TEXT = "Press me to enter Shopkeeper";
 

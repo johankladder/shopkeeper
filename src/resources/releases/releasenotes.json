@@ -1,9 +1,11 @@
 {
   "releases": [
     {
-      "prefix": "Initrelease",
+      "prefix": "v0.01",
       "notes": [
-        "Testing json"
+        "ADD: Support for release notes",
+        "ADD: GUI improvement",
+        "ADD: Pre-loader animation"
       ]
     },
     {
