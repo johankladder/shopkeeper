@@ -18,6 +18,10 @@ public class ListSelectionModelFX implements ChangeListener<Object>{
     private static Object SELECTED_SUBJECT = null;
     private static ArrayList<SelectionViewFX> VIEWS = new ArrayList<>();
 
+    /**
+     * Sets the views for this model. These views will be updated when an event has been fired from the head node.
+     * @param views The viewpackage whom include the views liked to be updated when event has been triggerd.
+     */
     public void setViewPackage(ArrayList<SelectionViewFX> views) {
         if(views != null) {
             VIEWS = views;
@@ -25,10 +29,15 @@ public class ListSelectionModelFX implements ChangeListener<Object>{
                 view.setModel(this);
             }
         }
-
     }
 
-    public void setSelectedSubject(Object subject) {
+    @Override
+    public void changed(ObservableValue<? extends Object> observable, Object oldValue, Object selectedSubject) {
+        setSelectedSubject(selectedSubject);
+    }
+
+
+    private void setSelectedSubject(Object subject) {
         if(subject != null) {
             SELECTED_SUBJECT = subject;
             updateViews();
@@ -43,11 +52,6 @@ public class ListSelectionModelFX implements ChangeListener<Object>{
         for(SelectionViewFX view : VIEWS) {
             view.updateView();
         }
-    }
-
-    @Override
-    public void changed(ObservableValue<? extends Object> observable, Object oldValue, Object selectedSubject) {
-        setSelectedSubject(selectedSubject);
     }
 
 }
