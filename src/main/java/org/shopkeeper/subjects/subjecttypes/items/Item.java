@@ -40,7 +40,6 @@ public class Item extends Subject {
     @Override
     public Map getFields() {
         Map fields = new LinkedHashMap<>();
-
         fields.put("id", getIdentificationNumber());
         fields.put("name", getName());
         fields.put("price", price);

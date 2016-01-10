@@ -5,7 +5,6 @@ import org.shopkeeper.subjects.subjecttypes.Subject;
 import org.shopkeeper.subjects.subjecttypes.SubjectFields;
 import org.shopkeeper.subjects.SubjectManipulator;
 import org.shopkeeper.subjects.subjecttypes.SubjectTypes;
-
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -174,6 +173,5 @@ public class SubjectMapGenerator {
             return new LinkedHashMap<>();
         }
     }
-
 
 }

@@ -71,6 +71,7 @@ public class InformationViewFX extends BorderPane implements SelectionViewFX {
             total_view_box.add(text_field, 1, counter_y[0]);
             counter_y[0] = counter_y[0] + 1;
         });
+        model.sendMap(map_prepared_for_sending);
 
         total_view_box.add(new UpdateSubjectController(model), 0, counter_y[0], 2, 1);
 
