@@ -257,8 +257,7 @@ public class SubjectMapGenerator {
     }
 
     private static Subject setNameSubjectFromMap(Subject subject, Map map) {
-        if (map.containsKey(SubjectFields.IDNUMBER) && map.containsKey(SubjectFields.NAME))
-        {
+        if (map.containsKey(SubjectFields.IDNUMBER) && map.containsKey(SubjectFields.NAME)) {
             subject.setName(StringUtils.trimToNull((String) map.get(SubjectFields.NAME)));
         }
         return subject;

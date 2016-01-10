@@ -20,7 +20,7 @@ public class SubjectsUtil {
     public static Subject createSubjectFromUpdateSubjectMap(Subject subject, Map map) {
         Map subjectMap = subject.getFields();
         map.forEach((k,v)-> {
-            if(StringUtils.contains((String)k, "id")) {
+            if(!StringUtils.contains((String)k, "id")) {
                 if (v instanceof String) {
                     subjectMap.put(k, v);
                 }
@@ -30,7 +30,7 @@ public class SubjectsUtil {
                 }
             }
         });
-        return SubjectMapGenerator.updateSubjectWithMap(subject, map);
+        return SubjectMapGenerator.updateSubjectWithMap(subject, subjectMap);
     }
 
 
