@@ -23,6 +23,10 @@ public class Item extends Subject {
         this.price = price;
     }
 
+    // This method is called from the table:
+    public String getPrice() {
+        return PriceGenerator.priceToString(price);
+    }
 
     public Double getDoublePrice() {
         return price;
