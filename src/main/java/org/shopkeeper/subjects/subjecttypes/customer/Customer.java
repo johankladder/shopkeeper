@@ -2,14 +2,18 @@ package org.shopkeeper.subjects.subjecttypes.customer;
 
 import org.joda.time.DateTime;
 import org.shopkeeper.subjects.subjecttypes.Subject;
+import org.shopkeeper.util.DateTimeGenerator;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
  * Created by typhooncoaster on 4-12-15.
  */
 public class Customer extends Subject {
+
+    public static final String TABLENAME = "customers";
 
     private String placeOfLiving;
     private String address;
@@ -26,6 +30,15 @@ public class Customer extends Subject {
         this.zipcode = zipcode;
         this.phone = phone;
         this.email = email;
+        super.INIT_FIELD =getInitFields();
+    }
+
+    public Long getId() {
+        return getIdentificationNumber();
+    }
+
+    public String getDateadded() {
+        return DateTimeGenerator.dateTimeToString(getDateAdded());
     }
 
     public String getPlaceOfLiving() {
@@ -70,26 +83,30 @@ public class Customer extends Subject {
 
     @Override
     public  Map getFields() {
-        Map fields = new HashMap();
-        fields.put("tablename", "customers");
+        Map fields = new LinkedHashMap();
+        fields.put("id", getIdentificationNumber());
+        fields.put("name", getName());
+        fields.put("place", getPlaceOfLiving());
+        fields.put("address", getAddress());
+        fields.put("zipcode", getZipcode());
+        fields.put("phone", getPhone());
+        fields.put("email", getEmail());
+        fields.put("dateadded", getDateAdded());
+        fields.put("tablename", TABLENAME);
+        return fields;
+    }
+
+    public static Map getInitFields() {
+        Map fields = new LinkedHashMap();
         fields.put("id", "integer");
         fields.put("name", "string");
-        fields.put("dateadded", "date");
         fields.put("place", "string");
         fields.put("address", "string");
         fields.put("zipcode", "string");
         fields.put("phone", "string");
         fields.put("email", "string");
-        return fields;
-    }
-
-    public static Map getInitFields() {
-        Map fields = new HashMap();
-        fields.put("tablename", "customers");
-        fields.put("price", "double");
-        fields.put("id", "integer");
-        fields.put("name", "string");
         fields.put("dateadded", "date");
+        fields.put("tablename", TABLENAME);
         return fields;
     }
 }

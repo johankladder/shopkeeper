@@ -4,7 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public class PriceGenerator {
 
-    public static final String CURRENCY_EURO = ""; // TODO Return the currency symbol.
+    public static final String CURRENCY_EURO = ""; // TODO Get currency symbol from preferences.
 
     /**
      * This method tries to parse a given string to a double number. It will check on comma and points and will return

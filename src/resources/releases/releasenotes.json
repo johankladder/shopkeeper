@@ -1,0 +1,19 @@
+{
+  "releases": [
+    {
+      "prefix": "v0.01",
+      "notes": [
+        "ADD: Support for release notes",
+        "ADD: GUI improvement",
+        "ADD: Pre-loader animation"
+      ]
+    },
+    {
+      "prefix": "Second test release",
+      "notes": [
+        "Test multiple values",
+        "Test multiple things"
+      ]
+    }
+  ]
+}

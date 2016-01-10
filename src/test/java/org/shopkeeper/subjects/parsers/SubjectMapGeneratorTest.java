@@ -1,5 +1,7 @@
 package org.shopkeeper.subjects.parsers;
 
+import org.apache.commons.lang3.StringUtils;
+import org.joda.time.DateTime;
 import org.junit.Test;
 import org.shopkeeper.subjects.subjecttypes.Subject;
 import org.shopkeeper.subjects.subjecttypes.SubjectFields;
@@ -8,8 +10,11 @@ import org.shopkeeper.subjects.subjecttypes.SubjectTypes;
 import org.shopkeeper.subjects.subjecttypes.categories.Category;
 import org.shopkeeper.subjects.subjecttypes.customer.Customer;
 import org.shopkeeper.subjects.subjecttypes.items.Item;
+import org.shopkeeper.util.DateTimeGenerator;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -150,5 +155,80 @@ public class SubjectMapGeneratorTest {
         assertEquals("11 as", item.getZipcode());
     }
 
+    @Test
+    public void testUserMap() {
+        Item item = new Item(new Long(1), "name", 12.31, DateTimeGenerator.generateDateTimeNow());
+        Customer cus = new Customer(new Long(1), "name", DateTimeGenerator.generateDateTimeNow(), "","" ,"","","");
+        Category cat = new Category(new Long(1), "name", DateTimeGenerator.generateDateTimeNow());
 
+        ArrayList<Subject> s = new ArrayList<>();
+        s.add(item);
+        s.add(cus);
+        s.add(cat);
+
+        for(Subject su : s) {
+            testGeneratedUserMap(su);
+        }
+
+
+    }
+
+    private void testGeneratedUserMap(Subject subject) {
+        final boolean[] hit = {false};
+        Map userViewMap = SubjectMapGenerator.createUserViewMap(subject.getFields());
+
+        userViewMap.forEach((k,v) -> {
+            if(StringUtils.contains((String) k, "tablename")) {
+                hit[0] = true;
+            }
+        });
+
+        assertFalse(hit[0]);
+    }
+
+
+    @Test
+    public void testUpdateSubjectWithMap() throws Exception {
+        Map map = new HashMap<>();
+        DateTime time = DateTimeGenerator.generateDateTimeNow();
+        Item item = new Item(new Long(1), "name", 12.31, time);
+        map.put(SubjectFields.IDNUMBER, "1");
+        map.put(SubjectFields.NAME, "test");
+        map.put(SubjectFields.ITEM_PRICE, "12.50");
+        map.put("dateadded", time);
+
+        Subject subject = SubjectMapGenerator.updateSubjectWithMap(item, map);
+        item = (Item) subject;
+
+        long id = item.getId();
+        double price = item.getPrice();
+        assertEquals(1,id);
+        assertEquals("test", item.getName());
+        assertEquals(12.50,price, 0.0001);
+
+
+        Category cat = new Category(new Long(1),"test", time);
+        map = new HashMap<>();
+        map.put(SubjectFields.IDNUMBER, "1");
+        map.put(SubjectFields.NAME, "testname");
+        map.put("dateadded", time);
+        cat = (Category) SubjectMapGenerator.updateSubjectWithMap(cat, map);
+
+        assertEquals("testname", cat.getName());
+
+
+        Customer customer = new Customer(new Long(1),"test", time, "place", "address", "zipcode", "phone", "email");
+        map = new HashMap<>();
+        map.put(SubjectFields.IDNUMBER, "1");
+        map.put(SubjectFields.NAME, "testname");
+        map.put("dateadded", time);
+        map.put(SubjectFields.CUSTOMER_ZIPCODE, "testzipcode");
+        map.put(SubjectFields.CUSTOMER_EMAIL, "testemail");
+        customer = (Customer) SubjectMapGenerator.updateSubjectWithMap(customer, map);
+
+        assertEquals("place", customer.getPlaceOfLiving());
+        assertEquals("testemail", customer.getEmail());
+        assertEquals("testzipcode", customer.getZipcode());
+        assertEquals("testname", customer.getName());
+    }
 }

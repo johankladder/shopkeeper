@@ -11,7 +11,7 @@ import org.shopkeeper.subjects.subjecttypes.Subject;
 public abstract class DatabaseModule implements Runnable {
 
     public Integer TYPE;    // The type of the module
-    protected static final String DBNAME = "shopkeeper";    // The database-name
+    protected static final String DB_NAME = "shopkeeper";    // The database-name
     protected static boolean CONNECTED = false; // Connected state of the database
 
     public DatabaseModule() {

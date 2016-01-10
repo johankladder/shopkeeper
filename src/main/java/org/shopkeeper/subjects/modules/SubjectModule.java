@@ -12,14 +12,13 @@ import java.util.ArrayList;
  */
 public abstract class SubjectModule {
 
-    private static ArrayList<Subject> SUBJECTS = new ArrayList<Subject>();
+    private ArrayList<Subject> SUBJECTS = new ArrayList<Subject>();
     private static boolean started = false;
-    protected static DatabaseModule DB = null;
+    public static DatabaseModule DB = null;
     private Integer SUBJECTTYPE = null;
 
     public SubjectModule(Integer subjecttype) {
         SUBJECTTYPE = subjecttype;
-        DB = DatabaseChooser.getDatabase(DatabaseTypes.DATABASETYPE_SQLLITE); // TODO From preferences.
     }
 
     public abstract void add(Subject subject);
@@ -37,11 +36,15 @@ public abstract class SubjectModule {
         return SUBJECTS.size();
     }
 
-    public static void addToList(Subject subject) {
+    public ArrayList<Subject> getModuleSubjects() {
+        return SUBJECTS;
+    }
+
+    public void addToList(Subject subject) {
         SUBJECTS.add(subject);
     }
 
-    public static void removeFromList(Subject subject) {
+    public void removeFromList(Subject subject) {
         SUBJECTS.remove(subject);
     }
 

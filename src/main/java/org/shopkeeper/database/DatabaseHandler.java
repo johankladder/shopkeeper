@@ -1,6 +1,9 @@
 package org.shopkeeper.database;
 
+import org.shopkeeper.database.modules.DatabaseChooser;
 import org.shopkeeper.database.modules.DatabaseModule;
+import org.shopkeeper.preferences.PreferenceModule;
+import org.shopkeeper.subjects.modules.SubjectModule;
 
 /**
  * Created by root on 16-12-15.
@@ -25,6 +28,8 @@ public class DatabaseHandler implements Runnable {
         running = true;
         while(running) {
             if(!STARTED) {
+                module = DatabaseChooser.getDatabase(PreferenceModule.DATABASE_TYPE);
+                SubjectModule.DB = module;
                 DBTHREAD = new Thread(module, "DATABASETHREAD FOR " + module.getClass().getName());
                 DBTHREAD.start();
                 STARTED = true;

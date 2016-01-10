@@ -7,8 +7,8 @@ public class SubjectFields {
 
     // Make sure all the fields are stored here when adding a new subject:
     // GENERAL
-    public static final String IDNUMBER = "id_number_general";
-    public static final String NAME = "name_general";
+    public static final String IDNUMBER = "id";
+    public static final String NAME = "name";
 
     // ITEM:
     public static final String ITEM_PRICE = "item_price";
