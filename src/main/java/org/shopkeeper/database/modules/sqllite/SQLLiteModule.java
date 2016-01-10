@@ -5,8 +5,6 @@ import org.shopkeeper.database.modules.DatabaseModule;
 import org.shopkeeper.database.modules.DatabaseTypes;
 import org.shopkeeper.database.parsers.ResultParser;
 import org.shopkeeper.database.parsers.SQLLiteQueryCreator;
-import org.shopkeeper.preloader.Preloader;
-import org.shopkeeper.subjects.ModuleHandler;
 import org.shopkeeper.subjects.parsers.SubjectResultSetParser;
 import org.shopkeeper.subjects.subjecttypes.Subject;
 import org.shopkeeper.subjects.subjecttypes.SubjectTypes;
@@ -61,7 +59,7 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
 
     // TODO PREPARED STATMENT
     public void processQueryNoResult(String query) {
-        if(query != null) {
+        if (query != null) {
             synchronized (queue) {
                 queue.addLast(query);
                 queue.notify();
@@ -70,7 +68,7 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
     }
 
     public ResultSet processQueryResult(String query, Integer subjectType) {
-        if(query != null) {
+        if (query != null) {
             synchronized (queue) {
                 REQUESTEDTYPE = subjectType;
                 queue.addLast(query);
@@ -121,22 +119,16 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
                     }
 
                     try {
-                        if(!ResultParser.queryWithResult(query)) {
+                        if (!ResultParser.queryWithResult(query)) {
                             Statement stmt = CONNECTION.createStatement();
                             stmt.execute(query);
                         } else {
 
                             Statement stmt = CONNECTION.createStatement();
                             RESULTSET = stmt.executeQuery(query);
-
-                            // TODO Results needs to be passed someway through the right module
-                            // TIP: Build a class that always with a lock object that always can be requested,
-                            // this class needs to have a lock-time limit, so a lock will always be released.
-                            synchronized (ModuleHandler.class) {
-                                SubjectResultSetParser.parseResultSetToModule(RESULTSET, REQUESTEDTYPE);
-                                REQUESTEDTYPE = null;
-                                ModuleHandler.class.notify();
-                            }
+                            SubjectResultSetParser.parseResultSetToModule(RESULTSET, REQUESTEDTYPE);
+                            REQUESTEDTYPE = null; // Reset the REQUESTEDTYPE, so i can be used next time.
+                            AntiLockSystem.notifyLockDatabase();
 
                         }
                         // Release a given lock here!
@@ -145,6 +137,7 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
                     } finally {
                         // release a given lock!
                     }
+                    // Release lock anyway here...
                 }
 
             } catch (Exception e) {

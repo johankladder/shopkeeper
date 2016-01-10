@@ -1,6 +1,5 @@
 package org.shopkeeper.subjects;
 
-import org.shopkeeper.preloader.Preloader;
 import org.shopkeeper.releases.ReleaseModule;
 import org.shopkeeper.subjects.modules.CategoryModule;
 import org.shopkeeper.subjects.modules.CustomerModule;
@@ -36,16 +35,15 @@ public class ModuleHandler implements Runnable {
         MODULES.add(customerModule);
 
         // For each module, get all the objects from the database:
-        synchronized (ModuleHandler.class) {
             for (SubjectModule module : MODULES) {
                 module.refresh();
                 try {
-                    ModuleHandler.class.wait();
+                    AntiLockSystem.lockAndWaitDatabase();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+
             }
-        }
         AntiLockSystem.notifyLock();
     }
 
