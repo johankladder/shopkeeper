@@ -11,7 +11,7 @@ public class SubjectFields {
     public static final String NAME = "name";
 
     // ITEM:
-    public static final String ITEM_PRICE = "item_price";
+    public static final String ITEM_PRICE = "price";
 
     // CUSTOMER:
     public static final String CUSTOMER_PLACE = "customer_place";

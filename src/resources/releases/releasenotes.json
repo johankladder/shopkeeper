@@ -16,6 +16,13 @@
         "BUG: Tablecolumns can get really small",
         "BUG: Price is not updating"
       ]
+    },
+    {
+      "prefix": "v0.03",
+      "notes": [
+        "ADD: User can add a subject",
+        "FIX: Price not updating"
+      ]
     }
   ]
 }

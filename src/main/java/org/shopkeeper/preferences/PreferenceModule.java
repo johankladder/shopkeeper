@@ -35,7 +35,7 @@ public class PreferenceModule {
     public static final String LOGOPATH = "/images/preloader_image.png";
     public static final String HEAD_LOGO_PATH = "/images/head.png";
     public static final String RELEASE_NOTES_PATH = "/releases/releasenotes.json";
-    public static final String RELEASE_NUMBER = "0.01";
+    public static final String RELEASE_NUMBER = "0.02";
     public static final String RELEASE_NOTES = "Version: " + RELEASE_NUMBER + " by Johan Kladder";
 
     // IDS:

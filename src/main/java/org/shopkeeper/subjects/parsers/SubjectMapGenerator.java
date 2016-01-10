@@ -211,8 +211,6 @@ public class SubjectMapGenerator {
         Item item = (Item) subject;
         item = (Item) setNameSubjectFromMap(item, map);
         if (map.containsKey(SubjectFields.ITEM_PRICE)) {
-            item.setName(StringUtils.trimToNull((String) map.get(SubjectFields.NAME)));
-
             try {
                 Double price = PriceGenerator.getPriceFromString((String) map.get(SubjectFields.ITEM_PRICE));
                 if(price != null) {
