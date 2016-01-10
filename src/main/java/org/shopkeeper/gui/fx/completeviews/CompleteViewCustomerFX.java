@@ -1,9 +1,8 @@
 package org.shopkeeper.gui.fx.completeviews;
 
 import javafx.geometry.Insets;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
 import org.shopkeeper.gui.fx.WindowBuilderFX;
 import org.shopkeeper.gui.fx.view.AbstractViewFX;
 import org.shopkeeper.gui.fx.view.ListViewFX;
@@ -33,14 +32,31 @@ public class CompleteViewCustomerFX {
         GridPane grid = new GridPane();
         grid.setPadding(new Insets(10, 0, 0, 0)); // TODO CSS
         grid.setHgap(10);
-        grid.add(list,0,0,1,1);
+        grid.add(list,0,0,1,4);
         grid.add(info_view,1,0,1,1);
-        ColumnConstraints col1Constraints = new ColumnConstraints();
-        ColumnConstraints col2Constraints = new ColumnConstraints();
-        col1Constraints.setPercentWidth(75);
-        col2Constraints.setPercentWidth(25);
-        grid.getColumnConstraints().addAll(col1Constraints,col2Constraints);
+
+        javafx.scene.image.Image image = new javafx.scene.image.Image("/images/head.png");
+        ImageView imageView = new ImageView(image);
+        BorderPane imagepane = new BorderPane();
+        imagepane.setCenter(imageView);
+        grid.add(imagepane,1,1,1,1);
+        GridPane.setVgrow(list, Priority.ALWAYS);
+        ColumnConstraints col1 = new ColumnConstraints();
+        ColumnConstraints col2 = new ColumnConstraints();
+        col1.setPercentWidth(75);
+        col2.setPercentWidth(25);
+        grid.getColumnConstraints().addAll(col1,col2);
         panel.setCenter(grid);
+
+        RowConstraints row1 = new RowConstraints();
+        RowConstraints row2 = new RowConstraints();
+        RowConstraints row3 = new RowConstraints();
+        RowConstraints row4 = new RowConstraints();
+        row1.setPercentHeight(25);
+        row2.setPercentHeight(25);
+        row3.setPercentHeight(25);
+        row4.setPercentHeight(25);
+        grid.getRowConstraints().addAll(row1,row2,row3,row4);
 
         return panel;
 

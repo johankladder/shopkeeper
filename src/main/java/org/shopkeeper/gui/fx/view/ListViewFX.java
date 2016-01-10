@@ -42,6 +42,7 @@ public class ListViewFX extends TableView implements AbstractViewFX {
                 getColumns().add(col);
             });
         }
+        setMaxHeight(Double.MAX_VALUE);
     }
 
     @Override

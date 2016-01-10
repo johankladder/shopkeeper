@@ -17,20 +17,20 @@ public class CompleteViewModuleFX {
     public static void getCompleteview(Integer subjectType) {
         if(subjectType != null) {
             if (subjectType == SubjectTypes.ITEM) {
+                removeLogo();
                 BorderPane newView = CompleteViewItemFX.getView();
-                MAIN.setTop(newView);
+                MAIN.setCenter(newView);
                 LAST_ADDED = newView;
-                removeLogo();
             } else if (subjectType == SubjectTypes.CATEGORY) {
+                removeLogo();
                 BorderPane newView = CompleteViewCategoryFX.getView();
-                MAIN.setTop(newView);
+                MAIN.setCenter(newView);
                 LAST_ADDED = newView;
-                removeLogo();
             } else if (subjectType == SubjectTypes.CUSTOMER) {
-                BorderPane newView = CompleteViewCustomerFX.getView();
-                MAIN.setTop(newView);
-                LAST_ADDED = newView;
                 removeLogo();
+                BorderPane newView = CompleteViewCustomerFX.getView();
+                MAIN.setCenter(newView);
+                LAST_ADDED = newView;
             } else {
 
             }

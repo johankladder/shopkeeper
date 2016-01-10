@@ -27,11 +27,6 @@ public class InformationViewFX extends BorderPane implements SelectionViewFX {
 
 
     private void initComponents() {
-        // Set logo application in this area before user clicks on a value in the list:
-        Image image = new Image("/images/head.png");
-        ImageView imageView = new ImageView(image);
-        setCenter(imageView);
-        Tooltip.install(imageView, new Tooltip("Click on a subject in the list to view information here"));
     }
 
 

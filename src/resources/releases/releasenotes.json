@@ -22,7 +22,8 @@
       "notes": [
         "ADD: User can add a subject",
         "FIX: Price not updating",
-        "FIX: Antilock system was not work fast, instead use wait/invoke -> still needs to have a timeout"
+        "FIX: Antilock system was not work fast, instead use wait/invoke -> still needs to have a timeout",
+        "FIX: Priceview in infoview is now correct rounded and with comma"
       ]
     }
   ]
