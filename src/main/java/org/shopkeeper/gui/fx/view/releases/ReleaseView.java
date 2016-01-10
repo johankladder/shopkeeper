@@ -7,6 +7,7 @@ import javafx.scene.control.ListView;
 import javafx.util.Callback;
 import org.shopkeeper.gui.fx.model.ReleaseModel;
 import org.shopkeeper.gui.fx.model.selection.ListSelectionModelFX;
+import org.shopkeeper.gui.fx.view.cellrenderers.ReleaseCellRenderer;
 import org.shopkeeper.gui.fx.view.selection.SelectionViewFX;
 import org.shopkeeper.releases.Release;
 
@@ -27,9 +28,6 @@ public class ReleaseView extends ListView {
 
     }
 
-    private void init() {
-
-    }
 
     public void update() {
         ArrayList<Release> data = new ArrayList<>();
@@ -39,25 +37,9 @@ public class ReleaseView extends ListView {
         ObservableList list = FXCollections.observableList(data);
         setItems(list);
 
-        setCellFactory(new Callback<ListView<Release>, ListCell<Release>>() {
-
-            @Override
-            public ListCell<Release> call(ListView<Release> p) {
-
-                ListCell<Release> cell = new ListCell<Release>() {
-
-                    @Override
-                    protected void updateItem(Release r, boolean bln) {
-                        super.updateItem(r, bln);
-                        if (r != null) {
-                            setText("Version: " + r.PREFIX);
-                        }
-                    }
-
-                };
-
-                return cell;
-            }
+        setCellFactory(p -> {
+            ListCell<Release> cell = new ReleaseCellRenderer();
+            return cell;
         });
     }
 
