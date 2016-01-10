@@ -8,9 +8,10 @@ import org.apache.commons.lang3.StringUtils;
 public class Beatifier {
 
     public static String beatifyString(String input) {
-        if(input != null) {
+        if(input != null && !StringUtils.equals(input, "")) {
             String output = StringUtils.trim(input);
-            output = StringUtils.capitalize(input);
+            output = StringUtils.lowerCase(output);
+            output = StringUtils.capitalize(output);
             return output;
         }
         return null;
