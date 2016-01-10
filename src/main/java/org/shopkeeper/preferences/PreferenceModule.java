@@ -31,6 +31,7 @@ public class PreferenceModule {
     public static final Integer PRELOADER_WIDTH = 600;
     public static final Integer PRELOADER_HEIGTH = 300;
     public static final Integer RELEASE_NOTES_HEIGHT = 200;
+    public static final Integer MIN_WIDTH_TABLE_COLUMN = 50;
     public static final String LOGOPATH = "/images/preloader_image.png";
     public static final String HEAD_LOGO_PATH = "/images/head.png";
     public static final String RELEASE_NOTES_PATH = "/releases/releasenotes.json";

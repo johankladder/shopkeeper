@@ -9,10 +9,12 @@
       ]
     },
     {
-      "prefix": "Second test release",
+      "prefix": "v0.02",
       "notes": [
-        "Test multiple values",
-        "Test multiple things"
+        "ADD: Updating subject via info-view",
+        "ADD: Antilock system (60 sec timeout)",
+        "BUG: Tablecolumns can get really small",
+        "BUG: Price is not updating"
       ]
     }
   ]

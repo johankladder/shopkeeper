@@ -8,7 +8,8 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class NotesCellRenderer extends ListCell<String> {
 
-    static final String ADD_STYLE = "{-fx-background-color: green;}";
+    static final String ADD_STYLE = "-fx-text-fill: rgb(49, 89, 23);";
+    static final String BUG_STYLE = "-fx-text-fill: rgb(145, 0, 0);";
 
 
     @Override
@@ -18,7 +19,10 @@ public class NotesCellRenderer extends ListCell<String> {
         if (s != null) {
             setText(s);
             if(StringUtils.contains(s, "ADD:")) {
-                //setStyle(ADD_STYLE); // TODO Selection in the list
+                setStyle(ADD_STYLE);
+            }
+            if(StringUtils.contains(s, "BUG:")) {
+                setStyle(BUG_STYLE);
             }
         } else {
             setText(""); // FIXME: Fix for not removing old values, this is not the right way.

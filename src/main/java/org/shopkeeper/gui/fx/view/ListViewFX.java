@@ -8,6 +8,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import org.shopkeeper.gui.fx.model.selection.ListSelectionModelFX;
 import org.shopkeeper.gui.fx.model.subjects.AbstractModelFX;
 import org.shopkeeper.gui.fx.view.selection.SelectionViewFX;
+import org.shopkeeper.preferences.Preference;
+import org.shopkeeper.preferences.PreferenceModule;
 import org.shopkeeper.subjects.parsers.SubjectMapGenerator;
 import org.shopkeeper.subjects.subjecttypes.Subject;
 import org.shopkeeper.util.Beatifier;
@@ -30,16 +32,17 @@ public class ListViewFX extends TableView implements AbstractViewFX {
     }
 
     private void init() {
+        setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         if (MODEL.getSubjects().size() > 0) {
             Subject temp = MODEL.getSubjects().get(0);
             Map map = SubjectMapGenerator.createUserViewMap(temp.getFields());
             map.forEach((k, v) -> {
                 TableColumn col = new TableColumn(Beatifier.beatifyString((String) k));
+                col.setMinWidth(PreferenceModule.MIN_WIDTH_TABLE_COLUMN);
                 col.setCellValueFactory(new PropertyValueFactory<Subject, String>((String) k));
                 getColumns().add(col);
             });
         }
-
     }
 
     @Override
