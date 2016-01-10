@@ -7,10 +7,11 @@ public class AntiLockSystem {
 
     private static Boolean LOCKHEAD = false;
     private static Boolean LOCKDATABASE = false;
+    private static final Integer LOCK_TIMEOUT = 60; // 60 seconds
 
     public static void lockAndWait() throws InterruptedException {
         synchronized (AntiLockSystem.LOCKHEAD) {
-                LOCKHEAD.wait();
+                LOCKHEAD.wait(60*1000);
         }
     }
 
@@ -22,7 +23,7 @@ public class AntiLockSystem {
 
     public static void lockAndWaitDatabase() throws InterruptedException {
         synchronized (AntiLockSystem.LOCKDATABASE) {
-            LOCKDATABASE.wait();
+            LOCKDATABASE.wait(60*1000);
         }
     }
 
