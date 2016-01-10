@@ -52,10 +52,10 @@ public class CompleteViewCustomerFX {
         RowConstraints row2 = new RowConstraints();
         RowConstraints row3 = new RowConstraints();
         RowConstraints row4 = new RowConstraints();
-        row1.setPercentHeight(25);
-        row2.setPercentHeight(25);
-        row3.setPercentHeight(25);
-        row4.setPercentHeight(25);
+        row1.setPercentHeight(30);
+        row2.setPercentHeight(30);
+        row3.setPercentHeight(20);
+        row4.setPercentHeight(20);
         grid.getRowConstraints().addAll(row1,row2,row3,row4);
 
         return panel;
