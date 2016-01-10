@@ -30,6 +30,7 @@ public class ReleaseView extends ListView {
 
 
     public void update() {
+        setItems(null);
         ArrayList<Release> data = new ArrayList<>();
         for (Release release : model.getReleases()) {
             data.add(release);

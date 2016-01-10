@@ -13,7 +13,6 @@ public class ReleaseCellRenderer extends ListCell<Release> {
         super.updateItem(r, bln);
         if (r != null) {
             setText("Version: " + r.PREFIX);
-
         }
     }
 
