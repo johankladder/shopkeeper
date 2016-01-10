@@ -10,6 +10,8 @@ import org.shopkeeper.gui.fx.model.subjects.AbstractModelFX;
 import org.shopkeeper.gui.fx.view.selection.SelectionViewFX;
 import org.shopkeeper.subjects.parsers.SubjectMapGenerator;
 import org.shopkeeper.subjects.subjecttypes.Subject;
+import org.shopkeeper.util.Beatifier;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +34,7 @@ public class ListViewFX extends TableView implements AbstractViewFX {
             Subject temp = MODEL.getSubjects().get(0);
             Map map = SubjectMapGenerator.createUserViewMap(temp.getFields());
             map.forEach((k, v) -> {
-                TableColumn col = new TableColumn((String) k);
+                TableColumn col = new TableColumn(Beatifier.beatifyString((String) k));
                 col.setCellValueFactory(new PropertyValueFactory<Subject, String>((String) k));
                 getColumns().add(col);
             });
