@@ -1,6 +1,7 @@
 package org.shopkeeper.subjects.parsers;
 
 import org.apache.commons.lang3.StringUtils;
+import org.joda.time.DateTime;
 import org.junit.Test;
 import org.shopkeeper.subjects.subjecttypes.Subject;
 import org.shopkeeper.subjects.subjecttypes.SubjectFields;
@@ -186,4 +187,23 @@ public class SubjectMapGeneratorTest {
     }
 
 
+    @Test
+    public void testUpdateSubjectWithMap() throws Exception {
+        Map map = new HashMap<>();
+        DateTime time = DateTimeGenerator.generateDateTimeNow();
+        Item item = new Item(new Long(1), "name", 12.31, time);
+        map.put(SubjectFields.IDNUMBER, "1");
+        map.put(SubjectFields.NAME, "test");
+        map.put(SubjectFields.ITEM_PRICE, "12.50");
+        map.put("dateadded", time);
+
+        Subject subject = SubjectMapGenerator.updateSubjectWithMap(item, map);
+        item = (Item) subject;
+
+        long id = item.getId();
+        double price = item.getPrice();
+        assertEquals(1,id);
+        assertEquals("test", item.getName());
+        assertEquals(12.50,price, 0.0001);
+    }
 }

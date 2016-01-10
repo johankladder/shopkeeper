@@ -1,6 +1,7 @@
 package org.shopkeeper.gui.fx.model.subjects;
 
 import javafx.scene.control.*;
+import org.apache.commons.lang3.StringUtils;
 import org.shopkeeper.subjects.subjecttypes.Subject;
 
 import java.awt.*;
@@ -15,12 +16,14 @@ public class SubjectsUtil {
     public static Map createUpdateSubjectMap(Subject subject, Map map) {
         Map subjectMap = subject.getFields();
         map.forEach((k,v)-> {
-            if(v instanceof String) {
-                subjectMap.put(k,v);
-            }
-            if(v instanceof javafx.scene.control.TextField) {
-                javafx.scene.control.TextField valueField = (javafx.scene.control.TextField) v;
-                subjectMap.put(k,valueField.getText());
+            if(StringUtils.contains((String)k, "id")) {
+                if (v instanceof String) {
+                    subjectMap.put(k, v);
+                }
+                if (v instanceof javafx.scene.control.TextField) {
+                    javafx.scene.control.TextField valueField = (javafx.scene.control.TextField) v;
+                    subjectMap.put(k, valueField.getText());
+                }
             }
         });
         return subjectMap;

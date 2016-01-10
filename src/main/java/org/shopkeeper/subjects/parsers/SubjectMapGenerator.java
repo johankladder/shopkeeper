@@ -5,6 +5,9 @@ import org.shopkeeper.subjects.subjecttypes.Subject;
 import org.shopkeeper.subjects.subjecttypes.SubjectFields;
 import org.shopkeeper.subjects.SubjectManipulator;
 import org.shopkeeper.subjects.subjecttypes.SubjectTypes;
+import org.shopkeeper.subjects.subjecttypes.items.Item;
+import org.shopkeeper.util.PriceGenerator;
+
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -173,5 +176,41 @@ public class SubjectMapGenerator {
             return new LinkedHashMap<>();
         }
     }
+
+    public static Subject updateSubjectWithMap(Subject subject, Map map) {
+        if (subject.TYPE == SubjectTypes.ITEM) {
+            return updateWithMapItem(subject, map);
+        }
+        return subject;
+    }
+
+    private static Subject updateWithMapItem(Subject subject, Map map) {
+        Item item = (Item) subject;
+        if (map.containsKey(SubjectFields.IDNUMBER) && map.containsKey(SubjectFields.NAME) &&
+                map.containsKey(SubjectFields.ITEM_PRICE)) {
+            item.setName(StringUtils.trimToNull((String) map.get(SubjectFields.NAME)));
+
+            try {
+                Double price = PriceGenerator.getPriceFromString((String) map.get(SubjectFields.ITEM_PRICE));
+                if(price != null) {
+                    item.setPrice(price);
+                } else {
+                    return subject;
+                }
+            }catch (NumberFormatException e) {
+                return subject;
+            }
+        }
+        return subject;
+    }
+
+    private static Subject updateWithMapCustomer(Subject subject) {
+        return null;
+    }
+
+    private static Subject updateWithMapCategory(Subject subject) {
+        return null;
+    }
+
 
 }
