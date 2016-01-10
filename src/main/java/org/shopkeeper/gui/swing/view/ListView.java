@@ -3,7 +3,7 @@ package org.shopkeeper.gui.swing.view;
 import org.shopkeeper.gui.swing.model.selection.ListSelectionModel;
 import org.shopkeeper.gui.swing.model.subjects.AbstractModel;
 import org.shopkeeper.gui.swing.view.selection.AbstractSelectionView;
-import org.shopkeeper.preferences.Preference;
+import org.shopkeeper.preferences.PreferenceModule;
 import org.shopkeeper.subjects.subjecttypes.Subject;
 
 import javax.swing.*;
@@ -22,7 +22,7 @@ public class ListView extends JScrollPane implements AbstractView{
     public ListView(AbstractModel model, ArrayList<AbstractSelectionView> views) {
         MODEL = model;
         setViewportView(LIST);
-        setPreferredSize(new Dimension(Preference.PREF_WIDTH_LIST_CONTAINERS, Preference.PREF_HEIGHT_LIST_CONTAINERS));
+        setPreferredSize(new Dimension(PreferenceModule.PREF_WIDTH_LIST_CONTAINERS, PreferenceModule.PREF_HEIGHT_LIST_CONTAINERS));
         SELECTION_MODEL.setViewPackage(views);
         LIST.addListSelectionListener(SELECTION_MODEL);
     }

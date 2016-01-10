@@ -3,11 +3,9 @@ package org.shopkeeper.releases;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.shopkeeper.preferences.Preference;
+import org.shopkeeper.preferences.PreferenceModule;
 import org.shopkeeper.preloader.Preloader;
 
-import java.io.File;
-import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -29,7 +27,7 @@ public class ReleaseModule implements Runnable {
         JSONParser parser = new JSONParser();
 
         try {
-            InputStream is = ReleaseModule.class.getResourceAsStream(Preference.RELEASE_NOTES_PATH);
+            InputStream is = ReleaseModule.class.getResourceAsStream(PreferenceModule.RELEASE_NOTES_PATH);
             InputStreamReader isr = new InputStreamReader(is);
             Object obj = parser.parse(isr);
 

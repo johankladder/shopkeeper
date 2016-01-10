@@ -1,22 +1,16 @@
 package org.shopkeeper.preloader;
 
 import javafx.animation.FadeTransition;
-import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -24,8 +18,8 @@ import org.shopkeeper.database.DatabaseHandler;
 import org.shopkeeper.database.modules.DatabaseChooser;
 import org.shopkeeper.database.modules.DatabaseTypes;
 import org.shopkeeper.gui.GuiChooser;
-import org.shopkeeper.preferences.Preference;
-import org.shopkeeper.preferences.PreferenceHandler;
+import org.shopkeeper.preferences.PreferenceModule;
+import org.shopkeeper.preferences.PreferenceLoader;
 import org.shopkeeper.releases.ReleaseModule;
 import org.shopkeeper.subjects.ModuleHandler;
 
@@ -82,7 +76,7 @@ public class Preloader extends Application {
     }
 
     private static void initPreloader() {
-        MODULES.add(new PreferenceHandler());
+        MODULES.add(new PreferenceLoader());
         MODULES.add(new DatabaseHandler(DatabaseChooser.getDatabase(DatabaseTypes.DATABASETYPE_SQLLITE)));
         MODULES.add(new ModuleHandler());
         MODULES.add(new ReleaseModule());
@@ -92,7 +86,7 @@ public class Preloader extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         // Images:
-        Image image = new Image(Preference.LOGOPATH);
+        Image image = new Image(PreferenceModule.LOGOPATH);
 
         imageView = new ImageView(image);
         // GUI:
@@ -104,13 +98,13 @@ public class Preloader extends Application {
         root.setTop(imageView);
         root.setCenter(PROGRESSBAR);
         BorderPane labelBorder = new BorderPane();
-        Label label = new Label(Preference.RELEASE_NOTES);
+        Label label = new Label(PreferenceModule.RELEASE_NOTES);
         label.setAlignment(Pos.CENTER);
         labelBorder.setCenter(label);
         root.setBottom(labelBorder);
         PROGRESSBAR.setMinWidth(600);
 
-        Scene scene = new Scene(root, Preference.PRELOADER_WIDTH, Preference.PRELOADER_HEIGTH);
+        Scene scene = new Scene(root, PreferenceModule.PRELOADER_WIDTH, PreferenceModule.PRELOADER_HEIGTH);
         primaryStage.setScene(scene);
         primaryStage.show();
         primaryStage.setResizable(false);

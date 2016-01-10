@@ -8,7 +8,7 @@ import org.shopkeeper.gui.fx.WindowBuilderFX;
 import org.shopkeeper.gui.fx.view.selection.NotesView;
 import org.shopkeeper.gui.fx.view.releases.ReleaseView;
 import org.shopkeeper.gui.fx.view.selection.SelectionViewFX;
-import org.shopkeeper.preferences.Preference;
+import org.shopkeeper.preferences.PreferenceModule;
 
 import java.util.ArrayList;
 
@@ -42,8 +42,8 @@ public class CompleteViewHomeFX {
         grid.getColumnConstraints().addAll(col1Constraints,col2Constraints);
         release_view.setMinHeight(1); // reset default min height
         notes_view.setMinHeight(1); // reset default min height
-        release_view.setMaxHeight(Preference.RELEASE_NOTES_HEIGHT);
-        notes_view.setMaxHeight(Preference.RELEASE_NOTES_HEIGHT);
+        release_view.setMaxHeight(PreferenceModule.RELEASE_NOTES_HEIGHT);
+        notes_view.setMaxHeight(PreferenceModule.RELEASE_NOTES_HEIGHT);
         panel.setCenter(imageView);
         panel.setBottom(grid);
         return panel;

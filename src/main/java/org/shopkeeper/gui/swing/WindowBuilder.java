@@ -5,7 +5,7 @@ import org.shopkeeper.gui.swing.controller.SubjectsViewController;
 import org.shopkeeper.gui.swing.model.subjects.CategoryModel;
 import org.shopkeeper.gui.swing.model.subjects.CustomerModel;
 import org.shopkeeper.gui.swing.model.subjects.ItemModel;
-import org.shopkeeper.preferences.Preference;
+import org.shopkeeper.preferences.PreferenceModule;
 import org.shopkeeper.subjects.ModuleHandler;
 
 import javax.swing.*;
@@ -34,12 +34,12 @@ public class WindowBuilder {
         CompleteViewModule.MAIN = MAIN_PANEL;
 
         JPanel release_notes = new JPanel(new BorderLayout());
-        release_notes.add(new JLabel(Preference.RELEASE_NOTES, JLabel.CENTER));
+        release_notes.add(new JLabel(PreferenceModule.RELEASE_NOTES, JLabel.CENTER));
         panel_with_head_and_buttom.add(release_notes, BorderLayout.SOUTH);
 
         WINDOW.add(panel_with_head_and_buttom);
         WINDOW.setExtendedState(Frame.MAXIMIZED_BOTH); // Set fullscreen
-        WINDOW.setMinimumSize(new Dimension(Preference.MIN_WIDTH_APPLICATION, Preference.MIN_HEIGHT_APPLICATION));
+        WINDOW.setMinimumSize(new Dimension(PreferenceModule.MIN_WIDTH_APPLICATION, PreferenceModule.MIN_HEIGHT_APPLICATION));
         WINDOW.setVisible(true);    // Set visible
     }
 }
