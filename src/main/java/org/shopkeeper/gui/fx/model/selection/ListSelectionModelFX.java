@@ -5,6 +5,7 @@ import javafx.beans.value.ObservableValue;
 import org.shopkeeper.gui.fx.view.selection.SelectionViewFX;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * This class can be used for communicating with other views. I.e when using a list, this class can be set as an
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 public class ListSelectionModelFX implements ChangeListener<Object>{
 
     private static Object SELECTED_SUBJECT = null;
+    private static Map map = null;
     private static ArrayList<SelectionViewFX> VIEWS = new ArrayList<>();
 
     /**
@@ -29,6 +31,14 @@ public class ListSelectionModelFX implements ChangeListener<Object>{
                 view.setModel(this);
             }
         }
+    }
+
+    public void sendMap(Map map) {
+        ListSelectionModelFX.map= map;
+    }
+
+    public Map getMap() {
+        return map;
     }
 
     @Override

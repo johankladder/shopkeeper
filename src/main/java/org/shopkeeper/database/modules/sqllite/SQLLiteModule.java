@@ -40,7 +40,7 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
 
     @Override
     public void update(Subject subject) {
-
+        processQueryNoResult(SQLLiteQueryCreator.createUpdateQuery(subject));
     }
 
     @Override

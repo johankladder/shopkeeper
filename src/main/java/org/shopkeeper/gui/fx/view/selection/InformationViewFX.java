@@ -10,7 +10,9 @@ import org.shopkeeper.gui.fx.controller.UpdateSubjectController;
 import org.shopkeeper.gui.fx.model.selection.ListSelectionModelFX;
 import org.shopkeeper.subjects.parsers.SubjectMapGenerator;
 import org.shopkeeper.subjects.subjecttypes.Subject;
+import org.shopkeeper.util.Beatifier;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -59,9 +61,12 @@ public class InformationViewFX extends BorderPane implements SelectionViewFX {
         // For usage in a lamba expression:
         final int[] counter_y = {0};
 
+        Map map_prepared_for_sending = new HashMap<>();
         final Map finalSubject_fields = subject_fields;
         labels.forEach((k, v) -> {
             TextField text_field = new TextField(finalSubject_fields.get((k)).toString());
+            map_prepared_for_sending.put(v.getText(), text_field);
+            v.setText(Beatifier.beatifyString(v.getText()));
             total_view_box.add(v, 0, counter_y[0]);
             total_view_box.add(text_field, 1, counter_y[0]);
             counter_y[0] = counter_y[0] + 1;
@@ -74,5 +79,7 @@ public class InformationViewFX extends BorderPane implements SelectionViewFX {
         ColumnConstraints col2Constraints = new ColumnConstraints();
         col2Constraints.setPercentWidth(70);
         total_view_box.getColumnConstraints().addAll(col1Constraints, col2Constraints);
+
+
     }
 }
