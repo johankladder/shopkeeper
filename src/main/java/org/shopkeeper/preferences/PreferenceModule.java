@@ -38,7 +38,7 @@ public class PreferenceModule {
 
     // IDS:
     public static final String[] DATA_BASE_TYPE = {"database_type", "sqlite"};
-    public static final String[] GUI_TYPE_ID = {"gui_type", "fx"};
+    public static final String[] GUI_TYPE_ID = {"gui_type", "fx","swing"};
     public static final ArrayList<String[]> IDS = new ArrayList<>(Arrays.asList(DATA_BASE_TYPE, GUI_TYPE_ID));
     public static Map<String,Preference> PREFERENCES = new HashMap<>();
 
@@ -70,8 +70,24 @@ public class PreferenceModule {
     public static void addPreference(Preference preference) {
         if(preference != null) {
             PREFERENCES.put(preference.getId(), preference);
+            completePreference(preference);
         }
     }
+
+    private static void completePreference(Preference preference) {
+        for(String[] id : IDS) {
+            if(StringUtils.contains(id[0], preference.getId())) {
+                // First two places are for the key and default value, so start looping from place 2
+                ArrayList<String> validFields = new ArrayList<>();
+                for (int i = 2; i < id.length; i++) {
+                    String value = id[i];
+                    validFields.add(value);
+                }
+                preference.setValidFields(validFields);
+            }
+        }
+    }
+
 
 
 

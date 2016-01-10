@@ -19,6 +19,7 @@ public class PreferenceLoader implements Runnable {
 
         for(String[] pref_array : PreferenceModule.IDS) {
             String value = prefs.get(pref_array[0], pref_array[1]);
+
             PreferenceModule.setPreference(new Preference(pref_array[0], value));
         }
         synchronized (Preloader.ready) {
