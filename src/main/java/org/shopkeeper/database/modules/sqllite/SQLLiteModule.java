@@ -2,7 +2,6 @@ package org.shopkeeper.database.modules.sqllite;
 
 import org.shopkeeper.database.DatabaseHandler;
 import org.shopkeeper.database.modules.DatabaseModule;
-import org.shopkeeper.database.modules.DatabaseTypes;
 import org.shopkeeper.database.parsers.ResultParser;
 import org.shopkeeper.database.parsers.SQLLiteQueryCreator;
 import org.shopkeeper.subjects.parsers.SubjectResultSetParser;
@@ -11,7 +10,6 @@ import org.shopkeeper.subjects.subjecttypes.SubjectTypes;
 import org.shopkeeper.subjects.subjecttypes.categories.Category;
 import org.shopkeeper.subjects.subjecttypes.customer.Customer;
 import org.shopkeeper.subjects.subjecttypes.items.Item;
-import org.shopkeeper.util.AntiLockSystem;
 
 import java.sql.*;
 import java.util.LinkedList;
@@ -24,6 +22,7 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
     public final LinkedList queue = new LinkedList();
     public static ResultSet RESULTSET = null;
     private static Integer REQUESTEDTYPE = null;
+    private int counter = 0;
 
 
     @Override
@@ -56,6 +55,11 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
         }
     }
 
+    @Override
+    public void initQuery(String query) {
+        processQueryNoResult(query);
+    }
+
 
     // TODO PREPARED STATMENT
     public void processQueryNoResult(String query) {
@@ -78,33 +82,19 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
         return null;
     }
 
-    private void initDatabase() {
-        try {
-            Statement stmt = CONNECTION.createStatement();
-            stmt.execute(SQLLiteQueryCreator.createInitQuery(Item.getInitFields(), DatabaseTypes.DATABASETYPE_SQLLITE));
-            stmt.execute(SQLLiteQueryCreator.createInitQuery(Customer.getInitFields(), DatabaseTypes.DATABASETYPE_SQLLITE));
-            stmt.execute(SQLLiteQueryCreator.createInitQuery(Category.getInitFields(), DatabaseTypes.DATABASETYPE_SQLLITE));
-            WAS_INITIALIZED = true; // Set status
-            AntiLockSystem.notifyLock();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            WAS_INITIALIZED = false;
-        }
-
-    }
-
 
     // TODO Connection checking
     public void run() {
         if (!RUNNING) {  // Check if the database is already RUNNING:
             RUNNING = true;
             try {
-                Class.forName("org.sqlite.JDBC");
-                CONNECTION = DriverManager.getConnection("jdbc:sqlite:" + DB_NAME + ".db");
-                CONNECTED = true;
-
-                initDatabase(); // Initializes tables in this database
-
+                synchronized (Thread.currentThread()) {
+                    Class.forName("org.sqlite.JDBC");
+                    CONNECTION = DriverManager.getConnection("jdbc:sqlite:" + DB_NAME + ".db");
+                    CONNECTED = true;
+                    System.out.println("INFO: Database has an valid connection and the module is running");
+                    Thread.currentThread().notify();
+                }
                 String query;
 
                 while (true) {
@@ -116,21 +106,27 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
                             }
                         }
                         query = (String) queue.removeFirst();
-                        System.out.println(query);
                     }
 
                     try {
                         if (!ResultParser.queryWithResult(query)) {
-                            Statement stmt = CONNECTION.createStatement();
-                            stmt.execute(query);
-                            AntiLockSystem.notifyLockDatabase();
+                            synchronized (Thread.currentThread()) {
+                                Statement stmt = CONNECTION.createStatement();
+                                stmt.execute(query);
+                                Thread.currentThread().notify();
+                                System.out.println("INFO: Executed query: " + query);
+                            }
                         } else {
 
-                            Statement stmt = CONNECTION.createStatement();
-                            RESULTSET = stmt.executeQuery(query);
-                            SubjectResultSetParser.parseResultSetToModule(RESULTSET, REQUESTEDTYPE);
-                            REQUESTEDTYPE = null; // Reset the REQUESTEDTYPE, so i can be used next time.
-                            AntiLockSystem.notifyLockDatabase();
+                            synchronized (Thread.currentThread()) {
+                                Statement stmt = CONNECTION.createStatement();
+                                RESULTSET = stmt.executeQuery(query);
+                                SubjectResultSetParser.parseResultSetToModule(RESULTSET, REQUESTEDTYPE);
+                                REQUESTEDTYPE = null; // Reset the REQUESTEDTYPE, so i can be used next time
+                                System.out.println("INFO: Executed query: " + query);
+                                Thread.currentThread().notify();
+                            }
+
 
                         }
                         // Release a given lock here!

@@ -3,7 +3,6 @@ package org.shopkeeper.gui.fx.model.subjects;
 import org.shopkeeper.gui.fx.view.AbstractViewFX;
 import org.shopkeeper.subjects.modules.SubjectModule;
 import org.shopkeeper.subjects.subjecttypes.Subject;
-import org.shopkeeper.util.AntiLockSystem;
 
 import java.util.ArrayList;
 
@@ -27,8 +26,8 @@ public abstract class AbstractModelFX {
     public void update(Subject subject){
         try {
             MODULE.update(subject);
-            AntiLockSystem.lockAndWaitDatabase();
-            updateViews(); // When done updating views
+            updateViews();
+            // TODO Watch if this synchronisation is going well in the future.
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

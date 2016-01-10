@@ -2,6 +2,7 @@ package org.shopkeeper.subjects.modules;
 
 import org.shopkeeper.database.modules.DatabaseChooser;
 import org.shopkeeper.database.modules.DatabaseModule;
+import org.shopkeeper.database.modules.DatabaseStarter;
 import org.shopkeeper.database.modules.DatabaseTypes;
 import org.shopkeeper.subjects.subjecttypes.Subject;
 
@@ -23,13 +24,21 @@ public abstract class SubjectModule {
 
     public abstract void add(Subject subject);
 
-    public abstract void update(Subject subject);
+    public void update(Subject subject) throws InterruptedException {
+        synchronized (DatabaseStarter.DBTHREAD) {
+            DB.update(subject);
+            DatabaseStarter.DBTHREAD.wait();
+        }
+    }
 
     public abstract void delete(Subject subject);
 
-    public void refresh() {
-        SUBJECTS.clear();
-        DB.showAll(SUBJECTTYPE);
+    public void refresh() throws InterruptedException {
+        synchronized (DatabaseStarter.DBTHREAD) {
+            SUBJECTS.clear();
+            DB.showAll(SUBJECTTYPE);
+            DatabaseStarter.DBTHREAD.wait();
+        }
     }
 
     public int getTotalSubjects() {

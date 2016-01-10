@@ -1,8 +1,6 @@
 package org.shopkeeper.subjects;
 
 import org.apache.commons.lang3.StringUtils;
-import org.shopkeeper.subjects.parsers.SubjectActionChooser;
-import org.shopkeeper.subjects.subjecttypes.Subject;
 import org.shopkeeper.subjects.subjecttypes.SubjectFields;
 import org.shopkeeper.subjects.subjecttypes.categories.Category;
 import org.shopkeeper.subjects.subjecttypes.customer.Customer;
@@ -111,17 +109,5 @@ public class SubjectManipulator {
         }
     }
 
-
-    public static void add(Subject subject) {
-        SubjectActionChooser.actionOnSubject(subject, SubjectActionChooser.ADD);
-    }
-
-    public static void update(Subject subject) {
-        SubjectActionChooser.actionOnSubject(subject, SubjectActionChooser.UPDATE);
-    }
-
-    public static void delete(Subject subject) {
-        SubjectActionChooser.actionOnSubject(subject, SubjectActionChooser.DELETE);
-    }
 
 }

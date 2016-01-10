@@ -5,7 +5,6 @@ import org.shopkeeper.subjects.modules.CategoryModule;
 import org.shopkeeper.subjects.modules.CustomerModule;
 import org.shopkeeper.subjects.modules.ItemModule;
 import org.shopkeeper.subjects.modules.SubjectModule;
-import org.shopkeeper.util.AntiLockSystem;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,16 +34,17 @@ public class ModuleHandler implements Runnable {
         MODULES.add(customerModule);
 
         // For each module, get all the objects from the database:
-            for (SubjectModule module : MODULES) {
+        for (SubjectModule module : MODULES) {
+            try {
                 module.refresh();
-                try {
-                    AntiLockSystem.lockAndWaitDatabase();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-        AntiLockSystem.notifyLock();
+        }
+
+        synchronized (Thread.currentThread()) {
+            Thread.currentThread().notify();
+        }
     }
 
     public static SubjectModule getModule(String name) {

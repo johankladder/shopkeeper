@@ -16,13 +16,13 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import org.shopkeeper.database.DatabaseHandler;
 import org.shopkeeper.database.modules.DatabaseChooser;
+import org.shopkeeper.database.modules.DatabaseStarter;
 import org.shopkeeper.database.modules.DatabaseTypes;
 import org.shopkeeper.gui.GuiChooser;
 import org.shopkeeper.preferences.PreferenceModule;
 import org.shopkeeper.preferences.PreferenceLoader;
 import org.shopkeeper.releases.ReleaseModule;
 import org.shopkeeper.subjects.ModuleHandler;
-import org.shopkeeper.util.AntiLockSystem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,13 +52,15 @@ public class Preloader extends Application {
             for (Runnable tasks : MODULES) {
                 Thread thread1 = new Thread(tasks);
                 thread1.start();
+                synchronized (thread1) {
                     try {
-                        AntiLockSystem.lockAndWait();
+                        thread1.wait();
                         System.out.println("PRELOADER JOB FINISH:" + tasks.getClass().getName());
                         JOBCOUNTER++;
                         updateProgressBar(JOBCOUNTER);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
+                    }
                 }
 
             }
@@ -74,6 +76,7 @@ public class Preloader extends Application {
 
     private static void initPreloader() {
         MODULES.add(new PreferenceLoader());
+        MODULES.add(new DatabaseStarter());
         MODULES.add(new DatabaseHandler(DatabaseChooser.getDatabase(DatabaseTypes.DATABASETYPE_SQLLITE)));
         MODULES.add(new ModuleHandler());
         MODULES.add(new ReleaseModule());

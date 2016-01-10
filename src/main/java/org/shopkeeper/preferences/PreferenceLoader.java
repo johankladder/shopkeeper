@@ -1,8 +1,5 @@
 package org.shopkeeper.preferences;
 
-import org.shopkeeper.preloader.Preloader;
-import org.shopkeeper.util.AntiLockSystem;
-
 import java.util.prefs.Preferences;
 
 /**
@@ -17,12 +14,16 @@ public class PreferenceLoader implements Runnable {
     public void run() {
         // Look if preferences exist:
         Preferences prefs = Preferences.userRoot().node(this.getClass().getName());
-
+        int pref_counter = 0;
         for(String[] pref_array : PreferenceModule.IDS) {
             String value = prefs.get(pref_array[0], pref_array[1]);
-
             PreferenceModule.setPreference(new Preference(pref_array[0], value));
+            pref_counter++;
         }
-        AntiLockSystem.notifyLock();
+
+        synchronized (Thread.currentThread()) {
+            System.out.println("INFO: Total of " + pref_counter + " preferences were loaded.");
+            Thread.currentThread().notify();
+        }
     }
 }

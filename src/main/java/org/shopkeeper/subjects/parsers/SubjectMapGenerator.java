@@ -97,63 +97,6 @@ public class SubjectMapGenerator {
     }
 
 
-    // MAP-PARSER:
-
-    /**
-     * Creates a new subject with a map -> When its done it will send a request to the module, who will eventually put
-     * this subject in a database or something like that. The method returns the requested item and will request null when
-     * there where any errors on the parsing site. This method communicates with the manipulator and so it will only give
-     * and request to the module when there where no errors.
-     *
-     * @param map Map containing information about the subject.
-     * @return The requested Subject class or null when there was a error.
-     */
-    public static Subject createWithMap(HashMap<String, String> map) {
-        if (map.containsKey(MAP_ITEM_ID)) {
-            Subject subject = SubjectManipulator.createItem(map);
-            SubjectManipulator.add(subject);
-            return subject;
-        } else if (map.containsKey(MAP_CUSTOMER_ID)) {
-            Subject subject = SubjectManipulator.createCustomer(map);
-            SubjectManipulator.add(subject);
-            return subject;
-        } else if (map.containsKey(MAP_CATEGORY_ID)) {
-            Subject subject = SubjectManipulator.createCategory(map);
-            SubjectManipulator.add(subject);
-            return subject;
-        } else {
-            LOGGER.warning("The map you gave was not valid, please make sure you haven't edited the map_id fields.");
-            return null;
-        }
-    }
-
-    /**
-     * This method updates a subject when it is given the right map. If not, or if there where errors, it will return
-     * null, else it will return the newly updated subject. This method works almost the same a creating a new subject
-     * with a map, but communicates a little bit different with the subjects manipulator.
-     *
-     * @param map Map including information about the subject.
-     * @return The updated subject.
-     */
-    public static Subject updateWithMap(HashMap<String, String> map) {
-        if (map.containsKey(MAP_ITEM_ID)) {
-            Subject subject = SubjectManipulator.createItem(map);
-            SubjectManipulator.update(subject);
-            return subject;
-        } else if (map.containsKey(MAP_CUSTOMER_ID)) {
-            Subject subject = SubjectManipulator.createCustomer(map);
-            SubjectManipulator.update(subject);
-            return subject;
-        } else if (map.containsKey(MAP_CATEGORY_ID)) {
-            Subject subject = SubjectManipulator.createCategory(map);
-            SubjectManipulator.update(subject);
-            return subject;
-        } else {
-            LOGGER.warning("The map you gave was not valid, please make sure you haven't edited the map_id fields.");
-            return null;
-        }
-    }
-
     /**
      * Creates a new map from the fields-map from a subject with only the interesting values for the user. Will return
      * a empty map if the given map is null or empty. This method is handy for creating the value maps in a user-view i.e

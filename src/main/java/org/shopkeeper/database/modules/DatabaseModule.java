@@ -41,5 +41,7 @@ public abstract class DatabaseModule implements Runnable {
         return CONNECTED;
     }
 
+    public abstract void initQuery(String query);
+
 
 }
