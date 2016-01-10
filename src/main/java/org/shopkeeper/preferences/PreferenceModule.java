@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.prefs.Preferences;
 
 /**
  * The PreferenceModule is holding all the default preferences. All the fields are final here, so they can't be changed
@@ -86,6 +87,11 @@ public class PreferenceModule {
                 preference.setValidFields(validFields);
             }
         }
+    }
+
+    public static void setNewPreference(Preference preference) {
+        Preferences prefs = Preferences.userRoot().node(PreferenceLoader.class.getName());
+        prefs.put(preference.getId(), preference.getValue());
     }
 
 
