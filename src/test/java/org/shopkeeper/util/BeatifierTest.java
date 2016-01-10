@@ -12,13 +12,13 @@ public class BeatifierTest {
 
     @Test
     public void testBeatifyString() throws Exception {
-        assertEquals("Test", Beatifier.beatifyString("test"));
-        assertEquals("Test", Beatifier.beatifyString("test"));
-        assertEquals("Test", Beatifier.beatifyString("   test   "));
-        assertEquals("Test", Beatifier.beatifyString("   test"));
-        assertEquals("Test", Beatifier.beatifyString("test   "));
-        assertNull(Beatifier.beatifyString(null));
-        assertNull(Beatifier.beatifyString(""));
+        assertEquals("Test", Beatifier.beautifyString("test"));
+        assertEquals("Test", Beatifier.beautifyString("test"));
+        assertEquals("Test", Beatifier.beautifyString("   test   "));
+        assertEquals("Test", Beatifier.beautifyString("   test"));
+        assertEquals("Test", Beatifier.beautifyString("test   "));
+        assertNull(Beatifier.beautifyString(null));
+        assertNull(Beatifier.beautifyString(""));
 
     }
 }

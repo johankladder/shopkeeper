@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.DecimalFormat;
 
 public class PriceGenerator {
 
@@ -66,7 +67,16 @@ public class PriceGenerator {
     }
 
     private static Double roundTwoDecimals(Double number) {
-        return round(number, 2);
+        if(number != null) {
+            return round(number, 2);
+        } else {
+            return null;
+        }
+    }
+
+    public static String priceToString(Double number) {
+        DecimalFormat df = new DecimalFormat("#.00");
+        return StringUtils.replace(df.format(number), ".", ",");
     }
 
     public static double round(double value, int places) {

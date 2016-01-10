@@ -21,7 +21,8 @@
       "prefix": "v0.03",
       "notes": [
         "ADD: User can add a subject",
-        "FIX: Price not updating"
+        "FIX: Price not updating",
+        "FIX: Antilock system was not work fast, instead use wait/invoke -> still needs to have a timeout"
       ]
     }
   ]

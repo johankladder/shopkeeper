@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.shopkeeper.subjects.subjecttypes.Subject;
 import org.shopkeeper.util.DateTimeGenerator;
+import org.shopkeeper.util.PriceGenerator;
 
 import java.text.DecimalFormat;
 import java.util.HashMap;
@@ -22,11 +23,6 @@ public class Item extends Subject {
         this.price = price;
     }
 
-
-    public String getPrice() {
-        DecimalFormat df = new DecimalFormat("#.00");
-        return StringUtils.replace(df.format(price), ".", ",");
-    }
 
     public Double getDoublePrice() {
         return price;

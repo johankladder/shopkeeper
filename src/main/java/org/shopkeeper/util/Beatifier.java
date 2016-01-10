@@ -7,7 +7,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class Beatifier {
 
-    public static String beatifyString(String input) {
+    public static String beautifyString(String input) {
         if(input != null && !StringUtils.equals(input, "")) {
             String output = StringUtils.trim(input);
             output = StringUtils.lowerCase(output);
@@ -15,5 +15,13 @@ public class Beatifier {
             return output;
         }
         return null;
+    }
+
+    public static String beautifyWithMapKeyAndString(String key, String value) {
+        if(StringUtils.contains(key, "price")) {
+            return PriceGenerator.priceToString(Double.parseDouble(value));
+        } else {
+            return value;
+        }
     }
 }
