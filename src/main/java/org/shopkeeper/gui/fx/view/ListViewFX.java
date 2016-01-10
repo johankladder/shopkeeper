@@ -8,37 +8,33 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import org.shopkeeper.gui.fx.model.selection.ListSelectionModelFX;
 import org.shopkeeper.gui.fx.model.subjects.AbstractModelFX;
 import org.shopkeeper.gui.fx.view.selection.SelectionViewFX;
+import org.shopkeeper.subjects.parsers.SubjectMapGenerator;
 import org.shopkeeper.subjects.subjecttypes.Subject;
-
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class ListViewFX extends TableView implements AbstractViewFX {
 
-    private AbstractModelFX MODEL = null;
     private static ListSelectionModelFX SELECTION_MODEL = new ListSelectionModelFX();
-    ObservableList<Subject> names = null;
+    private AbstractModelFX MODEL = null;
+    private ObservableList<Subject> names = FXCollections.observableArrayList();
 
     public ListViewFX(AbstractModelFX model, ArrayList<SelectionViewFX> views) {
         MODEL = model;
         SELECTION_MODEL.setViewPackage(views);
         getSelectionModel().selectedItemProperty().addListener(SELECTION_MODEL);
-
         init();
     }
 
     private void init() {
-        setItems(null);
-
         if (MODEL.getSubjects().size() > 0) {
             Subject temp = MODEL.getSubjects().get(0);
-            Map map = temp.getFields();
+            Map map = SubjectMapGenerator.createUserViewMap(temp.getFields());
             map.forEach((k, v) -> {
                 TableColumn col = new TableColumn((String) k);
-                getColumns().add(col);
                 col.setCellValueFactory(new PropertyValueFactory<Subject, String>((String) k));
+                getColumns().add(col);
             });
         }
 
@@ -46,9 +42,7 @@ public class ListViewFX extends TableView implements AbstractViewFX {
 
     @Override
     public void updateView() {
-        if (names != null) {
-            names.clear(); // Clear for refreshing
-        }
+        names.clear(); // Clear for refreshing
         List<Subject> list = new ArrayList<>();
         for (Subject subject : MODEL.getSubjects()) {
             list.add(subject);
