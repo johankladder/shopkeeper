@@ -116,6 +116,7 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
                             }
                         }
                         query = (String) queue.removeFirst();
+                        System.out.println(query);
                     }
 
                     try {

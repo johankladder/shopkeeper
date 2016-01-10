@@ -6,6 +6,7 @@ import org.shopkeeper.subjects.subjecttypes.SubjectTypes;
 import org.shopkeeper.subjects.subjecttypes.categories.Category;
 import org.shopkeeper.subjects.subjecttypes.customer.Customer;
 import org.shopkeeper.subjects.subjecttypes.items.Item;
+import org.shopkeeper.util.PriceGenerator;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -37,7 +38,7 @@ public class SubjectResultSetParser {
                 Item item = new Item(
                         new Long(set.getInt("id")),
                         set.getString("name"),
-                        set.getDouble("price"),
+                        PriceGenerator.getPriceFromString(set.getString("price")),
                         DateTime.parse(set.getString("dateadded"))
                 );
                 ModuleHandler.getModule("itemmodule").addToList(item);

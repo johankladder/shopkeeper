@@ -2,6 +2,9 @@ package org.shopkeeper.util;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class PriceGenerator {
 
     public static final String CURRENCY_EURO = ""; // TODO Get currency symbol from preferences.
@@ -15,13 +18,13 @@ public class PriceGenerator {
     public static Double getPriceFromString(String priceString) {
         if(priceString != null) {
             if (StringUtils.contains(priceString, ",")) {
-                return parseStringWithComma(priceString);
+                return roundTwoDecimals(parseStringWithComma(priceString));
             }
             else if (StringUtils.contains(priceString, ".")) {
-                return parseStringWithPoint(priceString);
+                return roundTwoDecimals(parseStringWithPoint(priceString));
             }
             else {
-                return parseStringWithoutPointOrComma(priceString);
+                return roundTwoDecimals(parseStringWithoutPointOrComma(priceString));
             }
 
         }
@@ -62,5 +65,16 @@ public class PriceGenerator {
         }
     }
 
+    private static Double roundTwoDecimals(Double number) {
+        return round(number, 2);
+    }
+
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        BigDecimal bd = new BigDecimal(value);
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
+    }
 
 }

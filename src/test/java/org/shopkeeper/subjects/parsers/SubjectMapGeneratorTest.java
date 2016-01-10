@@ -57,7 +57,7 @@ public class SubjectMapGeneratorTest {
         Item item = (Item) subject;
         assertEquals("testname", item.getName());
         Double actual = 12.51;
-        Double now = item.getPrice();
+        Double now = item.getDoublePrice();
         assertEquals(actual, now, 1);
 
         Long id = new Long(111);
@@ -201,7 +201,7 @@ public class SubjectMapGeneratorTest {
         item = (Item) subject;
 
         long id = item.getId();
-        double price = item.getPrice();
+        double price = item.getDoublePrice();
         assertEquals(1,id);
         assertEquals("test", item.getName());
         assertEquals(12.50,price, 0.0001);

@@ -1,9 +1,11 @@
 package org.shopkeeper.subjects.subjecttypes.items;
 
+import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.shopkeeper.subjects.subjecttypes.Subject;
 import org.shopkeeper.util.DateTimeGenerator;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -21,7 +23,12 @@ public class Item extends Subject {
     }
 
 
-    public Double getPrice() {
+    public String getPrice() {
+        DecimalFormat df = new DecimalFormat("#.00");
+        return StringUtils.replace(df.format(price), ".", ",");
+    }
+
+    public Double getDoublePrice() {
         return price;
     }
 
@@ -39,10 +46,11 @@ public class Item extends Subject {
 
     @Override
     public Map getFields() {
+
         Map fields = new LinkedHashMap<>();
         fields.put("id", getIdentificationNumber());
         fields.put("name", getName());
-        fields.put("price", price);
+        fields.put("price", getDoublePrice());
         fields.put("dateadded", DateTimeGenerator.dateTimeToString(getDateAdded()));
         fields.put("tablename", TABLENAME);
         return fields;
