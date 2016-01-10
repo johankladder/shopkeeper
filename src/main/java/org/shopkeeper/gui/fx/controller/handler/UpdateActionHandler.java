@@ -25,7 +25,6 @@ public class UpdateActionHandler implements EventHandler<ActionEvent> {
         Subject subject = (Subject) model.getSelectedSubject();
         AbstractModelFX model_db = ModelUtil.getModelFromSubjectType(subject.TYPE);
         subject = SubjectsUtil.createSubjectFromUpdateSubjectMap(subject, model.getMap());
-        System.out.println(subject.getName());
-        //model_db.update();
+        model_db.update(subject);
     }
 }

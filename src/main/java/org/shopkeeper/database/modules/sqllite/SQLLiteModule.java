@@ -122,6 +122,7 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
                         if (!ResultParser.queryWithResult(query)) {
                             Statement stmt = CONNECTION.createStatement();
                             stmt.execute(query);
+                            AntiLockSystem.notifyLockDatabase();
                         } else {
 
                             Statement stmt = CONNECTION.createStatement();

@@ -3,12 +3,14 @@ package org.shopkeeper.gui.fx.model.subjects;
 import org.shopkeeper.gui.fx.view.AbstractViewFX;
 import org.shopkeeper.subjects.modules.SubjectModule;
 import org.shopkeeper.subjects.subjecttypes.Subject;
+import org.shopkeeper.util.AntiLockSystem;
 
 import java.util.ArrayList;
 
 /**
  * Created by typhooncoaster on 29-12-15.
  */
+// TODO Refresh
 public abstract class AbstractModelFX {
 
     private SubjectModule MODULE = null;
@@ -23,7 +25,13 @@ public abstract class AbstractModelFX {
     }
 
     public void update(Subject subject){
-        MODULE.update(subject);
+        try {
+            MODULE.update(subject);
+            AntiLockSystem.lockAndWaitDatabase();
+            updateViews(); // When done updating views
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void delete(Subject subject) {
