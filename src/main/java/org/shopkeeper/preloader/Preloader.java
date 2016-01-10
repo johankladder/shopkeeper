@@ -50,13 +50,14 @@ public class Preloader extends Application {
     private static void startPreloader() throws InterruptedException {
         Thread thread = new Thread(() -> {
             initPreloader();
+            System.out.println("STARTED PRELOADER");
             for (Runnable tasks : MODULES) {
                 Thread thread1 = new Thread(tasks);
                 thread1.start();
                 synchronized (Preloader.ready) {
                     try {
                         ready.wait();
-                        System.out.println("PRELOADER DONE:" + tasks.getClass().getName());
+                        System.out.println("PRELOADER JOB FINISH:" + tasks.getClass().getName());
                         JOBCOUNTER++;
                         updateProgressBar(JOBCOUNTER);
                     } catch (InterruptedException e) {
@@ -69,6 +70,7 @@ public class Preloader extends Application {
 //                    for(int i = 0; i < 30; i++) {
 //                        ModuleHandler.getModule("itemmodule").add(new Item(null, "testitem"+i, 12.31, DateTimeGenerator.generateDateTimeNow()));
 ////                    }
+            System.out.println("PRELOADER FINISHED");
             donePreloader();
 
         });

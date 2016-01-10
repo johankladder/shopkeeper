@@ -1,7 +1,6 @@
 package org.shopkeeper.preferences;
 
 import org.apache.commons.lang3.StringUtils;
-import org.json.simple.JSONObject;
 import org.shopkeeper.database.modules.DatabaseTypes;
 import org.shopkeeper.gui.GuiTypes;
 
@@ -11,7 +10,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by johankladder on 12/23/15.
+ * The PreferenceModule is holding all the default preferences. All the fields are final here, so they can't be changed
+ * at a later point by a user. These fields are for all the application work or minimum view sizes.
+ *
+ * This class also holds a map with preference objects. Those can be changed by the user. Recommend is to only change
+ * the values from those objects and put them back into the list if you want to adapt changes to the preferences.
+ *
+ * @see Preference
  */
 public class PreferenceModule {
 
@@ -30,7 +35,6 @@ public class PreferenceModule {
     public static final String RELEASE_NOTES_PATH = "/releases/releasenotes.json";
     public static final String RELEASE_NUMBER = "0.01";
     public static final String RELEASE_NOTES = "Version: " + RELEASE_NUMBER + " by Johan Kladder";
-    public static final String START_TEXT = "Press me to enter Shopkeeper";
 
     // IDS:
     public static final String[] DATA_BASE_TYPE = {"database_type", "sqlite"};
