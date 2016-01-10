@@ -24,7 +24,7 @@ public class UpdateActionHandler implements EventHandler<ActionEvent> {
     public void handle(ActionEvent event) {
         Subject subject = (Subject) model.getSelectedSubject();
         AbstractModelFX model_db = ModelUtil.getModelFromSubjectType(subject.TYPE);
-        Map map = SubjectsUtil.createUpdateSubjectMap(subject, model.getMap());
+        subject = SubjectsUtil.createSubjectFromUpdateSubjectMap(subject, model.getMap());
         //TODO Parse map into subject
         //model_db.update();
     }

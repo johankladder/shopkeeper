@@ -179,6 +179,19 @@ public class SubjectMapGenerator {
         }
     }
 
+    /**
+     * Updates a given subject from an also given map. Most of the time this map is gathered from an updating view or add
+     * panel. This method is deciding which subject type the subject is and will handle the updating logic from there on.
+     *
+     * When problems occur when this method is trying to update a subject, the method will return the given object.
+     * Make note that it really tries also to update parts from a subject, also when it fails on other parts in the map.
+     *
+     * Will return null, when subject is null.
+     * @param subject The subject liked to be updated from a map
+     * @param map The map with all the given updates
+     * @return The updated subject
+     */
+    // TODO LOG
     public static Subject updateSubjectWithMap(Subject subject, Map map) {
         if(subject != null) {
             if (subject.TYPE == SubjectTypes.ITEM) {

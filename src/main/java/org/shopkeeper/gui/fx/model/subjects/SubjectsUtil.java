@@ -1,19 +1,23 @@
 package org.shopkeeper.gui.fx.model.subjects;
 
-import javafx.scene.control.*;
 import org.apache.commons.lang3.StringUtils;
+import org.shopkeeper.subjects.parsers.SubjectMapGenerator;
 import org.shopkeeper.subjects.subjecttypes.Subject;
-
-import java.awt.*;
-import java.awt.TextField;
 import java.util.Map;
 
-/**
- * Created by typhooncoaster on 10-1-16.
- */
+
 public class SubjectsUtil {
 
-    public static Map createUpdateSubjectMap(Subject subject, Map map) {
+    /**
+     * Creates a subject with the values that where gathered using the informationview (when user tries to update a subject)
+     * Please read documentation from other method mentioned below for more information about this parse.
+     * @param subject The 'normal' subject, whom liked to be updated
+     * @param map The map with updated values
+     * @return The subject with the new updated values.
+     * @see SubjectMapGenerator#updateSubjectWithMap(Subject, Map)
+     * @see org.shopkeeper.gui.fx.view.selection.InformationViewFX
+     */
+    public static Subject createSubjectFromUpdateSubjectMap(Subject subject, Map map) {
         Map subjectMap = subject.getFields();
         map.forEach((k,v)-> {
             if(StringUtils.contains((String)k, "id")) {
@@ -26,7 +30,7 @@ public class SubjectsUtil {
                 }
             }
         });
-        return subjectMap;
+        return SubjectMapGenerator.updateSubjectWithMap(subject, map);
     }
 
 
