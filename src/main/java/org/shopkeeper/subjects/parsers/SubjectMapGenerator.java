@@ -5,6 +5,8 @@ import org.shopkeeper.subjects.subjecttypes.Subject;
 import org.shopkeeper.subjects.subjecttypes.SubjectFields;
 import org.shopkeeper.subjects.SubjectManipulator;
 import org.shopkeeper.subjects.subjecttypes.SubjectTypes;
+import org.shopkeeper.subjects.subjecttypes.categories.Category;
+import org.shopkeeper.subjects.subjecttypes.customer.Customer;
 import org.shopkeeper.subjects.subjecttypes.items.Item;
 import org.shopkeeper.util.PriceGenerator;
 
@@ -178,16 +180,24 @@ public class SubjectMapGenerator {
     }
 
     public static Subject updateSubjectWithMap(Subject subject, Map map) {
-        if (subject.TYPE == SubjectTypes.ITEM) {
-            return updateWithMapItem(subject, map);
+        if(subject != null) {
+            if (subject.TYPE == SubjectTypes.ITEM) {
+                return updateWithMapItem(subject, map);
+            } else if (subject.TYPE == SubjectTypes.CATEGORY) {
+                return updateWithMapCategory(subject, map);
+            } else if (subject.TYPE == SubjectTypes.CUSTOMER) {
+                return updateWithMapCustomer(subject, map);
+            }
+            return subject;
+        } else {
+            return null;
         }
-        return subject;
     }
 
     private static Subject updateWithMapItem(Subject subject, Map map) {
         Item item = (Item) subject;
-        if (map.containsKey(SubjectFields.IDNUMBER) && map.containsKey(SubjectFields.NAME) &&
-                map.containsKey(SubjectFields.ITEM_PRICE)) {
+        item = (Item) setNameSubjectFromMap(item, map);
+        if (map.containsKey(SubjectFields.ITEM_PRICE)) {
             item.setName(StringUtils.trimToNull((String) map.get(SubjectFields.NAME)));
 
             try {
@@ -204,12 +214,41 @@ public class SubjectMapGenerator {
         return subject;
     }
 
-    private static Subject updateWithMapCustomer(Subject subject) {
-        return null;
+    private static Subject updateWithMapCustomer(Subject subject, Map map) {
+        Customer cus = (Customer) subject;
+        cus = (Customer) setNameSubjectFromMap(cus, map);
+
+        if(map.containsKey(SubjectFields.CUSTOMER_ADDRESS)) {
+            cus.setAddress(StringUtils.trimToNull((String) map.get(SubjectFields.CUSTOMER_ADDRESS)));
+        }
+        if(map.containsKey(SubjectFields.CUSTOMER_EMAIL)) {
+            cus.setEmail(StringUtils.trimToNull((String) map.get(SubjectFields.CUSTOMER_EMAIL)));
+        }
+        if(map.containsKey(SubjectFields.CUSTOMER_PHONE)) {
+            cus.setPhone(StringUtils.trimToNull((String) map.get(SubjectFields.CUSTOMER_PHONE)));
+        }
+        if(map.containsKey(SubjectFields.CUSTOMER_PLACE)) {
+            cus.setPlaceOfLiving(StringUtils.trimToNull((String) map.get(SubjectFields.CUSTOMER_PLACE)));
+        }
+        if(map.containsKey(SubjectFields.CUSTOMER_ZIPCODE)) {
+            cus.setZipcode(StringUtils.trimToNull((String) map.get(SubjectFields.CUSTOMER_ZIPCODE)));
+        }
+
+        return subject;
     }
 
-    private static Subject updateWithMapCategory(Subject subject) {
-        return null;
+    private static Subject updateWithMapCategory(Subject subject, Map map) {
+        Category category = (Category) subject;
+        category = (Category) setNameSubjectFromMap(category, map);
+        return category;
+    }
+
+    private static Subject setNameSubjectFromMap(Subject subject, Map map) {
+        if (map.containsKey(SubjectFields.IDNUMBER) && map.containsKey(SubjectFields.NAME))
+        {
+            subject.setName(StringUtils.trimToNull((String) map.get(SubjectFields.NAME)));
+        }
+        return subject;
     }
 
 

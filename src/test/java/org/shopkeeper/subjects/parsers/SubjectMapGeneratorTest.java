@@ -205,5 +205,30 @@ public class SubjectMapGeneratorTest {
         assertEquals(1,id);
         assertEquals("test", item.getName());
         assertEquals(12.50,price, 0.0001);
+
+
+        Category cat = new Category(new Long(1),"test", time);
+        map = new HashMap<>();
+        map.put(SubjectFields.IDNUMBER, "1");
+        map.put(SubjectFields.NAME, "testname");
+        map.put("dateadded", time);
+        cat = (Category) SubjectMapGenerator.updateSubjectWithMap(cat, map);
+
+        assertEquals("testname", cat.getName());
+
+
+        Customer customer = new Customer(new Long(1),"test", time, "place", "address", "zipcode", "phone", "email");
+        map = new HashMap<>();
+        map.put(SubjectFields.IDNUMBER, "1");
+        map.put(SubjectFields.NAME, "testname");
+        map.put("dateadded", time);
+        map.put(SubjectFields.CUSTOMER_ZIPCODE, "testzipcode");
+        map.put(SubjectFields.CUSTOMER_EMAIL, "testemail");
+        customer = (Customer) SubjectMapGenerator.updateSubjectWithMap(customer, map);
+
+        assertEquals("place", customer.getPlaceOfLiving());
+        assertEquals("testemail", customer.getEmail());
+        assertEquals("testzipcode", customer.getZipcode());
+        assertEquals("testname", customer.getName());
     }
 }
