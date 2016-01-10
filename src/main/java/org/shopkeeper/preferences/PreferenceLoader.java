@@ -1,6 +1,7 @@
 package org.shopkeeper.preferences;
 
 import org.shopkeeper.preloader.Preloader;
+import org.shopkeeper.util.AntiLockSystem;
 
 import java.util.prefs.Preferences;
 
@@ -22,8 +23,6 @@ public class PreferenceLoader implements Runnable {
 
             PreferenceModule.setPreference(new Preference(pref_array[0], value));
         }
-        synchronized (Preloader.ready) {
-            Preloader.ready.notify();
-        }
+        AntiLockSystem.notifyLock();
     }
 }

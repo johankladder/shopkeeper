@@ -22,6 +22,7 @@ import org.shopkeeper.preferences.PreferenceModule;
 import org.shopkeeper.preferences.PreferenceLoader;
 import org.shopkeeper.releases.ReleaseModule;
 import org.shopkeeper.subjects.ModuleHandler;
+import org.shopkeeper.util.AntiLockSystem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,9 +32,6 @@ import java.util.List;
  * Created by johankladder on 12/22/15.
  */
 public class Preloader extends Application {
-
-    // Locking:
-    public static final Boolean ready = false;
 
     // Modules:
     private static List<Runnable> MODULES = new ArrayList<>(); // The list with all the runnables:
@@ -54,16 +52,13 @@ public class Preloader extends Application {
             for (Runnable tasks : MODULES) {
                 Thread thread1 = new Thread(tasks);
                 thread1.start();
-                synchronized (Preloader.ready) {
                     try {
-                        ready.wait();
+                        AntiLockSystem.lockAndWait();
                         System.out.println("PRELOADER JOB FINISH:" + tasks.getClass().getName());
                         JOBCOUNTER++;
                         updateProgressBar(JOBCOUNTER);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
-                    }
-
                 }
 
             }

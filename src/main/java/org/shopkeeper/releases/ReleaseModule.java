@@ -5,6 +5,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.shopkeeper.preferences.PreferenceModule;
 import org.shopkeeper.preloader.Preloader;
+import org.shopkeeper.util.AntiLockSystem;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -56,13 +57,9 @@ public class ReleaseModule implements Runnable {
 
         } catch (Exception e) {
             e.printStackTrace();
-            synchronized (Preloader.ready) {
-                Preloader.ready.notify();
-            }
+            AntiLockSystem.notifyLock();
         } finally {
-            synchronized (Preloader.ready) {
-                Preloader.ready.notify();
-            }
+            AntiLockSystem.notifyLock();
         }
     }
 }

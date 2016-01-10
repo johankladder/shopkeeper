@@ -6,6 +6,7 @@ import org.shopkeeper.subjects.modules.CategoryModule;
 import org.shopkeeper.subjects.modules.CustomerModule;
 import org.shopkeeper.subjects.modules.ItemModule;
 import org.shopkeeper.subjects.modules.SubjectModule;
+import org.shopkeeper.util.AntiLockSystem;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,10 +46,7 @@ public class ModuleHandler implements Runnable {
                 }
             }
         }
-        synchronized (Preloader.ready) {
-
-            Preloader.ready.notify();
-        }
+        AntiLockSystem.notifyLock();
     }
 
     public static SubjectModule getModule(String name) {

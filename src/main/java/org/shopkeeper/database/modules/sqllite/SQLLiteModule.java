@@ -13,6 +13,7 @@ import org.shopkeeper.subjects.subjecttypes.SubjectTypes;
 import org.shopkeeper.subjects.subjecttypes.categories.Category;
 import org.shopkeeper.subjects.subjecttypes.customer.Customer;
 import org.shopkeeper.subjects.subjecttypes.items.Item;
+import org.shopkeeper.util.AntiLockSystem;
 
 import java.sql.*;
 import java.util.LinkedList;
@@ -86,9 +87,7 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
             stmt.execute(SQLLiteQueryCreator.createInitQuery(Customer.getInitFields(), DatabaseTypes.DATABASETYPE_SQLLITE));
             stmt.execute(SQLLiteQueryCreator.createInitQuery(Category.getInitFields(), DatabaseTypes.DATABASETYPE_SQLLITE));
             WAS_INITIALIZED = true; // Set status
-            synchronized (Preloader.ready) {
-                Preloader.ready.notify();
-            }
+            AntiLockSystem.notifyLock();
         } catch (SQLException e) {
             e.printStackTrace();
             WAS_INITIALIZED = false;
