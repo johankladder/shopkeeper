@@ -37,7 +37,7 @@ public class SubjectMapGenerator {
         Map subjectMap = null;
 
         if (subjectType == SubjectTypes.CUSTOMER) {
-            subjectMap = Customer.getInitFields();g
+            subjectMap = Customer.getInitFields();
         } else if (subjectType == SubjectTypes.ITEM) {
             subjectMap = Item.getInitFields();
         } else if (subjectType == SubjectTypes.CATEGORY) {
