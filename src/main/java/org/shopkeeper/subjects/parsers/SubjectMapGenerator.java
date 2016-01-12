@@ -33,11 +33,11 @@ public class SubjectMapGenerator {
 
 
     private static Map generateMap(Integer subjectType) {
-        Map map = new LinkedHashMap<>();
-        Map<String, String> subjectMap = null;
+        Map<String, String> map = new LinkedHashMap<>();
+        Map subjectMap = null;
 
         if (subjectType == SubjectTypes.CUSTOMER) {
-            subjectMap = Customer.getInitFields();
+            subjectMap = Customer.getInitFields();g
         } else if (subjectType == SubjectTypes.ITEM) {
             subjectMap = Item.getInitFields();
         } else if (subjectType == SubjectTypes.CATEGORY) {
@@ -49,7 +49,7 @@ public class SubjectMapGenerator {
         // Fill the map:
         subjectMap.forEach((k, v) -> {
             if (SubjectUtils.isEditable((String) k)) {
-                map.put(k, null);
+                map.put((String) k, null);
             }
         });
 
