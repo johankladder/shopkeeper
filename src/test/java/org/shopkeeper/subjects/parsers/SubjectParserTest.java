@@ -6,9 +6,7 @@ import org.shopkeeper.subjects.subjecttypes.SubjectTypes;
 import org.shopkeeper.subjects.subjecttypes.categories.Category;
 import org.shopkeeper.subjects.subjecttypes.customer.Customer;
 import org.shopkeeper.subjects.subjecttypes.items.Item;
-import org.shopkeeper.subjects.subjecttypes.SubjectFields;
 
-import java.util.HashMap;
 
 import static org.junit.Assert.*;
 
@@ -39,29 +37,6 @@ public class SubjectParserTest {
         not = SubjectTypes.ITEM;
         assertEquals(testcase, actual);
         assertNotEquals(not, actual);
-    }
-
-    @Test
-    public void testHashMapGetter() {
-        HashMap<String, String> map = SubjectMapGenerator.generateMapForStorage(SubjectTypes.ITEM);
-        boolean status;
-        if (map.containsKey(SubjectFields.ITEM_PRICE) && map.containsKey(SubjectFields.NAME) && map.containsKey(SubjectFields.IDNUMBER)
-                && !map.containsKey(SubjectFields.CUSTOMER_ADDRESS)) {
-            status = true;
-        } else {
-            status = false;
-        }
-
-
-        HashMap<String, String> map2 = SubjectMapGenerator.generateMapForStorage(SubjectTypes.CUSTOMER);
-        boolean status2;
-        if (!map2.containsKey(SubjectFields.ITEM_PRICE) && map2.containsKey(SubjectFields.CUSTOMER_ADDRESS) && map2.containsKey(SubjectFields.CUSTOMER_EMAIL)
-                && map2.containsKey(SubjectFields.NAME)) {
-            status2 = true;
-        } else {
-            status2 = false;
-        }
-        assertTrue(status2);
     }
 
 }

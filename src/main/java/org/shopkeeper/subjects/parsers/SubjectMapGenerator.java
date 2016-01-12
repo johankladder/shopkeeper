@@ -1,45 +1,22 @@
 package org.shopkeeper.subjects.parsers;
 
 import org.apache.commons.lang3.StringUtils;
+import org.shopkeeper.subjects.SubjectUtils;
 import org.shopkeeper.subjects.subjecttypes.Subject;
 import org.shopkeeper.subjects.subjecttypes.SubjectFields;
-import org.shopkeeper.subjects.SubjectManipulator;
 import org.shopkeeper.subjects.subjecttypes.SubjectTypes;
 import org.shopkeeper.subjects.subjecttypes.categories.Category;
 import org.shopkeeper.subjects.subjecttypes.customer.Customer;
 import org.shopkeeper.subjects.subjecttypes.items.Item;
 import org.shopkeeper.util.PriceGenerator;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
-/**
- * The SubjectMapGenerator is specialised when it comes to creating new subjects from for example forms. The method generates
- * these HashMaps with pre stated keys. Just invoke the method generateMapForSubject with the subject type and of you go.
- * <p>
- * The hashmap are prefilled with key's and values. The best way to use this class is to invoke a generated HashMap and
- * put the values that the subject contains after the right key. Example:
- * <p>
- * <p>HashMap<String, String> map = generateMapForStorage(SubjectTypes.ITEM); <br>
- * map.put(SubjectFields.PRICE, "12.2"); <br>
- * etc. <br>
- * </p>
- * <p>After that the map can be passed in the create/update with map methods. This will handles the rest.</p>
- *
- * @see SubjectManipulator
- * @see SubjectMapGenerator#generateMapForStorage(Integer)
- * @see SubjectMapGenerator#createWithMap(HashMap)
- * @see SubjectMapGenerator#updateWithMap(HashMap)
- */
+
 public class SubjectMapGenerator {
     private final static Logger LOGGER = Logger.getLogger(SubjectMapGenerator.class.getName());
-
-    // MAP IDS:
-    public static final String MAP_ITEM_ID = "item_map_id=" + SubjectTypes.ITEM;
-    public static final String MAP_CUSTOMER_ID = "customer_map_id=" + SubjectTypes.CUSTOMER;
-    public static final String MAP_CATEGORY_ID = "category_map_id=" + SubjectTypes.CATEGORY;
 
     /**
      * Gets the hashmap with keys according to the subject-type. This map is used for saving form information.
@@ -49,52 +26,35 @@ public class SubjectMapGenerator {
      *
      * @see SubjectFields
      */
-    public static HashMap<String, String> generateMapForStorage(Integer subjectType) {
-        if (subjectType == SubjectTypes.ITEM) {
-            return generateMapItem();
+    public static Map generateEditableMapSubject(Integer subjectType) {
+            return generateMap(subjectType);
+    }
+
+
+    private static Map generateMap(Integer subjectType) {
+        Map map = new LinkedHashMap<>();
+        Map subjectMap = null;
+
+        if(subjectType == SubjectTypes.CUSTOMER) {
+            subjectMap = Customer.getInitFields();
+        } else if (subjectType == SubjectTypes.ITEM) {
+            subjectMap = Item.getInitFields();
         } else if (subjectType == SubjectTypes.CATEGORY) {
-            return generateMapCategories();
-        } else if (subjectType == SubjectTypes.CUSTOMER) {
-            return generateMapCustomer();
+            subjectMap = Category.getInitFields();
         } else {
-            LOGGER.warning("Your subject type can not be found..");
-            return null;
+            return map;
         }
-    }
 
-    // Map generations:
-    private static HashMap<String, String> generateMapItem() {
-        HashMap<String, String> map = new HashMap<String, String>();
-        // Put the fields in it:
-        map.put(SubjectFields.IDNUMBER, null);
-        map.put(SubjectFields.NAME, null);
-        map.put(SubjectFields.ITEM_PRICE, null);
-        map.put(MAP_ITEM_ID, null);
+        // Fill the map:
+        subjectMap.forEach((k,v) -> {
+            if(SubjectUtils.isEditable((String) k)) {
+                map.put((String) k, null);
+            }
+        });
+
         return map;
     }
 
-    private static HashMap<String, String> generateMapCustomer() {
-        HashMap<String, String> map = new HashMap<String, String>();
-        // Put the fields in it:
-        map.put(SubjectFields.IDNUMBER, null);
-        map.put(SubjectFields.NAME, null);
-        map.put(SubjectFields.CUSTOMER_PLACE, null);
-        map.put(SubjectFields.CUSTOMER_EMAIL, null);
-        map.put(SubjectFields.CUSTOMER_ADDRESS, null);
-        map.put(SubjectFields.CUSTOMER_PHONE, null);
-        map.put(SubjectFields.CUSTOMER_ZIPCODE, null);
-        map.put(MAP_CUSTOMER_ID, null);
-        return map;
-    }
-
-    private static HashMap<String, String> generateMapCategories() {
-        HashMap<String, String> map = new HashMap<String, String>();
-        // Put the fields in it:
-        map.put(SubjectFields.IDNUMBER, null);
-        map.put(SubjectFields.NAME, null);
-        map.put(MAP_CATEGORY_ID, null);
-        return map;
-    }
 
 
     /**
