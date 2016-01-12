@@ -51,4 +51,8 @@ public abstract class AbstractModelFX {
             view.updateView();
         }
     }
+
+    public Integer getSubjectTypeModel() {
+        return MODULE.getSubjectType();
+    }
 }
