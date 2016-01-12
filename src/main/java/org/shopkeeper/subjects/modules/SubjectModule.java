@@ -57,5 +57,9 @@ public abstract class SubjectModule {
         SUBJECTS.remove(subject);
     }
 
+    public Integer getSubjectType() {
+        return getSubjectType();
+    }
+
 
 }
