@@ -18,24 +18,25 @@ import java.util.logging.Logger;
 public class SubjectMapGenerator {
     private final static Logger LOGGER = Logger.getLogger(SubjectMapGenerator.class.getName());
 
+
     /**
-     * Gets the hashmap with keys according to the subject-type. This map is used for saving form information.
-     * The program needs to now which map fits the needs of a certain subject. Make sure you only change the fields that
-     * meant to be changed. Fields are avalaible in SubjectField's class.
-     * Will return null if subject-type is not supported
+     * Generates a map that is filled with editable keys and null values for an subject. These fields are chosen
+     * according the Subject-type, so thats the reason for the parameter. When a subject-type can't be matched to
+     * the subject type in the parameter, this method will return a empty map.
      *
-     * @see SubjectFields
+     * @param subjectType The subject-type for creating the map
+     * @return The map filled with editable keys and null values.
      */
     public static Map generateEditableMapSubject(Integer subjectType) {
-            return generateMap(subjectType);
+        return generateMap(subjectType);
     }
 
 
     private static Map generateMap(Integer subjectType) {
         Map map = new LinkedHashMap<>();
-        Map subjectMap = null;
+        Map<String, String> subjectMap = null;
 
-        if(subjectType == SubjectTypes.CUSTOMER) {
+        if (subjectType == SubjectTypes.CUSTOMER) {
             subjectMap = Customer.getInitFields();
         } else if (subjectType == SubjectTypes.ITEM) {
             subjectMap = Item.getInitFields();
@@ -46,15 +47,14 @@ public class SubjectMapGenerator {
         }
 
         // Fill the map:
-        subjectMap.forEach((k,v) -> {
-            if(SubjectUtils.isEditable((String) k)) {
-                map.put((String) k, null);
+        subjectMap.forEach((k, v) -> {
+            if (SubjectUtils.isEditable((String) k)) {
+                map.put(k, null);
             }
         });
 
         return map;
     }
-
 
 
     /**
@@ -85,18 +85,19 @@ public class SubjectMapGenerator {
     /**
      * Updates a given subject from an also given map. Most of the time this map is gathered from an updating view or add
      * panel. This method is deciding which subject type the subject is and will handle the updating logic from there on.
-     *
+     * <p>
      * When problems occur when this method is trying to update a subject, the method will return the given object.
      * Make note that it really tries also to update parts from a subject, also when it fails on other parts in the map.
-     *
+     * <p>
      * Will return null, when subject is null.
+     *
      * @param subject The subject liked to be updated from a map
-     * @param map The map with all the given updates
+     * @param map     The map with all the given updates
      * @return The updated subject
      */
     // TODO LOG
     public static Subject updateSubjectWithMap(Subject subject, Map map) {
-        if(subject != null) {
+        if (subject != null) {
             if (subject.TYPE == SubjectTypes.ITEM) {
                 return updateWithMapItem(subject, map);
             } else if (subject.TYPE == SubjectTypes.CATEGORY) {
@@ -116,12 +117,12 @@ public class SubjectMapGenerator {
         if (map.containsKey(SubjectFields.ITEM_PRICE)) {
             try {
                 Double price = PriceGenerator.getPriceFromString((String) map.get(SubjectFields.ITEM_PRICE));
-                if(price != null) {
+                if (price != null) {
                     item.setPrice(price);
                 } else {
                     return subject;
                 }
-            }catch (NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 return subject;
             }
         }
@@ -132,19 +133,19 @@ public class SubjectMapGenerator {
         Customer cus = (Customer) subject;
         cus = (Customer) setNameSubjectFromMap(cus, map);
 
-        if(map.containsKey(SubjectFields.CUSTOMER_ADDRESS)) {
+        if (map.containsKey(SubjectFields.CUSTOMER_ADDRESS)) {
             cus.setAddress(StringUtils.trimToNull((String) map.get(SubjectFields.CUSTOMER_ADDRESS)));
         }
-        if(map.containsKey(SubjectFields.CUSTOMER_EMAIL)) {
+        if (map.containsKey(SubjectFields.CUSTOMER_EMAIL)) {
             cus.setEmail(StringUtils.trimToNull((String) map.get(SubjectFields.CUSTOMER_EMAIL)));
         }
-        if(map.containsKey(SubjectFields.CUSTOMER_PHONE)) {
+        if (map.containsKey(SubjectFields.CUSTOMER_PHONE)) {
             cus.setPhone(StringUtils.trimToNull((String) map.get(SubjectFields.CUSTOMER_PHONE)));
         }
-        if(map.containsKey(SubjectFields.CUSTOMER_PLACE)) {
+        if (map.containsKey(SubjectFields.CUSTOMER_PLACE)) {
             cus.setPlaceOfLiving(StringUtils.trimToNull((String) map.get(SubjectFields.CUSTOMER_PLACE)));
         }
-        if(map.containsKey(SubjectFields.CUSTOMER_ZIPCODE)) {
+        if (map.containsKey(SubjectFields.CUSTOMER_ZIPCODE)) {
             cus.setZipcode(StringUtils.trimToNull((String) map.get(SubjectFields.CUSTOMER_ZIPCODE)));
         }
 
