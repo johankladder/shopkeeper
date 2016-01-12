@@ -36,6 +36,7 @@ public class Item extends Subject {
         return getIdentificationNumber();
     }
 
+    // FIXME: Return nicely formatted string
     public String getDateadded() {
         return DateTimeGenerator.dateTimeToString(getDateAdded());
     }

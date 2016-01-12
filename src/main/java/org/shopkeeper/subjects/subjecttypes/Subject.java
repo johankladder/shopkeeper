@@ -2,7 +2,6 @@ package org.shopkeeper.subjects.subjecttypes;
 
 import org.joda.time.DateTime;
 import org.shopkeeper.subjects.parsers.SubjectParser;
-
 import java.util.Map;
 
 // TODO: Documentation methods!

@@ -26,10 +26,6 @@ public class DateTimeGenerator {
      */
     public static String dateTimeToString(DateTime time) {
         if (time != null) {
-           // DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
-            //return fmt.print(time);
-
-            // FIXME: Clashed with Subjectresultparser!
             return time.toString();
         } else {
             return null;

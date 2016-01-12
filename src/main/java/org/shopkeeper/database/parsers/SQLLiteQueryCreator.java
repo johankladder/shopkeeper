@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 /**
  * Created by typhooncoaster on 14-12-15.
  */
-// TODO
+
 public class SQLLiteQueryCreator {
     private final static Logger LOGGER = Logger.getLogger(SQLLiteQueryCreator.class.getName());
 
@@ -106,7 +106,6 @@ public class SQLLiteQueryCreator {
      * @return The insert-query bases on the above mentioned subject.
      * @see Subject
      */
-    // TODO Currently not checking if value is null or empty.
     public static String createInsertQuery(Subject subject) {
         if (subject != null) {
             Map map = subject.getFields();
@@ -120,7 +119,10 @@ public class SQLLiteQueryCreator {
                     if (!pair.getKey().equals("id") && !pair.getKey().equals("tablename")) {
                         datanames += pair.getKey() + ", ";
                         // Create values
-                        values += parseValue(pair, subject.INIT_FIELD) + ", ";
+                        Object value = parseValue(pair, subject.INIT_FIELD);
+                        if(value != null) {
+                            values += value + ", ";
+                        }
                     }
                 }
                 // Trim and normalise:

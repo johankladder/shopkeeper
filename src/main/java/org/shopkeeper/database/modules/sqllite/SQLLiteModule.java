@@ -61,7 +61,7 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
     }
 
 
-    // TODO PREPARED STATMENT
+    // TODO PREPARED STATMENT? Necessary with sqlite?
     public void processQueryNoResult(String query) {
         if (query != null) {
             synchronized (queue) {
@@ -83,7 +83,6 @@ public class SQLLiteModule extends DatabaseModule implements Runnable {
     }
 
 
-    // TODO Connection checking
     public void run() {
         if (!RUNNING) {  // Check if the database is already RUNNING:
             RUNNING = true;

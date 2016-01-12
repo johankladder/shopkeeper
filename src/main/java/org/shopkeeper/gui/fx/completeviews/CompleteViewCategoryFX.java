@@ -43,7 +43,7 @@ public class CompleteViewCategoryFX {
         imagepane.setCenter(imageView);
         grid.add(imagepane,1,1,1,1);
         BorderPane.setAlignment(imageView, Pos.TOP_CENTER);
-        
+
 
         AddSubjectView add_view = new AddSubjectView(WindowBuilderFX.CATEGORY_MODEL);
         grid.add(add_view, 1,2,1,1);

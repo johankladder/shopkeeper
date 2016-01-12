@@ -27,7 +27,7 @@ public abstract class AbstractModelFX {
         try {
             MODULE.update(subject);
             updateViews();
-            // TODO Watch if this synchronisation is going well in the future.
+            // TODO Watch if this call is called after executing!
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

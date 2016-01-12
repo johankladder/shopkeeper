@@ -59,6 +59,7 @@ public class InformationViewFX extends BorderPane implements SelectionViewFX {
         Map map_prepared_for_sending = new HashMap<>();
         final Map finalSubject_fields = subject_fields;
         labels.forEach((k, v) -> {
+            // TODO null pointer -> TIP: Create valuechecker
             String value = finalSubject_fields.get((k)).toString();
             TextField text_field = new TextField(Beatifier.beautifyWithMapKeyAndString(k, value));
             map_prepared_for_sending.put(v.getText(), text_field);
