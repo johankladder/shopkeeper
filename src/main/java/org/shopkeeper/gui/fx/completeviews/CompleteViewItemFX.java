@@ -1,11 +1,14 @@
 package org.shopkeeper.gui.fx.completeviews;
 
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.image.*;
 import javafx.scene.layout.*;
 import org.shopkeeper.gui.fx.WindowBuilderFX;
 import org.shopkeeper.gui.fx.view.AbstractViewFX;
+import org.shopkeeper.gui.fx.view.AddSubjectView;
 import org.shopkeeper.gui.fx.view.ListViewFX;
 import org.shopkeeper.gui.fx.view.selection.SelectionViewFX;
 import org.shopkeeper.gui.fx.view.selection.InformationViewFX;
@@ -41,8 +44,12 @@ public class CompleteViewItemFX {
         javafx.scene.image.Image image = new javafx.scene.image.Image("/images/head.png");
         ImageView imageView = new ImageView(image);
         BorderPane imagepane = new BorderPane();
-        imagepane.setCenter(imageView);
+        imagepane.setTop(imageView);
         grid.add(imagepane,1,1,1,1);
+        BorderPane.setAlignment(imageView, Pos.TOP_CENTER);
+
+        AddSubjectView add_view = new AddSubjectView(WindowBuilderFX.ITEMMODEL);
+        grid.add(add_view, 1,2,1,1);
         GridPane.setVgrow(list, Priority.ALWAYS);
         ColumnConstraints col1 = new ColumnConstraints();
         ColumnConstraints col2 = new ColumnConstraints();
@@ -57,8 +64,8 @@ public class CompleteViewItemFX {
         RowConstraints row4 = new RowConstraints();
         row1.setPercentHeight(30);
         row2.setPercentHeight(30);
-        row3.setPercentHeight(20);
-        row4.setPercentHeight(20);
+        row3.setPercentHeight(30);
+        row4.setPercentHeight(10);
         grid.getRowConstraints().addAll(row1,row2,row3,row4);
         return panel;
 

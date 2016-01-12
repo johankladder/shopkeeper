@@ -1,9 +1,7 @@
 package org.shopkeeper.subjects.modules;
 
-import org.shopkeeper.database.modules.DatabaseChooser;
 import org.shopkeeper.database.modules.DatabaseModule;
 import org.shopkeeper.database.modules.DatabaseStarter;
-import org.shopkeeper.database.modules.DatabaseTypes;
 import org.shopkeeper.subjects.subjecttypes.Subject;
 
 import java.util.ArrayList;
@@ -58,7 +56,7 @@ public abstract class SubjectModule {
     }
 
     public Integer getSubjectType() {
-        return getSubjectType();
+        return SUBJECTTYPE;
     }
 
 

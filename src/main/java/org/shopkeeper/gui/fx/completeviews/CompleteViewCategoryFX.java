@@ -1,10 +1,12 @@
 package org.shopkeeper.gui.fx.completeviews;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import org.shopkeeper.gui.fx.WindowBuilderFX;
 import org.shopkeeper.gui.fx.view.AbstractViewFX;
+import org.shopkeeper.gui.fx.view.AddSubjectView;
 import org.shopkeeper.gui.fx.view.ListViewFX;
 import org.shopkeeper.gui.fx.view.selection.SelectionViewFX;
 import org.shopkeeper.gui.fx.view.selection.InformationViewFX;
@@ -40,6 +42,11 @@ public class CompleteViewCategoryFX {
         BorderPane imagepane = new BorderPane();
         imagepane.setCenter(imageView);
         grid.add(imagepane,1,1,1,1);
+        BorderPane.setAlignment(imageView, Pos.TOP_CENTER);
+        
+
+        AddSubjectView add_view = new AddSubjectView(WindowBuilderFX.CATEGORY_MODEL);
+        grid.add(add_view, 1,2,1,1);
         GridPane.setVgrow(list, Priority.ALWAYS);
         ColumnConstraints col1 = new ColumnConstraints();
         ColumnConstraints col2 = new ColumnConstraints();
@@ -54,8 +61,8 @@ public class CompleteViewCategoryFX {
         RowConstraints row4 = new RowConstraints();
         row1.setPercentHeight(30);
         row2.setPercentHeight(30);
-        row3.setPercentHeight(20);
-        row4.setPercentHeight(20);
+        row3.setPercentHeight(30);
+        row4.setPercentHeight(10);
         grid.getRowConstraints().addAll(row1,row2,row3,row4);
 
         return panel;
