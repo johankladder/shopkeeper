@@ -14,9 +14,9 @@ public class SubjectFields {
     public static final String ITEM_PRICE = "price";
 
     // CUSTOMER:
-    public static final String CUSTOMER_PLACE = "customer_place";
-    public static final String CUSTOMER_ADDRESS = "customer_address";
-    public static final String CUSTOMER_ZIPCODE = "customer_zipcode";
-    public static final String CUSTOMER_PHONE = "customer_phone";
-    public static final String CUSTOMER_EMAIL = "customer_email";
+    public static final String CUSTOMER_PLACE = "place";
+    public static final String CUSTOMER_ADDRESS = "address";
+    public static final String CUSTOMER_ZIPCODE = "zipcode";
+    public static final String CUSTOMER_PHONE = "phone";
+    public static final String CUSTOMER_EMAIL = "email";
 }
