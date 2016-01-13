@@ -14,6 +14,7 @@ import java.sql.SQLException;
 /**
  * Created by johankladder on 12/28/15.
  */
+// TODO Results are 'null' when no values are inserted -> Querymaker fault maybe
 public class SubjectResultSetParser {
 
     /**

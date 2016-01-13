@@ -13,11 +13,12 @@ public class PriceGenerator {
     /**
      * This method tries to parse a given string to a double number. It will check on comma and points and will return
      * the double value of the given string when it is possible to parse it into a double. If not, it will return null.
+     * It will also return if it recieves a string that is 'null'.
      * @param priceString The String object liked to be parsed to an Double
      * @return the double value of the String
      */
     public static Double getPriceFromString(String priceString) {
-        if(priceString != null) {
+        if(priceString != null || StringUtils.contains(priceString, "null")) {
             if (StringUtils.contains(priceString, ",")) {
                 return roundTwoDecimals(parseStringWithComma(priceString));
             }

@@ -8,7 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 public class Beatifier {
 
     public static String beautifyString(String input) {
-        if(input != null && !StringUtils.equals(input, "")) {
+        if (input != null && !StringUtils.equals(input, "")) {
             String output = StringUtils.trim(input);
             output = StringUtils.lowerCase(output);
             output = StringUtils.capitalize(output);
@@ -17,11 +17,22 @@ public class Beatifier {
         return null;
     }
 
-    public static String beautifyWithMapKeyAndString(String key, String value) {
-        if(StringUtils.contains(key, "price")) {
-            return PriceGenerator.priceToString(Double.parseDouble(value));
+    public static String beautifyWithMapKeyAndString(String key, Object value) {
+        if (value instanceof String) {
+            if (value == null || StringUtils.contains((String) value, "null")) {
+                return "";
+            } else {
+                return (String) value;
+            }
         } else {
-            return value;
+            if (value == null) {
+                return "";
+            }
+
+            if (StringUtils.contains(key, "price")) {
+                return PriceGenerator.priceToString((Double)value);
+            }
         }
+        return "" + value;
     }
 }
