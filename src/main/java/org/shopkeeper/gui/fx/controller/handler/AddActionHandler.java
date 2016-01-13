@@ -5,6 +5,7 @@ import javafx.event.EventHandler;
 import org.shopkeeper.gui.fx.model.selection.ListSelectionModelFX;
 import org.shopkeeper.subjects.parsers.SubjectMapGenerator;
 import org.shopkeeper.subjects.subjecttypes.Subject;
+import java.util.Map;
 
 /**
  * Created by typhooncoaster on 13-1-16.
@@ -19,6 +20,7 @@ public class AddActionHandler implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent event) {
-        Subject subject = SubjectMapGenerator.createSubjectFromMap(model.getSubjectType(), model.getMap());
+        Map<String,String> map = SubjectMapGenerator.createCompatibleMapFromMapWithTextFields(model.getMap());
+        Subject subject = SubjectMapGenerator.createSubjectFromMap(model.getSubjectType(), map);
     }
 }

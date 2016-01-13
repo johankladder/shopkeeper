@@ -1,5 +1,6 @@
 package org.shopkeeper.subjects.parsers;
 
+import javafx.scene.control.TextField;
 import org.apache.commons.lang3.StringUtils;
 import org.shopkeeper.subjects.SubjectUtils;
 import org.shopkeeper.subjects.subjecttypes.Subject;
@@ -8,8 +9,10 @@ import org.shopkeeper.subjects.subjecttypes.SubjectTypes;
 import org.shopkeeper.subjects.subjecttypes.categories.Category;
 import org.shopkeeper.subjects.subjecttypes.customer.Customer;
 import org.shopkeeper.subjects.subjecttypes.items.Item;
+import org.shopkeeper.util.DateTimeGenerator;
 import org.shopkeeper.util.PriceGenerator;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -165,8 +168,70 @@ public class SubjectMapGenerator {
         return subject;
     }
 
-    public static Subject createSubjectFromMap(Integer subjectType, Map map) {
+    public static Subject createSubjectFromMap(Integer subjectType, Map<String, String> map) {
+        if(checkSubjectKeys(map)) {
+            if (subjectType == SubjectTypes.ITEM) {
+                return createItemFromMap(map);
+            } else if (subjectType == SubjectTypes.CATEGORY) {
+                return createCategoryFromMap(map);
+            } else if (subjectType == SubjectTypes.CUSTOMER) {
+                return createCustomerFromMap(map);
+            }
+        }
         return null;
+    }
+
+    private static Subject createItemFromMap(Map givenMap) {
+        if(givenMap.containsKey(SubjectFields.ITEM_PRICE)) {
+            Double price = PriceGenerator.getPriceFromString((String) givenMap.get(SubjectFields.ITEM_PRICE));
+            return new Item(null,(String) givenMap.get(SubjectFields.NAME), price,  DateTimeGenerator.generateDateTimeNow());
+        } else {
+            return null;
+        }
+    }
+
+    private static Subject createCategoryFromMap(Map givenMap) {
+        return new Category(null,(String) givenMap.get(SubjectFields.NAME), DateTimeGenerator.generateDateTimeNow());
+    }
+
+    private static Subject createCustomerFromMap(Map givenMap) {
+        Customer cus = new Customer(null,(String)givenMap.get(SubjectFields.NAME),DateTimeGenerator.generateDateTimeNow(),null,null,null,null,null);
+        if(givenMap.containsKey(SubjectFields.CUSTOMER_ADDRESS)) {
+            cus.setAddress(StringUtils.trimToNull((String) givenMap.get(SubjectFields.CUSTOMER_ADDRESS)));
+        }
+        if (givenMap.containsKey(SubjectFields.CUSTOMER_EMAIL)) {
+            cus.setEmail(StringUtils.trimToNull((String) givenMap.get(SubjectFields.CUSTOMER_EMAIL)));
+        }
+        if (givenMap.containsKey(SubjectFields.CUSTOMER_PHONE)) {
+            cus.setPhone(StringUtils.trimToNull((String) givenMap.get(SubjectFields.CUSTOMER_PHONE)));
+        }
+        if (givenMap.containsKey(SubjectFields.CUSTOMER_PLACE)) {
+            cus.setPlaceOfLiving(StringUtils.trimToNull((String) givenMap.get(SubjectFields.CUSTOMER_PLACE)));
+        }
+        if (givenMap.containsKey(SubjectFields.CUSTOMER_ZIPCODE)) {
+            cus.setZipcode(StringUtils.trimToNull((String) givenMap.get(SubjectFields.CUSTOMER_ZIPCODE)));
+        }
+
+        return cus;
+    }
+
+    private static boolean checkSubjectKeys(Map map) {
+        if(map.containsKey(SubjectFields.NAME)) {
+            return true;
+        }
+        return false;
+    }
+
+    public static Map<String, String> createCompatibleMapFromMapWithTextFields(Map givenMap) {
+        Map<String, String> map = new HashMap<>();
+
+        givenMap.forEach((k,v) -> {
+            if(k instanceof String || v instanceof TextField) {
+                TextField field = (TextField) v;
+                map.put((String) k, field.getText());
+            }
+        });
+        return map;
     }
 
 
