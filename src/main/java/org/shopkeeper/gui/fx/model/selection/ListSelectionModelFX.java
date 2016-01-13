@@ -14,11 +14,14 @@ import java.util.Map;
  *
  * @see SelectionViewFX
  */
+
+// TODO ADD DOC
 public class ListSelectionModelFX implements ChangeListener<Object>{
 
     private static Object SELECTED_SUBJECT = null;
-    private static Map map = null;
-    private static ArrayList<SelectionViewFX> VIEWS = new ArrayList<>();
+    private Map map = null;
+    private Integer SUBJECTTYPE = null;
+    private ArrayList<SelectionViewFX> VIEWS = new ArrayList<>();
 
     /**
      * Sets the views for this model. These views will be updated when an event has been fired from the head node.
@@ -34,7 +37,7 @@ public class ListSelectionModelFX implements ChangeListener<Object>{
     }
 
     public void sendMap(Map map) {
-        ListSelectionModelFX.map= map;
+        this.map= map;
     }
 
     public Map getMap() {
@@ -62,6 +65,14 @@ public class ListSelectionModelFX implements ChangeListener<Object>{
         for(SelectionViewFX view : VIEWS) {
             view.updateView();
         }
+    }
+
+    public void setSubjectType(Integer subjectType) {
+        SUBJECTTYPE = subjectType;
+    }
+
+    public Integer getSubjectType() {
+        return SUBJECTTYPE;
     }
 
 }

@@ -5,7 +5,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import org.shopkeeper.gui.fx.controller.handler.AddSubjectController;
+import org.shopkeeper.gui.fx.controller.AddSubjectController;
+import org.shopkeeper.gui.fx.model.selection.ListSelectionModelFX;
 import org.shopkeeper.gui.fx.model.subjects.AbstractModelFX;
 import org.shopkeeper.subjects.parsers.SubjectMapGenerator;
 import org.shopkeeper.util.Beatifier;
@@ -20,6 +21,7 @@ import java.util.Map;
 public class AddSubjectView extends BorderPane {
 
     private AbstractModelFX model;
+    private ListSelectionModelFX selectionModel = new ListSelectionModelFX();
 
     public AddSubjectView(AbstractModelFX model) {
         this.model = model;
@@ -30,7 +32,6 @@ public class AddSubjectView extends BorderPane {
     private void init() {
         GridPane total_view_box = new GridPane();
         total_view_box.setVgap(10);
-
         setCenter(total_view_box);
         setMaxWidth(Double.MAX_VALUE);
         Map subject_fields = SubjectMapGenerator.generateEditableMapSubject(model.getSubjectTypeModel());
@@ -54,9 +55,10 @@ public class AddSubjectView extends BorderPane {
             total_view_box.add(text_field, 1, counter_y[0]);
             counter_y[0] = counter_y[0] + 1;
         });
-        //model.sendMap(map_prepared_for_sending);
-
-        total_view_box.add(new AddSubjectController(), 0, counter_y[0], 2, 1);
+        selectionModel.sendMap(map_prepared_for_sending);
+        selectionModel.setSubjectType(model.getSubjectTypeModel());
+        AddSubjectController controller = new AddSubjectController(selectionModel);
+        total_view_box.add(controller, 0, counter_y[0], 2, 1);
 
         ColumnConstraints col1Constraints = new ColumnConstraints();
         col1Constraints.setPercentWidth(30);

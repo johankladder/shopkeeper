@@ -165,5 +165,9 @@ public class SubjectMapGenerator {
         return subject;
     }
 
+    public static Subject createSubjectFromMap(Integer subjectType, Map map) {
+        return null;
+    }
+
 
 }
